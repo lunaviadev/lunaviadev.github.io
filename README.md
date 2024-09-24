@@ -42,4 +42,29 @@ Here's a few examples of my pixel art:
 ![alt text](images/fianch-export2a.gif)
 ----
 
-## 
+## CURRENT INTERESTS
+
+<p>
+At the moment my general interests are online competitive games, things like League of Legends, Valorant and Dead by Daylight are all games I sink a lot of my time into recently in the hopes to improve drastically. I've also been fairly active in the FGC scene, primarily playing games like TEKKEN 8 and Super Smash Bros, during the Tekken 7 era around 2021, I played semi professionally in Tekken 7 tournaments online and locally after the lockdown had ended. Currently in Tekken 8 I have remained mostly casual due to taking up the responsibility of creating my game but I still play somewhat frequently.
+</p>
+
+<p>
+But aside from those games some of my personal favourite games are as follows:
+</p>
+<ol>
+    <li>Persona 3 FES/RELOAD
+    <li>Until Then
+    <li>Octopath Traveller I/II
+    <li>Final Fantasy 7
+    <li>Xenoblade Chronicles 3
+    <li>Dragon Quest XI
+</ol>
+<p>
+And many other games that would make the list way too long and I'd be here forever if I were to include like every single game I love.
+
+## BONUS LITTLE THINGS
+
+Here's just a few extra things about me that don't really fit into any of the categories beforehand!
+
+This is my manga / figure collection that I have in my dorm room:
+
