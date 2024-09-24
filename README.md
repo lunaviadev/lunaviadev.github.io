@@ -67,4 +67,10 @@ And many other games that would make the list way too long and I'd be here forev
 Here's just a few extra things about me that don't really fit into any of the categories beforehand!
 
 This is my manga / figure collection that I have in my dorm room:
+![alt text](images/shelfimage.jpg)
 
+This is my MIDI keyboard that I use to compose music in my free time for my game:
+![alt text](images/keyboard.jpg)
+
+And this is my PC tower if anyone's curious:
+![alt text](images/pcsetup.jpg)
