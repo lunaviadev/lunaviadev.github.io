@@ -84,3 +84,12 @@ footer {
   font-size: 0.9rem;
   color: #aaa;
 }
+
+.card-image {
+  display: block;
+  max-width: 100%;   /* makes sure it fits inside the box */
+  height: auto;      /* keeps aspect ratio */
+  margin: 1rem auto; /* space around it, centered */
+  border-radius: 0.5rem; /* optional rounded corners */
+  border: 1px solid #fff; /* optional white border */
+}
