@@ -3,8 +3,8 @@
 
 body {
   font-family: 'Segoe UI', sans-serif;
-  background: #000; /* Black background */
-  color: #fff;      /* White text */
+  background: #000;  /* Black background */
+  color: #fff;       /* White text */
   line-height: 1.6;
   padding: 2rem;
 }
@@ -16,11 +16,11 @@ header {
 
 header h1 {
   font-size: 2.5rem;
-  color: #fff; /* White title */
+  color: #fff;
 }
 
 header p {
-  color: #ccc; /* Light grey subtext */
+  color: #ccc;
 }
 
 main {
@@ -30,42 +30,46 @@ main {
   margin: auto;
 }
 
+/* 🔲 Card boxes */
 .card {
-  background: #1e1e1e; /* Dark grey box */
-  padding: 1.5rem;
+  background: #1e1e1e;       /* Dark grey background */
+  border: 2px solid #fff;    /* White outline */
   border-radius: 1rem;
-  border: 2px solid #fff; /* White outline */
+  padding: 1.5rem;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  /* Make sure they’re always visible as boxes */
+  min-height: 100px;
+  display: block;
+
+  /* Animation for expand/collapse */
+  transition: all 0.3s ease;
   overflow: hidden;
-  max-height: 5rem; /* collapsed size */
 }
 
 .card h2 {
   margin-bottom: 0.5rem;
-  color: #fff; /* White headings */
+  color: #fff;
 }
 
+/* Content hidden by default */
 .card .content {
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-  transition: all 0.4s ease;
-  color: #ddd; /* Slightly grey text inside */
+  display: none;
+  margin-top: 1rem;
+  color: #ddd;
 }
 
+/* Expanded state */
 .card.active {
-  max-height: 500px; /* expanded size */
+  background: #2a2a2a; /* Slightly lighter when open */
 }
 
 .card.active .content {
-  opacity: 1;
-  max-height: 400px;
-  margin-top: 1rem;
+  display: block;
 }
 
 .card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   box-shadow: 0 6px 15px rgba(255,255,255,0.2);
 }
 
@@ -78,5 +82,5 @@ footer {
   text-align: center;
   margin-top: 3rem;
   font-size: 0.9rem;
-  color: #aaa; /* Subtle grey */
+  color: #aaa;
 }
