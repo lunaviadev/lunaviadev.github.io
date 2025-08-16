@@ -1,10 +1,12 @@
+/* Reset */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
 body {
-  font-family: Arial, sans-serif;
-  max-width: 800px;
-  margin: auto;
-  padding: 2rem;
-  background: #000000;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f5f5f7;
   color: #333;
+  line-height: 1.6;
+  padding: 2rem;
 }
 
 header {
@@ -12,12 +14,63 @@ header {
   margin-bottom: 2rem;
 }
 
-h1 {
+header h1 {
   font-size: 2.5rem;
-  color: #ffffff;
+  color: #4a148c;
 }
 
-a {
-  color: #ffffff;
-  text-decoration: none;
+header p {
+  color: #555;
+}
+
+main {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: auto;
+}
+
+.card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+  max-height: 5rem; /* collapsed size */
+}
+
+.card h2 {
+  margin-bottom: 0.5rem;
+  color: #6a1b9a;
+}
+
+.card .content {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.card.active {
+  max-height: 500px; /* expanded size */
+}
+
+.card.active .content {
+  opacity: 1;
+  max-height: 400px;
+  margin-top: 1rem;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+footer {
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 0.9rem;
+  color: #666;
 }

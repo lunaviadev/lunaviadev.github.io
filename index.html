@@ -3,35 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lunavia</title>
+  <title>Liliana | Portfolio</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1>LUNAVIA 👋</h1>
-    <p>Game Developer | Programmer</p>
+    <h1>Liliana’s Portfolio</h1>
+    <p>Game Developer | Programmer | Designer</p>
   </header>
 
   <main>
-    <section>
+    <!-- About Me -->
+    <section class="card" onclick="toggleCard(this)">
       <h2>About Me</h2>
-      <p>I primarily make games in Godot though also program in C, C+ and C#. Currently creating <strong>Within Time</strong>.</p>
+      <div class="content">
+        <p>Hello! I’m Liliana, a developer who loves creating games. I work with C (raylib), Godot, and Unreal Engine. 
+        My current project is <strong>Dungeon Driver</strong>, a golf-roguelike where dungeon crawling meets physics-based gameplay.</p>
+      </div>
     </section>
 
-    <section>
-      <h2>Within Time</h2>
-      <ul>
-        <li><a href="https://store.steampowered.com/app/2302230/Within_Time">Within Time on Steam</a> - </li>
-        <li>Within Time is developed by Lunaviadev in collaboration with TEAM INNERMINDS</li>
-      </ul>
+    <!-- Projects -->
+    <section class="card" onclick="toggleCard(this)">
+      <h2>Projects</h2>
+      <div class="content">
+        <ul>
+          <li><strong>Dungeon Driver</strong> – A golf roguelike in C using raylib</li>
+          <li><strong>Dialogue System</strong> – Advanced branching dialogue in GDScript</li>
+          <li><strong>Unreal Combat Demo</strong> – Turn-based JRPG prototype</li>
+        </ul>
+      </div>
     </section>
 
-    <section>
-      <h2>Contact Info:</h2>
-      <p>Email: lunaviadev@gmail.com</p>
-      <p>GitHub: <a href="https://github.com/lunaviadev">github.com/lunaviadev</a></p>
+    <!-- My Work -->
+    <section class="card" onclick="toggleCard(this)">
+      <h2>My Work</h2>
+      <div class="content">
+        <p>I specialize in gameplay programming, physics systems, and creating fun player experiences. 
+        I also experiment with shaders, UI design, and game feel polish (particles, hit effects, etc).</p>
+      </div>
+    </section>
+
+    <!-- Links -->
+    <section class="card" onclick="toggleCard(this)">
+      <h2>Links</h2>
+      <div class="content">
+        <ul>
+          <li><a href="https://github.com/yourusername" target="_blank">GitHub</a></li>
+          <li><a href="https://twitter.com/yourhandle" target="_blank">Twitter</a></li>
+          <li><a href="mailto:youremail@example.com">Email Me</a></li>
+        </ul>
+      </div>
     </section>
   </main>
+
+  <footer>
+    <p>© 2025 Liliana | Built with ❤️ and GitHub Pages</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
-
