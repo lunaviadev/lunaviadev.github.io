@@ -1,299 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <style>
-        /* ======= General Styles ======= */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #f4f4f9;
-            color: #333;
-            overflow-x: hidden;
-        }
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Portfolio</title>
+<style>
+/* ======= General ======= */
+body {
+    font-family: Arial, sans-serif;
+    margin:0; padding:0;
+    background:#1a1a1a;
+    color:#f0f0f0;
+    overflow-x:hidden;
+}
+a { color: inherit; text-decoration: none; }
+img { display:block; max-width:100%; height:auto; }
 
-        /* ======= Header ======= */
-        header {
-            text-align: center;
-            padding: 50px 20px 20px;
-            background: #282c34;
-            color: white;
-        }
-        header img {
-            max-width: 120px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-        }
-        header h1 {
-            margin: 0 0 10px;
-            font-size: 2.5rem;
-        }
-        header p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+/* ======= Header ======= */
+header { text-align:center; padding:50px 20px 20px; background:#111; color:white; }
+header img { max-width:120px; border-radius:50%; margin-bottom:20px; }
+header h1 { margin:0 0 10px; font-size:2.5rem; }
+header p { font-size:1.2rem; max-width:600px; margin:0 auto; }
 
-        /* ======= Buttons Section ======= */
-        .buttons {
-            display: flex;
-            justify-content: center;
-            margin: 40px 0 20px;
-            gap: 20px;
-        }
-        .buttons button {
-            padding: 12px 25px;
-            font-size: 1rem;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            background: #61dafb;
-            color: #282c34;
-            transition: background 0.3s;
-        }
-        .buttons button:hover {
-            background: #21a1f1;
-        }
-        .buttons button.active {
-            background: #21a1f1;
-            color: white;
-        }
+/* ======= Buttons Section ======= */
+.buttons { display:flex; justify-content:center; margin:40px 0 20px; gap:20px; }
+.buttons button {
+    padding:12px 25px; font-size:1rem; border:none; border-radius:8px;
+    cursor:pointer; background:#61dafb; color:#111; transition: background 0.3s;
+}
+.buttons button:hover { background:#21a1f1; }
+.buttons button.active { background:#21a1f1; color:white; }
 
-        /* ======= Content Section ======= */
-        .content {
-            max-width: 1000px;
-            margin: 0 auto 50px;
-            padding: 0 20px;
-            min-height: 300px;
-            position: relative;
-        }
-        .section {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            pointer-events: none;
-        }
-        .section.active {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
+/* ======= Content Section ======= */
+.content {
+    max-width:1000px; margin:0 auto 50px; padding:0 20px;
+    min-height:300px; position:relative;
+}
+.section {
+    position:absolute; top:0; left:0; width:100%;
+    opacity:0; transform:translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events:none;
+}
+.section.active { opacity:1; transform:translateY(0); pointer-events:auto; }
 
-        /* ======= Programming Section ======= */
-        .projects {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .project-card {
-            position: relative;
-            flex: 1 1 calc(33% - 20px);
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        .project-card:hover {
-            transform: translateY(-5px);
-        }
-        .project-card img {
-            width: 100%;
-            display: block;
-        }
-        .project-card-content {
-            padding: 15px;
-        }
-        .project-card-content h3 {
-            margin: 0 0 5px;
-        }
-        .project-card-content p {
-            font-size: 0.9rem;
-            margin: 0;
-        }
+/* ======= Programming ======= */
+.projects { display:flex; flex-wrap:wrap; gap:20px; }
+.featured-project {
+    flex:1 1 100%;
+    background:#2a2a2a;
+    border-radius:10px;
+    overflow:hidden;
+    position:relative;
+    box-shadow:0 4px 12px rgba(0,0,0,0.5);
+    cursor:pointer;
+    transition: transform 0.3s;
+}
+.featured-project:hover { transform:translateY(-5px); }
+.project-card-small {
+    flex:1 1 calc(33% - 20px);
+    background:#2a2a2a; border-radius:10px;
+    overflow:hidden; position:relative; box-shadow:0 4px 8px rgba(0,0,0,0.5);
+    cursor:pointer; transition: transform 0.3s;
+}
+.project-card-small:hover { transform:translateY(-5px); }
+.project-card-content, .featured-content { padding:15px; }
+.project-card-content h3, .featured-content h3 { margin:0 0 5px; }
+.project-card-content p, .featured-content p { font-size:0.9rem; margin:0; }
+.overlay {
+    position:absolute; top:0; left:0; right:0; bottom:0;
+    background:rgba(33,161,241,0.85); color:white;
+    opacity:0; display:flex; align-items:center; justify-content:center;
+    text-align:center; padding:20px; transition: opacity 0.3s;
+}
+.featured-project:hover .overlay, .project-card-small:hover .overlay { opacity:1; }
 
-        /* Hover overlay */
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(33, 161, 241, 0.85);
-            color: white;
-            opacity: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
-            transition: opacity 0.3s;
-        }
-        .project-card:hover .overlay {
-            opacity: 1;
-        }
+/* ======= Art ======= */
+.art-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:15px; }
+.art-card { position:relative; overflow:hidden; border-radius:10px; cursor:pointer; transition: transform 0.3s; }
+.art-card img { width:100%; display:block; transition: transform 0.3s; }
+.art-card:hover img { transform:scale(1.1); }
+.art-card-caption {
+    position:absolute; bottom:0; left:0; right:0;
+    background:rgba(0,0,0,0.6); color:white; text-align:center; padding:10px; opacity:0; transition: opacity 0.3s;
+}
+.art-card:hover .art-card-caption { opacity:1; }
 
-        /* ======= Art Section ======= */
-        .art-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
+/* ======= Music ======= */
+.music-link { text-align:center; margin-top:20px; }
+.music-link a {
+    display:inline-block; padding:12px 25px; background:#1DB954; color:white;
+    font-weight:bold; border-radius:8px; transition: background 0.3s, transform 0.3s;
+}
+.music-link a:hover { background:#17a64f; transform:scale(1.05); }
 
-        /* ======= Music Section ======= */
-        .music-link {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .music-link a {
-            display: inline-block;
-            padding: 12px 25px;
-            background: #1DB954;
-            color: white;
-            font-weight: bold;
-            border-radius: 8px;
-            transition: background 0.3s;
-        }
-        .music-link a:hover {
-            background: #17a64f;
-        }
-
-        /* ======= Responsive ======= */
-        @media (max-width: 768px) {
-            .projects {
-                flex-direction: column;
-            }
-        }
-    </style>
+/* ======= Responsive ======= */
+@media (max-width:768px) {
+    .projects { flex-direction:column; }
+    .project-card-small { flex:1 1 100%; }
+}
+</style>
 </head>
 <body>
 
-    <!-- ======= Header ======= -->
-    <header>
-        <img src="your-logo.png" alt="Developer Logo"> <!-- Replace with your logo -->
-        <h1>Hi, I'm Liliana</h1>
-        <p>I'm a passionate developer, musician, and artist. I love creating projects that combine technology and creativity.</p>
-    </header>
+<header>
+    <img src="your-logo.png" alt="Developer Logo">
+    <h1>Hi, I'm Liliana</h1>
+    <p>I'm a passionate developer, musician, and artist. I love creating projects that combine technology and creativity.</p>
+</header>
 
-    <!-- ======= Buttons ======= -->
-    <div class="buttons">
-        <button class="active" data-target="programming">Programming</button>
-        <button data-target="music">Music</button>
-        <button data-target="art">Art</button>
+<div class="buttons">
+    <button class="active" data-target="programming">Programming</button>
+    <button data-target="music">Music</button>
+    <button data-target="art">Art</button>
+</div>
+
+<div class="content">
+
+<!-- Programming -->
+<div class="section active" id="programming">
+    <h2>Programming Projects</h2>
+    <div class="projects">
+        <!-- Featured Project -->
+        <div class="featured-project">
+            <img src="featured-project.png" alt="Featured Project">
+            <div class="featured-content">
+                <h3>Featured Project</h3>
+                <p>Main project in development.</p>
+            </div>
+            <div class="overlay">
+                <p>Extra info: tech stack, challenges, highlights.</p>
+            </div>
+        </div>
+        <!-- Smaller Projects -->
+        <div class="project-card-small">
+            <img src="mini1.png" alt="Mini 1">
+            <div class="project-card-content"><h3>Mini 1</h3><p>Brief</p></div>
+            <div class="overlay"><p>Extra details</p></div>
+        </div>
+        <div class="project-card-small">
+            <img src="mini2.png" alt="Mini 2">
+            <div class="project-card-content"><h3>Mini 2</h3><p>Brief</p></div>
+            <div class="overlay"><p>Extra details</p></div>
+        </div>
+        <div class="project-card-small">
+            <img src="mini3.png" alt="Mini 3">
+            <div class="project-card-content"><h3>Mini 3</h3><p>Brief</p></div>
+            <div class="overlay"><p>Extra details</p></div>
+        </div>
     </div>
+</div>
 
-    <!-- ======= Dynamic Content ======= -->
-    <div class="content">
-
-        <!-- Programming Section -->
-        <div class="section active" id="programming">
-            <h2>Programming Projects</h2>
-            <div class="projects">
-                <!-- Featured Project -->
-                <div class="project-card">
-                    <img src="featured-project.png" alt="Featured Project">
-                    <div class="project-card-content">
-                        <h3>Featured Project</h3>
-                        <p>This is my main project, currently in development.</p>
-                    </div>
-                    <div class="overlay">
-                        <p>Detailed info about this project goes here. Technologies used, challenges, etc.</p>
-                    </div>
-                </div>
-                <!-- Smaller Projects -->
-                <div class="project-card">
-                    <img src="mini1.png" alt="Mini Project 1">
-                    <div class="project-card-content">
-                        <h3>Mini Project 1</h3>
-                        <p>Brief description</p>
-                    </div>
-                    <div class="overlay">
-                        <p>Extra details about Mini Project 1</p>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <img src="mini2.png" alt="Mini Project 2">
-                    <div class="project-card-content">
-                        <h3>Mini Project 2</h3>
-                        <p>Brief description</p>
-                    </div>
-                    <div class="overlay">
-                        <p>Extra details about Mini Project 2</p>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <img src="mini3.png" alt="Mini Project 3">
-                    <div class="project-card-content">
-                        <h3>Mini Project 3</h3>
-                        <p>Brief description</p>
-                    </div>
-                    <div class="overlay">
-                        <p>Extra details about Mini Project 3</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Music Section -->
-        <div class="section" id="music">
-            <h2>Music</h2>
-            <p>Check out my music on Spotify:</p>
-            <div class="music-link">
-                <a href="https://open.spotify.com/" target="_blank">Listen on Spotify</a> <!-- Replace with your link -->
-            </div>
-        </div>
-
-        <!-- Art Section -->
-        <div class="section" id="art">
-            <h2>Art</h2>
-            <div class="art-grid">
-                <img src="art1.jpg" alt="Artwork 1">
-                <img src="art2.jpg" alt="Artwork 2">
-                <img src="art3.jpg" alt="Artwork 3">
-                <img src="art4.jpg" alt="Artwork 4">
-            </div>
-        </div>
-
+<!-- Music -->
+<div class="section" id="music">
+    <h2>Music</h2>
+    <p>Check out my music on Spotify:</p>
+    <div class="music-link">
+        <a href="https://open.spotify.com/" target="_blank">Listen on Spotify</a>
     </div>
+</div>
 
-    <!-- ======= JavaScript ======= -->
-    <script>
-        const buttons = document.querySelectorAll('.buttons button');
-        const sections = document.querySelectorAll('.section');
+<!-- Art -->
+<div class="section" id="art">
+    <h2>Art</h2>
+    <div class="art-grid">
+        <div class="art-card"><img src="art1.jpg" alt="Art 1"><div class="art-card-caption">Artwork 1</div></div>
+        <div class="art-card"><img src="art2.jpg" alt="Art 2"><div class="art-card-caption">Artwork 2</div></div>
+        <div class="art-card"><img src="art3.jpg" alt="Art 3"><div class="art-card-caption">Artwork 3</div></div>
+        <div class="art-card"><img src="art4.jpg" alt="Art 4"><div class="art-card-caption">Artwork 4</div></div>
+    </div>
+</div>
 
-        buttons.forEach(button => {
-            button.addEventListener('click', () => {
-                buttons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
+</div>
 
-                const target = button.getAttribute('data-target');
-
-                sections.forEach(section => {
-                    if (section.id === target) {
-                        section.classList.add('active');
-                    } else {
-                        section.classList.remove('active');
-                    }
-                });
-            });
-        });
-    </script>
+<script>
+const buttons=document.querySelectorAll('.buttons button');
+const sections=document.querySelectorAll('.section');
+buttons.forEach(button=>{button.addEventListener('click',()=>{buttons.forEach(btn=>btn.classList.remove('active'));button.classList.add('active');const target=button.getAttribute('data-target');sections.forEach(section=>{section.id===target?section.classList.add('active'):section.classList.remove('active');});});});
+</script>
 </body>
 </html>
