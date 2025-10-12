@@ -1,113 +1,299 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lunavia | Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        /* ======= General Styles ======= */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f9;
+            color: #333;
+            overflow-x: hidden;
+        }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ======= Header ======= */
+        header {
+            text-align: center;
+            padding: 50px 20px 20px;
+            background: #282c34;
+            color: white;
+        }
+        header img {
+            max-width: 120px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+        header h1 {
+            margin: 0 0 10px;
+            font-size: 2.5rem;
+        }
+        header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ======= Buttons Section ======= */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0 20px;
+            gap: 20px;
+        }
+        .buttons button {
+            padding: 12px 25px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #61dafb;
+            color: #282c34;
+            transition: background 0.3s;
+        }
+        .buttons button:hover {
+            background: #21a1f1;
+        }
+        .buttons button.active {
+            background: #21a1f1;
+            color: white;
+        }
+
+        /* ======= Content Section ======= */
+        .content {
+            max-width: 1000px;
+            margin: 0 auto 50px;
+            padding: 0 20px;
+            min-height: 300px;
+            position: relative;
+        }
+        .section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            pointer-events: none;
+        }
+        .section.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        /* ======= Programming Section ======= */
+        .projects {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .project-card {
+            position: relative;
+            flex: 1 1 calc(33% - 20px);
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        .project-card img {
+            width: 100%;
+            display: block;
+        }
+        .project-card-content {
+            padding: 15px;
+        }
+        .project-card-content h3 {
+            margin: 0 0 5px;
+        }
+        .project-card-content p {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Hover overlay */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(33, 161, 241, 0.85);
+            color: white;
+            opacity: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            transition: opacity 0.3s;
+        }
+        .project-card:hover .overlay {
+            opacity: 1;
+        }
+
+        /* ======= Art Section ======= */
+        .art-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        /* ======= Music Section ======= */
+        .music-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .music-link a {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #1DB954;
+            color: white;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        .music-link a:hover {
+            background: #17a64f;
+        }
+
+        /* ======= Responsive ======= */
+        @media (max-width: 768px) {
+            .projects {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Lunavia🐙</h1>
-    <p>Game Developer | Programmer | Artist | Musician</p>
-  </header>
 
-  <main>
-    <!-- About Me -->
-    <section class="card" onclick="toggleCard(this)">
-      <h2>About Me</h2>
-      <div class="content">
-        <p>I'm Lunavia a 19 year-old game's developer and programmer from the UK. I am the founder of Team INNERMINDS, the studio behind <strong> Within Time</strong>.
-        </strong> I also am a self-taught artist and musician, having practiced both arts for several years. These skills allowed me to start up my own
-        game's studio as formerly mentioned. 
-      </p>
-      </div>
-    </section>
+    <!-- ======= Header ======= -->
+    <header>
+        <img src="your-logo.png" alt="Developer Logo"> <!-- Replace with your logo -->
+        <h1>Hi, I'm Liliana</h1>
+        <p>I'm a passionate developer, musician, and artist. I love creating projects that combine technology and creativity.</p>
+    </header>
 
-    <!-- Projects -->
-    <section class="card" onclick="toggleCard(this)">
-      <h2>Projects</h2>
-      <div class="content">
-        <ul>
-          <li><strong>Within Time</strong> – A turn-based RPG taking place in the worlds of Terrus and Iolade. Following Yunis Caelum and his friends as they prevent the world from its end.(Page can be found publicly on Steam)</li>
-          <li><strong>Like a Butterfly</strong> – A visual novel following the life of Ana, a transgender woman and showcases the difficulties of her day to day life. (Development on Haitus) </li>
-          <li><strong>Reverberation</strong> – A tech-demo for a puzzle game featuring the use of clones, created in collaboration with Popedev. (Avaliable to view on Itch) </li>
-        </ul>
-      </div>
-    </section>
+    <!-- ======= Buttons ======= -->
+    <div class="buttons">
+        <button class="active" data-target="programming">Programming</button>
+        <button data-target="music">Music</button>
+        <button data-target="art">Art</button>
+    </div>
 
-    <!-- Within Time -->
-    <section class="card" onclick="toggleCard(this)">
-      <h2>Within Time</h2>
-      <img src="images/within-time-cover.png" alt="Within Time Key Art" class="card-image">
-      <div class="content">
-        <p>
-          FATE CHANGES FOR NO ONE. Your destiny is intertwined with the end of the world. As the descendants of long powerful mages known as SCIONS, Yunis, Estella, Angie and Rictor travel to Iolade to halt the end of humanity as they know it.<br>
+    <!-- ======= Dynamic Content ======= -->
+    <div class="content">
 
-          6 Months remain before the fate of the world is sealed and humanity as it's known ceases to exist.<br>
+        <!-- Programming Section -->
+        <div class="section active" id="programming">
+            <h2>Programming Projects</h2>
+            <div class="projects">
+                <!-- Featured Project -->
+                <div class="project-card">
+                    <img src="featured-project.png" alt="Featured Project">
+                    <div class="project-card-content">
+                        <h3>Featured Project</h3>
+                        <p>This is my main project, currently in development.</p>
+                    </div>
+                    <div class="overlay">
+                        <p>Detailed info about this project goes here. Technologies used, challenges, etc.</p>
+                    </div>
+                </div>
+                <!-- Smaller Projects -->
+                <div class="project-card">
+                    <img src="mini1.png" alt="Mini Project 1">
+                    <div class="project-card-content">
+                        <h3>Mini Project 1</h3>
+                        <p>Brief description</p>
+                    </div>
+                    <div class="overlay">
+                        <p>Extra details about Mini Project 1</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="mini2.png" alt="Mini Project 2">
+                    <div class="project-card-content">
+                        <h3>Mini Project 2</h3>
+                        <p>Brief description</p>
+                    </div>
+                    <div class="overlay">
+                        <p>Extra details about Mini Project 2</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="mini3.png" alt="Mini Project 3">
+                    <div class="project-card-content">
+                        <h3>Mini Project 3</h3>
+                        <p>Brief description</p>
+                    </div>
+                    <div class="overlay">
+                        <p>Extra details about Mini Project 3</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-Yunis Caelum leads the charge to save humanity followed closely by his ensemble of childhood friends, Estella Kisiel, Angie Alfaro and Rictor Fitzsimmons as they venture into Iolade, a world connected loosely to their own through a force unbeknownst to them. Follow this group of unlikely saviours as they traverse the many regions of this unfamiliar land, taking down each Antiborne that stands in their way to salvation. <br>
+        <!-- Music Section -->
+        <div class="section" id="music">
+            <h2>Music</h2>
+            <p>Check out my music on Spotify:</p>
+            <div class="music-link">
+                <a href="https://open.spotify.com/" target="_blank">Listen on Spotify</a> <!-- Replace with your link -->
+            </div>
+        </div>
 
-With hopes of gaining answers to June's unprecedented disappearance just a year prior, the unlikely group of Heroes make their way through Iolade, piecing together their larger roles in this prophecy as they aim to put an end to the Scion of Time's terror and allow both Iolade and Terrus to live in peace.<br>
+        <!-- Art Section -->
+        <div class="section" id="art">
+            <h2>Art</h2>
+            <div class="art-grid">
+                <img src="art1.jpg" alt="Artwork 1">
+                <img src="art2.jpg" alt="Artwork 2">
+                <img src="art3.jpg" alt="Artwork 3">
+                <img src="art4.jpg" alt="Artwork 4">
+            </div>
+        </div>
 
-FATE CHANGES FOR NO ONE.
-<br>
-<br>
-Within Time is currently my biggest project. I have been working on it for close to around 2 and a half years now, the game has been through
-quite a few stages, originally starting as an RPGMAKER project under the name 'Our Mind' back in late 2022, releasing a demo in early 2023.
-I was unhappy with the game and pulled the demo from steam, aiming to completely revamp the game with improved visuals, writing and gameplay.
-Towards the end of 2023 I realised that RPGMAKER was not the engine I would need for 'Our Mind' and made the jump to Gamemaker Studio 2 in order
-to seek a more capable engine. Though after around 7 months of development and a rebrand to 'Within Time' I realised that Gamemaker also was not
-the engine I was looking for. Taking one last risk I made the jump to Godot as it had recently had its 4.0 update which significantly improved the
-engine. This is now what Within Time is being developed on. Within Time in its current iteration has only existed for around 10 months and has been through
-several rewrites, replannings and has been rebuilt from the ground up multiple times in order to create my ideal vision.
-<br>
-<br>
-Within Time is a 40 hour TBRPG taking place primarily in the world of Iolade, a world inhabited by a modified race of humans known as 'The Marked'.
-The game primarily takes heavy inspiration from games like Dragon Quest, Final Fantasy, Chronotrigger, Persona and more. I aim to recreate the feel and vibe
-of those classic 32bit RPGs I love so fondly, with improved quality of life and gameplay!
-        </p>
-      </div>
-    </section>
+    </div>
 
-    <!-- My Work -->
-    <section class="card" onclick="toggleCard(this)">
-      <h2>My Work</h2>
-      <div class="content">
-        <p>I specialize in programming in the GDScript language and have proficency working with the Godot game enginge.
-          I also have experience working in Gamemaker Studio 2, Unreal Engine, Unity and Raylib. 
+    <!-- ======= JavaScript ======= -->
+    <script>
+        const buttons = document.querySelectorAll('.buttons button');
+        const sections = document.querySelectorAll('.section');
 
-          On the side I also specialise in Pixel art (as seen in Within Time) as I work as the lead artist at my studio, Team
-          INNERMINDS. Having practiced Pixel art for a little over two years now. 
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                buttons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
 
-          As a hobby I also create music in FL Studio 21 typically for Within Time though also as a hobby for friends and family.
+                const target = button.getAttribute('data-target');
 
-          I have been creating games for a little over 4 years now, having started out in RPGMAKER VXAce and gradually teaching myself new skills.
-        </p>
-      </div>
-    </section>
-
-    <!-- Links -->
-    <section class="card" onclick="toggleCard(this)">
-      <h2>My Links</h2>
-      <div class="content">
-        <ul>
-          <li><a href="https://store.steampowered.com/app/2302230/Within_Time" target="_blank">Within Time on Steam</a></li>
-          <li><a href="https://x.com/withintimegame" target="_blank">Within Time's Twitter</a></li>
-          <li><a href="https://www.youtube.com/@withintimegame" target="_blank">Within Time's Youtube</a></li>
-          <li><a href="https://discord.gg/BP3jBjgWn5" target="_blank">Within Time's Discord</a></li>
-          <li><a href="https://github.com/lunaviadev" target="_blank">My Github</a></li>
-          <li><a href="https://lunavia.itch.io" target="_blank">My Itch.io page</a></li>
-        </ul>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>© 2025 Lunavia | © 2025 Team INNERMINDS </p>
-  </footer>
-
-  <script src="script.js"></script>
-
+                sections.forEach(section => {
+                    if (section.id === target) {
+                        section.classList.add('active');
+                    } else {
+                        section.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
