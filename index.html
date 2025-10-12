@@ -18,15 +18,25 @@ a { color: inherit; text-decoration: none; }
 img { display:block; max-width:100%; height:auto; }
 
 /* ======= Header ======= */
-header { 
+header {
+    position: relative;
     text-align:center; 
     padding:50px 20px 20px; 
-    background:#111; 
+    background: linear-gradient(135deg, #111 0%, #333 100%);
     color:white; 
     opacity:0; 
     transform:translateY(-20px); 
     transition: opacity 1s ease, transform 1s ease; 
+    overflow: hidden;
 }
+header::after {
+    content: '';
+    position: absolute;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.3);
+    z-index:0;
+}
+header img, header h1, header p { position: relative; z-index:1; }
 header.visible { opacity:1; transform:translateY(0); }
 header img { 
     max-width:120px; 
@@ -211,9 +221,7 @@ header:hover h1 { text-shadow: 0 0 10px #61dafb, 0 0 20px #21a1f1; }
     <h2>About Me</h2>
     <div class="about-content">
         <p>Hi! I'm Liliana Bellas, also known as Lunavia online. I’m a 20-year-old UK-based developer and full-time Game Development student. I’ve been passionate about creating games and interactive experiences since a young age, and I enjoy blending creativity with technical skills to craft unique projects.</p>
-
         <p>Beyond development, I love storytelling, world-building, and exploring art and music. My goal is to build immersive experiences that engage players emotionally and creatively. Outside of games, I enjoy collaborating with other creatives, learning new programming techniques, and contributing to indie projects.</p>
-
         <p>Feel free to explore my portfolio to see my programming projects, art, and more about my journey as a developer!</p>
     </div>
 </div>
