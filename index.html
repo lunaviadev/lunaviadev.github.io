@@ -69,15 +69,17 @@ header:hover h1 { text-shadow: 0 0 10px #7a3cc2, 0 0 20px #7a3cc2; }
 .project-card-content h3, .featured-content h3 { margin:0 0 5px; font-weight:600; }
 .project-card-content p, .featured-content p { font-size:0.9rem; margin:0; font-weight:300; }
 .overlay {
-    position:absolute; top:0; left:0; right:0; bottom:0; background:rgba(122,60,194,0.9); color:white;
-    opacity:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    position:absolute; top:0; left:0; right:0; bottom:0; background:rgba(122,60,194,0.95); color:white;
+    opacity:0; display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
     text-align:center; padding:20px; transition: opacity 0.3s; pointer-events:none;
+    overflow-y:auto; max-height:90%;
 }
 .featured-project.active .overlay, .project-card-small.active .overlay { opacity:1; pointer-events:auto; }
 .featured-project:hover .overlay, .project-card-small:hover .overlay { opacity:1; pointer-events:auto; }
 .view-project-btn {
     margin-top:15px; padding:10px 25px; border:none; border-radius:25px; background:#7a3cc2; color:white; font-weight:600;
     cursor:pointer; transition: background 0.3s, transform 0.2s;
+    flex-shrink:0;
 }
 .view-project-btn:hover { background:#5e2fa2; transform: scale(1.05); }
 
@@ -95,7 +97,11 @@ header:hover h1 { text-shadow: 0 0 10px #7a3cc2, 0 0 20px #7a3cc2; }
 .about-content p.visible { opacity:1; transform: translateY(0); }
 
 /* ======= Responsive ======= */
-@media (max-width:768px) { .projects { flex-direction:column; } .project-card-small { flex:1 1 100%; } .about-content { max-height:none; } }
+@media (max-width:768px) { 
+    .projects { flex-direction:column; } 
+    .project-card-small { flex:1 1 100%; } 
+    .about-content { max-height:none; } 
+}
 </style>
 </head>
 <body>
@@ -174,9 +180,12 @@ header:hover h1 { text-shadow: 0 0 10px #7a3cc2, 0 0 20px #7a3cc2; }
 <div class="section" id="about">
     <h2>About Me</h2>
     <div class="about-content">
-        <p>Hi! I'm Liliana Bellas, also known as Lunavia online. I’m a 20-year-old UK-based developer and full-time Game Development student. I’ve been passionate about creating games and interactive experiences since a young age, and I enjoy blending creativity with technical skills to craft unique projects.</p>
-        <p>Beyond development, I love storytelling, world-building, and exploring art and music. My goal is to build immersive experiences that engage players emotionally and creatively. Outside of games, I enjoy collaborating with other creatives, learning new programming techniques, and contributing to indie projects.</p>
-        <p>Feel free to explore my portfolio to see my programming projects, art, and more about my journey as a developer!</p>
+        <p>Hi! I'm Liliana Bellas, also known as Lunavia online. I’m a 20-year-old UK-based developer and full-time Game Development student.</p>
+        <p>I'm currently in the process of making my first commercial game 'Within Time' alongside my studio 'Team INNERMINDS'</p>
+        <p>I'm familar with many engines and languages, specialising mostly in GDSCRIPT/Godot and C#/Unity. Though I have knowledge on Unreal Engine, C++, HTML/JS and small amounts of C.</p>
+        <p>I create all my artwork with Clip Studio Paint (traditional digital art) or Aseprite (2D pixel art) and have a XP Pen 15.6 pro as my art tablet. </p>
+        <p>For music I use FL Studio 21 and play electric guitar which I often use for many of my recorded tracks.</p>
+        <p>I have been programming for roughly 3 years and drawing for over 5. If any of my work interests you, you can contact me on discord! 'lunavia.gd'</p>
     </div>
 </div>
 
