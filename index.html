@@ -17,13 +17,48 @@ a { color: inherit; text-decoration: none; }
 img { display:block; max-width:100%; height:auto; }
 
 /* ======= Header ======= */
-header { text-align:center; padding:50px 20px 20px; background:#111; color:white; }
-header img { max-width:120px; border-radius:50%; margin-bottom:20px; }
-header h1 { margin:0 0 10px; font-size:2.5rem; }
-header p { font-size:1.2rem; max-width:600px; margin:0 auto; }
+header { 
+    text-align:center; 
+    padding:50px 20px 20px; 
+    background:#111; 
+    color:white; 
+    opacity:0; 
+    transform:translateY(-20px); 
+    transition: opacity 1s ease, transform 1s ease; 
+}
+header.visible { opacity:1; transform:translateY(0); }
+header img { 
+    max-width:120px; 
+    border-radius:50%; 
+    margin-bottom:20px; 
+    transition: transform 0.3s ease; 
+}
+header h1 { 
+    margin:0 0 10px; 
+    font-size:2.5rem; 
+    transition: text-shadow 0.3s ease; 
+}
+header p { 
+    font-size:1.2rem; 
+    max-width:600px; 
+    margin:0 auto; 
+}
+
+/* ======= Header Hover Effect ======= */
+header:hover img { transform: scale(1.1); }
+header:hover h1 { text-shadow: 0 0 10px #61dafb, 0 0 20px #21a1f1; }
 
 /* ======= Buttons Section ======= */
-.buttons { display:flex; justify-content:center; margin:40px 0 20px; gap:20px; }
+.buttons { 
+    display:flex; 
+    justify-content:center; 
+    margin:40px 0 20px; 
+    gap:20px; 
+    opacity:0; 
+    transform:translateY(20px); 
+    transition: opacity 1s ease, transform 1s ease; 
+}
+.buttons.visible { opacity:1; transform:translateY(0); }
 .buttons button {
     padding:12px 25px; font-size:1rem; border:none; border-radius:8px;
     cursor:pointer; background:#61dafb; color:#111; transition: background 0.3s;
@@ -46,23 +81,13 @@ header p { font-size:1.2rem; max-width:600px; margin:0 auto; }
 
 /* ======= Programming ======= */
 .projects { display:flex; flex-wrap:wrap; gap:20px; }
-.featured-project {
-    flex:1 1 100%;
-    background:#2a2a2a;
-    border-radius:10px;
-    overflow:hidden;
-    position:relative;
-    box-shadow:0 4px 12px rgba(0,0,0,0.5);
-    cursor:pointer;
-    transition: transform 0.3s;
+.featured-project, .project-card-small {
+    border-radius:10px; overflow:hidden; position:relative; cursor:pointer;
+    box-shadow:0 4px 12px rgba(0,0,0,0.5); transition: transform 0.3s;
 }
+.featured-project { flex:1 1 100%; background:#2a2a2a; }
 .featured-project:hover { transform:translateY(-5px); }
-.project-card-small {
-    flex:1 1 calc(33% - 20px);
-    background:#2a2a2a; border-radius:10px;
-    overflow:hidden; position:relative; box-shadow:0 4px 8px rgba(0,0,0,0.5);
-    cursor:pointer; transition: transform 0.3s;
-}
+.project-card-small { flex:1 1 calc(33% - 20px); background:#2a2a2a; }
 .project-card-small:hover { transform:translateY(-5px); }
 .project-card-content, .featured-content { padding:15px; }
 .project-card-content h3, .featured-content h3 { margin:0 0 5px; }
@@ -76,9 +101,17 @@ header p { font-size:1.2rem; max-width:600px; margin:0 auto; }
 .featured-project:hover .overlay, .project-card-small:hover .overlay { opacity:1; }
 
 /* ======= Art ======= */
-.art-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:15px; }
-.art-card { position:relative; overflow:hidden; border-radius:10px; cursor:pointer; transition: transform 0.3s; }
+.art-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:15px; perspective:1000px; }
+.art-card { 
+    position:relative; 
+    overflow:hidden; 
+    border-radius:10px; 
+    cursor:pointer; 
+    transition: transform 0.3s, box-shadow 0.3s; 
+    transform-style: preserve-3d;
+}
 .art-card img { width:100%; display:block; transition: transform 0.3s; }
+.art-card:hover { transform: rotateY(5deg) rotateX(5deg) scale(1.05); box-shadow:0 10px 25px rgba(0,0,0,0.7); }
 .art-card:hover img { transform:scale(1.1); }
 .art-card-caption {
     position:absolute; bottom:0; left:0; right:0;
@@ -86,13 +119,10 @@ header p { font-size:1.2rem; max-width:600px; margin:0 auto; }
 }
 .art-card:hover .art-card-caption { opacity:1; }
 
-/* ======= Music ======= */
-.music-link { text-align:center; margin-top:20px; }
-.music-link a {
-    display:inline-block; padding:12px 25px; background:#1DB954; color:white;
-    font-weight:bold; border-radius:8px; transition: background 0.3s, transform 0.3s;
-}
-.music-link a:hover { background:#17a64f; transform:scale(1.05); }
+/* ======= About Me ======= */
+.about-content { padding:20px; line-height:1.6; font-size:1rem; background:#2a2a2a; border-radius:10px; }
+.about-content p { opacity:0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.about-content p.visible { opacity:1; transform: translateY(0); }
 
 /* ======= Responsive ======= */
 @media (max-width:768px) {
@@ -106,12 +136,12 @@ header p { font-size:1.2rem; max-width:600px; margin:0 auto; }
 <header>
     <img src="DEVLOGO.png" alt="Developer Logo">
     <h1>Liliana Bellas</h1>
-    <p>I'm Lili, I also go by Lunavia online! I'm a 20 year-old UK based developer and current full time student for Game's Development. </p>
+    <p>I'm Lili, I also go by Lunavia online! I'm a 20 year-old UK based developer and current full time student for Game's Development.</p>
 </header>
 
 <div class="buttons">
     <button class="active" data-target="programming">Programming</button>
-    <button data-target="music">Music</button>
+    <button data-target="about">About Me</button>
     <button data-target="art">Art</button>
 </div>
 
@@ -122,7 +152,7 @@ header p { font-size:1.2rem; max-width:600px; margin:0 auto; }
     <h2>Programming Projects</h2>
     <div class="projects">
         <!-- Featured Project -->
-        <div class="featured-project">
+        <a href="https://example.com/within-time" target="_blank" class="featured-project">
             <img src="timeforanewera.png" alt="Within Time">
             <div class="featured-content">
                 <h3>Within Time</h3>
@@ -138,39 +168,41 @@ header p { font-size:1.2rem; max-width:600px; margin:0 auto; }
                   Team INNERMINDS has grown to a size of 8 and also supports a large amount of voice actors working on the project.
                 </p>
             </div>
-        </div>
+        </a>
         <!-- Smaller Projects -->
-        <div class="project-card-small">
-            <img src="coverart2.png" alt="Protcol: Shutdown">
+        <a href="https://example.com/protocol-shutdown" target="_blank" class="project-card-small">
+            <img src="coverart2.png" alt="Protocol: Shutdown">
             <div class="project-card-content"><h3>Protocol: Shutdown</h3><p>Made for Brackey's Gamejam 2025.2</p></div>
             <div class="overlay"><p>Protocol: Shutdown was a gamejam gam made in under a week as part of Brackey's Gamejam 2025.2. It was made in collaboration with a fellow developer Bradley Curtis
               and I created and provided all assets seen within the game alongside contributing to parts of the programming.
               
               Protocol:Shutdown was made in Unity.
-
             </p></div>
-        </div>
-        <div class="project-card-small">
+        </a>
+        <a href="https://example.com/like-a-butterfly" target="_blank" class="project-card-small">
             <img src="LABANN2.png" alt="Like a Butterfly">
             <div class="project-card-content"><h3>Like a Butterfly</h3><p>On Hiatus</p></div>
             <div class="overlay"><p>Like a Butterfly is a visual novel developed in Godot that tells the story of a transgender girl and her daily lives. It was originally created as a social commentary on
               how difficult it can be to be transgender and was a passion project of mine, though has been temporarily placed on hiatus in order to allow me to focus on other projects.
             </p></div>
-        </div>
-        <div class="project-card-small">
+        </a>
+        <a href="https://example.com/mini3" target="_blank" class="project-card-small">
             <img src="mini3.png" alt="Mini 3">
             <div class="project-card-content"><h3>Mini 3</h3><p>Brief</p></div>
             <div class="overlay"><p>Extra details</p></div>
-        </div>
+        </a>
     </div>
 </div>
 
-<!-- Music -->
-<div class="section" id="music">
-    <h2>Music</h2>
-    <p>Check out my music on Spotify:</p>
-    <div class="music-link">
-        <a href="https://open.spotify.com/" target="_blank">Listen on Spotify</a>
+<!-- About Me -->
+<div class="section" id="about">
+    <h2>About Me</h2>
+    <div class="about-content">
+        <p>Hi! I'm Liliana Bellas, also known as Lunavia online. I’m a 20-year-old UK-based developer and full-time Game Development student. I’ve been passionate about creating games and interactive experiences since a young age, and I enjoy blending creativity with technical skills to craft unique projects.</p>
+
+        <p>Beyond development, I love storytelling, world-building, and exploring art and music. My goal is to build immersive experiences that engage players emotionally and creatively. Outside of games, I enjoy collaborating with other creatives, learning new programming techniques, and contributing to indie projects.</p>
+
+        <p>Feel free to explore my portfolio to see my programming projects, art, and more about my journey as a developer!</p>
     </div>
 </div>
 
@@ -192,7 +224,32 @@ header p { font-size:1.2rem; max-width:600px; margin:0 auto; }
 <script>
 const buttons=document.querySelectorAll('.buttons button');
 const sections=document.querySelectorAll('.section');
-buttons.forEach(button=>{button.addEventListener('click',()=>{buttons.forEach(btn=>btn.classList.remove('active'));button.classList.add('active');const target=button.getAttribute('data-target');sections.forEach(section=>{section.id===target?section.classList.add('active'):section.classList.remove('active');});});});
+
+// Fade in header and buttons on page load
+window.addEventListener('DOMContentLoaded',()=>{
+    document.querySelector('header').classList.add('visible');
+    document.querySelector('.buttons').classList.add('visible');
+});
+
+buttons.forEach(button=>{
+    button.addEventListener('click',()=>{
+        buttons.forEach(btn=>btn.classList.remove('active'));
+        button.classList.add('active');
+        const target=button.getAttribute('data-target');
+        sections.forEach(section=>{
+            section.id===target ? section.classList.add('active') : section.classList.remove('active');
+        });
+
+        // Animate About Me paragraphs
+        if(target==="about"){
+            const paragraphs=document.querySelectorAll("#about .about-content p");
+            paragraphs.forEach((p,i)=>{
+                p.classList.remove("visible");
+                setTimeout(()=>{p.classList.add("visible");}, i*300);
+            });
+        }
+    });
+});
 </script>
 </body>
 </html>
