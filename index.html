@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Liliana Bellas | Portfolio</title>
 
-<!-- Google Font -->
+<!-- the font -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
@@ -20,10 +20,10 @@ body {
 a { color: inherit; text-decoration: none; }
 img { display:block; max-width:100%; height:auto; }
 
-/* ======= Page Fade-In ======= */
+/* fade in effect */
 #page-wrapper { opacity:0; transition: opacity 1.2s ease; transition-delay: 0.3s; }
 
-/* ======= Header ======= */
+/* header for site */
 header {
     position: relative;
     text-align:center; 
@@ -44,7 +44,7 @@ header p { font-size:1.1rem; font-weight:300; max-width:600px; margin:0 auto; li
 header:hover img { transform: scale(1.08); }
 header:hover h1 { text-shadow: 0 0 10px #7a3cc2, 0 0 20px #7a3cc2; }
 
-/* ======= Buttons ======= */
+/* page buttons */
 .buttons { display:flex; justify-content:center; margin:40px 0 20px; gap:20px; opacity:0; transform:translateY(20px); transition: opacity 1s ease, transform 1s ease; }
 .buttons.visible { opacity:1; transform:translateY(0); }
 .buttons button {
@@ -54,12 +54,12 @@ header:hover h1 { text-shadow: 0 0 10px #7a3cc2, 0 0 20px #7a3cc2; }
 .buttons button:hover { background:#5e2fa2; transform: translateY(-3px); }
 .buttons button.active { background:#5e2fa2; color:white; }
 
-/* ======= Content ======= */
+/* main content */
 .content { max-width:1000px; margin:0 auto 50px; padding:0 20px; min-height:300px; position:relative; }
 .section { position:absolute; top:0; left:0; width:100%; opacity:0; transform:translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; pointer-events:none; }
 .section.active { opacity:1; transform:translateY(0); pointer-events:auto; }
 
-/* ======= Programming ======= */
+/* programming section */
 .projects { display:flex; flex-wrap:wrap; gap:20px; }
 .featured-project, .project-card-small { border-radius:10px; overflow:hidden; position:relative; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.5); transition: transform 0.3s; }
 .featured-project { flex:1 1 100%; background:#2a2a2a; }
@@ -83,7 +83,7 @@ header:hover h1 { text-shadow: 0 0 10px #7a3cc2, 0 0 20px #7a3cc2; }
 }
 .view-project-btn:hover { background:#5e2fa2; transform: scale(1.05); }
 
-/* ======= Art ======= */
+/* art section */
 .art-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:15px; }
 .art-card { position:relative; overflow:hidden; border-radius:10px; cursor:pointer; transition: transform 0.3s; }
 .art-card img { width:100%; display:block; transition: transform 0.3s; }
@@ -91,12 +91,12 @@ header:hover h1 { text-shadow: 0 0 10px #7a3cc2, 0 0 20px #7a3cc2; }
 .art-card-caption { position:absolute; bottom:0; left:0; right:0; background:rgba(0,0,0,0.6); color:white; text-align:center; padding:10px; opacity:0; transition: opacity 0.3s; }
 .art-card:hover .art-card-caption, .art-card.active .art-card-caption { opacity:1; }
 
-/* ======= About Me ======= */
+/* about me section */
 .about-content { padding:20px; line-height:1.7; font-size:1rem; background:#2a2a2a; border-radius:10px; max-height:500px; overflow-y:auto; }
 .about-content p { opacity:0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .about-content p.visible { opacity:1; transform: translateY(0); }
 
-/* ======= Responsive ======= */
+/* top banner */
 @media (max-width:768px) { 
     .projects { flex-direction:column; } 
     .project-card-small { flex:1 1 100%; } 
@@ -121,12 +121,12 @@ header:hover h1 { text-shadow: 0 0 10px #7a3cc2, 0 0 20px #7a3cc2; }
 
 <div class="content">
 
-<!-- Programming -->
+<!-- programming section -->
 <div class="section active" id="programming">
     <h2>Programming Projects</h2>
     <div class="projects">
 
-        <!-- Featured -->
+        <!-- featured project -->
         <div class="featured-project">
             <img src="timeforanewera.png" alt="Within Time">
             <div class="featured-content"><h3>Within Time</h3><p>Main project in development.</p></div>
@@ -142,7 +142,7 @@ header:hover h1 { text-shadow: 0 0 10px #7a3cc2, 0 0 20px #7a3cc2; }
             </div>
         </div>
 
-        <!-- Smaller Projects -->
+        <!-- minor projects -->
         <div class="project-card-small">
             <img src="coverart2.png" alt="Protocol: Shutdown">
             <div class="project-card-content"><h3>Protocol: Shutdown</h3><p>Made for Brackey's Gamejam 2025.2</p></div>
@@ -176,7 +176,7 @@ header:hover h1 { text-shadow: 0 0 10px #7a3cc2, 0 0 20px #7a3cc2; }
     </div>
 </div>
 
-<!-- About -->
+<!-- about section -->
 <div class="section" id="about">
     <h2>About Me</h2>
     <div class="about-content">
@@ -189,7 +189,7 @@ header:hover h1 { text-shadow: 0 0 10px #7a3cc2, 0 0 20px #7a3cc2; }
     </div>
 </div>
 
-<!-- Art -->
+<!-- art section -->
 <div class="section" id="art">
     <h2>Art</h2>
     <div class="art-grid">
@@ -239,7 +239,7 @@ buttons.forEach(button=>{
     });
 });
 
-// Mobile: toggle overlay on tap
+// mobile stuff, toggle overlay on display
 programmingCards.forEach(card=>{
     card.addEventListener('click', e=>{
         if(window.innerWidth<=768){
@@ -256,7 +256,7 @@ artCards.forEach(card=>{
     });
 });
 
-// Close overlays if tap outside
+// close display
 document.addEventListener('click', e=>{
     if(window.innerWidth<=768){
         const isCard=e.target.closest('.featured-project, .project-card-small, .art-card');
