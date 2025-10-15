@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Protocol: Shutdown | Project Details</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+body {
+  font-family: 'Poppins', sans-serif;
+  background:#121212;
+  color:#f0f0f0;
+  margin:0;
+  padding:0;
+  overflow-x:hidden;
+  animation: fadeInBody 1s ease forwards;
+}
+@keyframes fadeInBody {
+  from {opacity:0; transform:scale(1.02);}
+  to {opacity:1; transform:scale(1);}
+}
+header {
+  background: linear-gradient(135deg, #0e0e0e 0%, #7a3cc2 50%, #2c2c2c 100%);
+  padding: 40px 20px 60px;
+  color:white;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+header img {
+  max-width:200px;
+  margin:0 auto 20px;
+  display:block;
+  animation: fadeInLogo 1.2s ease forwards;
+}
+@keyframes fadeInLogo {
+  from {opacity:0; transform:translateY(-20px);}
+  to {opacity:1; transform:translateY(0);}
+}
+header h1 {
+  font-size:2.5rem;
+  font-weight:600;
+  letter-spacing:1px;
+  margin:0;
+  animation: fadeInHeader 1.2s ease 0.3s forwards;
+  opacity:0;
+}
+@keyframes fadeInHeader {
+  from {opacity:0; transform:translateY(20px);}
+  to {opacity:1; transform:translateY(0);}
+}
+.content {
+  max-width:900px;
+  margin:40px auto;
+  padding:20px;
+  line-height:1.8;
+}
+section {
+  margin-bottom:60px;
+  opacity:0;
+  transform:translateY(20px);
+  animation: slideUp 0.8s ease forwards;
+}
+section:nth-of-type(1){animation-delay:0.4s;}
+section:nth-of-type(2){animation-delay:0.6s;}
+section:nth-of-type(3){animation-delay:0.8s;}
+section:nth-of-type(4){animation-delay:1s;}
+section:nth-of-type(5){animation-delay:1.2s;}
+@keyframes slideUp {
+  to {opacity:1; transform:translateY(0);}
+}
+h2 {
+  color:#b68cff;
+  font-weight:600;
+  margin-bottom:15px;
+  border-left:4px solid #7a3cc2;
+  padding-left:10px;
+}
+.project-image {
+  width:100%;
+  border-radius:10px;
+  margin:20px 0;
+  box-shadow:0 4px 15px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease;
+}
+.project-image:hover {
+  transform:scale(1.03);
+}
+ul {
+  list-style:none;
+  padding:0;
+}
+ul li {
+  background:#1e1e1e;
+  margin:8px 0;
+  padding:10px 15px;
+  border-radius:8px;
+  border-left:4px solid #7a3cc2;
+  transition:transform 0.2s ease;
+}
+ul li:hover { transform:translateX(5px); }
+.buttons {
+  text-align:center;
+  margin-top:40px;
+}
+button {
+  background:#7a3cc2;
+  color:white;
+  border:none;
+  padding:12px 30px;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:600;
+  transition: background 0.3s, transform 0.2s;
+  margin:10px;
+}
+button:hover { background:#632ea4; transform:scale(1.05); }
+a { text-decoration:none; color:inherit; }
+</style>
+</head>
+<body>
+
+<header>
+  <img src="coverart2.png" alt="Protocol Shutdown Logo">
+  <h1>Protocol: Shutdown</h1>
+</header>
+
+<div class="content">
+
+  <section id="overview">
+    <h2>Overview</h2>
+    <p>Protocol: Shutdown was a short cyberpunk-themed action project created during a 2024 game jam. The goal was to explore atmospheric level design, tight controls, and a story that could be told entirely through visuals and sound without text or dialogue. Despite the time constraint, the result became one of my most polished small-scale projects.</p>
+    <img src="protocol-overview.gif" alt="Protocol Overview" class="project-image">
+  </section>
+
+  <section id="gameplay">
+    <h2>Gameplay</h2>
+    <p>Players infiltrate a hostile corporate complex, using stealth and quick reflexes to disable security drones and reach the system’s core. The focus was on creating responsive movement and using environmental lighting cues to guide the player. Visual effects and shaders were used to heighten tension and immersion.</p>
+    <img src="protocol-gif1.gif" alt="Gameplay Clip 1" class="project-image">
+    <img src="protocol-gif2.gif" alt="Gameplay Clip 2" class="project-image">
+  </section>
+
+  <section id="development">
+    <h2>Development Process</h2>
+    <p>Developed in just 7 days using Godot 4, the project emphasized speed and modular design. My primary focus was refining the control system and camera smoothing to maintain immersion while keeping performance optimal. I also handled sound design and environmental storytelling through visual details and lighting direction.</p>
+  </section>
+
+  <section id="skills">
+    <h2>Skills Demonstrated</h2>
+    <ul>
+      <li>Godot 4 scene organization and scripting</li>
+      <li>Lighting, color design, and shader-based effects</li>
+      <li>Optimized 2D camera and physics</li>
+      <li>Sound and ambient design</li>
+    </ul>
+  </section>
+
+  <div class="buttons">
+    <a href="https://bradleycurtis.itch.io/protocolshutdown" target="_blank"><button>View on Itch.io</button></a>
+    <a href="index.html"><button>← Back to Portfolio</button></a>
+  </div>
+</div>
+</body>
+</html>

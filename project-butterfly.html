@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Like a Butterfly | Project Details</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+body {
+  font-family: 'Poppins', sans-serif;
+  background:#121212;
+  color:#f0f0f0;
+  margin:0;
+  padding:0;
+  overflow-x:hidden;
+  animation: fadeInBody 1s ease forwards;
+}
+@keyframes fadeInBody {
+  from {opacity:0; transform:scale(1.02);}
+  to {opacity:1; transform:scale(1);}
+}
+header {
+  background: linear-gradient(135deg, #0e0e0e 0%, #7a3cc2 50%, #2c2c2c 100%);
+  padding: 40px 20px 60px;
+  color:white;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+header img {
+  max-width:200px;
+  margin:0 auto 20px;
+  display:block;
+  animation: fadeInLogo 1.2s ease forwards;
+}
+@keyframes fadeInLogo {
+  from {opacity:0; transform:translateY(-20px);}
+  to {opacity:1; transform:translateY(0);}
+}
+header h1 {
+  font-size:2.5rem;
+  font-weight:600;
+  letter-spacing:1px;
+  margin:0;
+  animation: fadeInHeader 1.2s ease 0.3s forwards;
+  opacity:0;
+}
+@keyframes fadeInHeader {
+  from {opacity:0; transform:translateY(20px);}
+  to {opacity:1; transform:translateY(0);}
+}
+.content {
+  max-width:900px;
+  margin:40px auto;
+  padding:20px;
+  line-height:1.8;
+}
+section {
+  margin-bottom:60px;
+  opacity:0;
+  transform:translateY(20px);
+  animation: slideUp 0.8s ease forwards;
+}
+section:nth-of-type(1){animation-delay:0.4s;}
+section:nth-of-type(2){animation-delay:0.6s;}
+section:nth-of-type(3){animation-delay:0.8s;}
+section:nth-of-type(4){animation-delay:1s;}
+section:nth-of-type(5){animation-delay:1.2s;}
+@keyframes slideUp {
+  to {opacity:1; transform:translateY(0);}
+}
+h2 {
+  color:#b68cff;
+  font-weight:600;
+  margin-bottom:15px;
+  border-left:4px solid #7a3cc2;
+  padding-left:10px;
+}
+.project-image {
+  width:100%;
+  border-radius:10px;
+  margin:20px 0;
+  box-shadow:0 4px 15px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease;
+}
+.project-image:hover {
+  transform:scale(1.03);
+}
+ul {
+  list-style:none;
+  padding:0;
+}
+ul li {
+  background:#1e1e1e;
+  margin:8px 0;
+  padding:10px 15px;
+  border-radius:8px;
+  border-left:4px solid #7a3cc2;
+  transition:transform 0.2s ease;
+}
+ul li:hover { transform:translateX(5px); }
+.buttons {
+  text-align:center;
+  margin-top:40px;
+}
+button {
+  background:#7a3cc2;
+  color:white;
+  border:none;
+  padding:12px 30px;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:600;
+  transition: background 0.3s, transform 0.2s;
+  margin:10px;
+}
+button:hover { background:#632ea4; transform:scale(1.05); }
+a { text-decoration:none; color:inherit; }
+</style>
+</head>
+<body>
+
+<header>
+  <img src="LABANN2.png" alt="Like a Butterfly Logo">
+  <h1>Like a Butterfly</h1>
+</header>
+
+<div class="content">
+
+  <section id="overview">
+    <h2>Overview</h2>
+    <p>Like a Butterfly is a narrative-driven RPG that began development in early 2024. While currently on hiatus, the project focuses heavily on emotional storytelling, surreal presentation, and player choice. It’s designed as a character-driven experience exploring personal growth and identity.</p>
+    <img src="butterfly-overview.gif" alt="Butterfly Overview" class="project-image">
+  </section>
+
+  <section id="gameplay">
+    <h2>Gameplay</h2>
+    <p>The game blends visual novel-style storytelling with interactive segments, puzzles, and character bonding. While currently in prototype phase, its gameplay emphasizes narrative pacing and player immersion through subtle visual feedback and a strong atmospheric direction.</p>
+    <img src="butterfly-gif1.gif" alt="Gameplay Clip 1" class="project-image">
+    <img src="butterfly-gif2.gif" alt="Gameplay Clip 2" class="project-image">
+  </section>
+
+  <section id="development">
+    <h2>Development Process</h2>
+    <p>Like a Butterfly is an ongoing experimental project built in Godot. It serves as both a technical exercise and a narrative exploration piece, where I test new dialogue systems, animation tools, and music-driven pacing. Much of its development revolves around balancing visual minimalism with emotional depth.</p>
+  </section>
+
+  <section id="skills">
+    <h2>Skills Demonstrated</h2>
+    <ul>
+      <li>Godot-based narrative system design</li>
+      <li>UI/UX for dialogue and scene flow</li>
+      <li>Music composition integration</li>
+      <li>Lighting and emotional pacing through visuals</li>
+    </ul>
+  </section>
+
+  <div class="buttons">
+    <a href="#" target="_blank"><button>View Project (Coming Soon)</button></a>
+    <a href="index.html"><button>← Back to Portfolio</button></a>
+  </div>
+</div>
+</body>
+</html>
