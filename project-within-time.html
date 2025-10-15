@@ -8,56 +8,172 @@
 <style>
 body {
   font-family: 'Poppins', sans-serif;
-  background:#1a1a1a;
+  background:#121212;
   color:#f0f0f0;
   margin:0;
   padding:0;
-  text-align:center;
-  animation: fadeIn 1s ease;
+  overflow-x:hidden;
+  animation: fadeInBody 1s ease forwards;
 }
-@keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+
+/* Fade in */
+@keyframes fadeInBody {
+  from {opacity:0; transform:scale(1.02);}
+  to {opacity:1; transform:scale(1);}
+}
+
+/* Header */
 header {
   background: linear-gradient(135deg, #0e0e0e 0%, #6a1fb5 50%, #2c2c2c 100%);
-  padding: 40px 20px;
+  padding: 40px 20px 60px;
   color:white;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
 }
-.content { max-width:900px; margin:40px auto; padding:20px; line-height:1.8; text-align:left; }
-img, video { max-width:100%; border-radius:10px; margin-bottom:20px; }
+header img {
+  max-width:200px;
+  margin:0 auto 20px;
+  display:block;
+  animation: fadeInLogo 1.2s ease forwards;
+}
+@keyframes fadeInLogo {
+  from {opacity:0; transform:translateY(-20px);}
+  to {opacity:1; transform:translateY(0);}
+}
+header h1 {
+  font-size:2.5rem;
+  font-weight:600;
+  letter-spacing:1px;
+  margin:0;
+  animation: fadeInHeader 1.2s ease 0.3s forwards;
+  opacity:0;
+}
+@keyframes fadeInHeader {
+  from {opacity:0; transform:translateY(20px);}
+  to {opacity:1; transform:translateY(0);}
+}
+
+/* Section layout */
+.content {
+  max-width:900px;
+  margin:40px auto;
+  padding:20px;
+  line-height:1.8;
+}
+section {
+  margin-bottom:60px;
+  opacity:0;
+  transform:translateY(20px);
+  animation: slideUp 0.8s ease forwards;
+}
+section:nth-of-type(1){animation-delay:0.4s;}
+section:nth-of-type(2){animation-delay:0.6s;}
+section:nth-of-type(3){animation-delay:0.8s;}
+section:nth-of-type(4){animation-delay:1s;}
+section:nth-of-type(5){animation-delay:1.2s;}
+@keyframes slideUp {
+  to {opacity:1; transform:translateY(0);}
+}
+h2 {
+  color:#b68cff;
+  font-weight:600;
+  margin-bottom:15px;
+  border-left:4px solid #6a1fb5;
+  padding-left:10px;
+}
+
+/* Images & gifs */
+.project-image {
+  width:100%;
+  border-radius:10px;
+  margin:20px 0;
+  box-shadow:0 4px 15px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease;
+}
+.project-image:hover {
+  transform:scale(1.03);
+}
+
+/* Skills list */
+ul {
+  list-style:none;
+  padding:0;
+}
+ul li {
+  background:#1e1e1e;
+  margin:8px 0;
+  padding:10px 15px;
+  border-radius:8px;
+  border-left:4px solid #6a1fb5;
+  transition:transform 0.2s ease;
+}
+ul li:hover { transform:translateX(5px); }
+
+/* Buttons */
+.buttons {
+  text-align:center;
+  margin-top:40px;
+}
 button {
-  background:#6a1fb5; color:white; border:none; padding:12px 30px; border-radius:999px;
-  cursor:pointer; font-weight:600; transition: background 0.3s, transform 0.2s;
+  background:#6a1fb5;
+  color:white;
+  border:none;
+  padding:12px 30px;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:600;
+  transition: background 0.3s, transform 0.2s;
+  margin:10px;
 }
 button:hover { background:#521891; transform:scale(1.05); }
+a { text-decoration:none; color:inherit; }
 </style>
 </head>
 <body>
+
 <header>
+  <!-- Game logo -->
+  <img src="timeforanewera.png" alt="Within Time Logo">
   <h1>Within Time</h1>
 </header>
 
 <div class="content">
-  <h2>Overview</h2>
-  <p>Within Time is a TBRPG that I began developing back in 2023 ... [full text from your main page]</p>
 
-  <h2>Gameplay Showcase</h2>
-  <img src="gif1.gif" alt="Gameplay Example">
-  <img src="gif2.gif" alt="Another Gameplay Scene">
+  <section id="overview">
+    <h2>Overview</h2>
+    <p>Within Time is a TBRPG that I began developing back in 2023 in an effort to create my first commercial game. It evolved into a large-scale project I’ve dedicated most of my time to, built with the Godot engine and developed alongside my indie team “Team INNERMINDS”.</p>
+    <!-- Optional image/gif -->
+    <img src="within-time-preview.gif" alt="Overview Image" class="project-image">
+  </section>
 
-  <h2>Development Process</h2>
-  <p>I used the Godot game engine ... [describe technical challenges, what you learned, etc.]</p>
+  <section id="gameplay">
+    <h2>Gameplay</h2>
+    <p>Within Time features turn-based combat, intricate narrative design, and an evolving world that responds to player actions. Here are some clips and images showcasing its mechanics and visuals:</p>
+    <img src="gif1.gif" alt="Gameplay Clip 1" class="project-image">
+    <img src="gif2.gif" alt="Gameplay Clip 2" class="project-image">
+  </section>
 
-  <h2>Skills Demonstrated</h2>
-  <ul>
-    <li>GDScript programming and system architecture</li>
-    <li>Team management and version control</li>
-    <li>UI/UX design and narrative structure</li>
-  </ul>
+  <section id="development">
+    <h2>Development Process</h2>
+    <p>The project began in 2023 with early prototypes in Unity, before transitioning to Godot for greater flexibility and cleaner scripting through GDScript. As the lead developer, I handled all game systems including dialogue, combat logic, and UI/UX implementation, while coordinating with artists and composers under Team INNERMINDS.</p>
+  </section>
 
-  <div style="text-align:center; margin-top:30px;">
+  <section id="skills">
+    <h2>Skills Demonstrated</h2>
+    <ul>
+      <li>Advanced GDScript development and modular architecture</li>
+      <li>Team collaboration using Git version control</li>
+      <li>Pixel art and UI design integration</li>
+      <li>Project management and iterative design</li>
+    </ul>
+  </section>
+
+  <div class="buttons">
     <a href="https://store.steampowered.com/app/2302230/Within_Time" target="_blank"><button>View Project on Steam</button></a>
-    <br><br>
     <a href="index.html"><button>← Back to Portfolio</button></a>
   </div>
 </div>
+
 </body>
 </html>
