@@ -6,75 +6,203 @@
 <title>Within Time | Case Study</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-:root { --bg: #0a0a0c; --card-bg: rgba(255, 255, 255, 0.03); --accent: #a855f7; --text-main: #f0f0f0; --text-dim: #a1a1aa; --glass-border: rgba(255, 255, 255, 0.1); }
-body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text-main); margin: 0; line-height: 1.8; opacity: 0; animation: fadeIn 0.8s ease forwards; }
+:root {
+  --bg: #0a0a0c;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --accent: #a855f7;
+  --accent-glow: rgba(168, 85, 247, 0.4);
+  --text-main: #f0f0f0;
+  --text-dim: #a1a1aa;
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Poppins', sans-serif;
+  margin:0; padding:0;
+  background: var(--bg);
+  color: var(--text-main);
+  line-height: 1.8;
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+/* Matching the Landing Page Glow */
+body::before {
+  content: '';
+  position: fixed;
+  top: -10%; left: -10%;
+  width: 50%; height: 50%;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  z-index: -1;
+  filter: blur(100px);
+}
+
 @keyframes fadeIn { to { opacity: 1; } }
 
-header { 
-    height: 50vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
-    background: linear-gradient(rgba(10,10,12,0.7), rgba(10,10,12,1)), url('timeforanewera.png');
-    background-size: cover; background-position: center; border-bottom: 1px solid var(--glass-border); text-align: center;
+/* Cinematic Header */
+header {
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(rgba(10,10,12,0.7), rgba(10,10,12,1)), url('timeforanewera.png');
+  background-size: cover;
+  background-position: center;
+  border-bottom: 1px solid var(--glass-border);
+  text-align: center;
+  position: relative;
 }
-header img { max-width: 220px; margin-bottom: 20px; filter: drop-shadow(0 0 15px rgba(0,0,0,0.5)); }
-header h1 { font-size: 3.5rem; margin: 0; letter-spacing: -2px; background: linear-gradient(#fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-.container { max-width: 900px; margin: -60px auto 100px; padding: 0 20px; position: relative; z-index: 2; }
-.back-nav { position: absolute; top: -120px; left: 20px; color: var(--text-dim); font-size: 0.9rem; transition: 0.3s; }
-.back-nav:hover { color: var(--accent); }
+header img { 
+  max-width: 280px; 
+  margin-bottom: 20px; 
+  filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.4));
+  transition: 0.5s ease;
+}
 
-section { background: var(--card-bg); border: 1px solid var(--glass-border); padding: 50px; border-radius: 24px; backdrop-filter: blur(15px); margin-bottom: 40px; }
-h2 { color: var(--accent); font-size: 1.6rem; margin-top: 0; display: flex; align-items: center; gap: 10px; }
-h2::before { content: ''; width: 20px; height: 2px; background: var(--accent); display: inline-block; }
+header h1 { 
+  font-size: 4rem; 
+  margin: 0; 
+  letter-spacing: -2px; 
+  background: linear-gradient(#fff, #a1a1aa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
-.project-image { width: 100%; border-radius: 15px; margin: 30px 0; border: 1px solid var(--glass-border); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+/* Navigation Link */
+.back-btn {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  background: var(--card-bg);
+  border: 1px solid var(--glass-border);
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: 0.3s;
+  color: var(--text-main);
+  text-decoration: none;
+  z-index: 10;
+}
+.back-btn:hover { background: var(--accent); border-color: transparent; transform: translateX(-5px); }
 
-ul { padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-ul li { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; border-left: 3px solid var(--accent); font-size: 0.9rem; }
+/* Content Layout */
+.container { max-width: 900px; margin: -80px auto 100px; padding: 0 20px; position: relative; z-index: 2; }
 
+section { 
+  background: var(--card-bg); 
+  border: 1px solid var(--glass-border); 
+  padding: 50px; 
+  border-radius: 24px; 
+  backdrop-filter: blur(20px); 
+  margin-bottom: 40px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+h2 { 
+  color: var(--accent); 
+  font-size: 1.8rem; 
+  margin-top: 0; 
+  letter-spacing: -0.5px;
+  margin-bottom: 25px;
+}
+
+.project-image { 
+  width: 100%; 
+  border-radius: 15px; 
+  margin: 30px 0; 
+  border: 1px solid var(--glass-border); 
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5); 
+}
+
+/* Skills List */
+.skills-grid { 
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 15px; 
+  padding: 0;
+  list-style: none;
+}
+.skills-grid li { 
+  background: rgba(255,255,255,0.05); 
+  padding: 18px; 
+  border-radius: 15px; 
+  border-left: 4px solid var(--accent); 
+  font-size: 0.95rem; 
+}
+
+/* Footer Actions */
 .footer-actions { text-align: center; margin-top: 60px; }
-.btn { display: inline-block; padding: 15px 40px; background: var(--accent); color: white; border-radius: 40px; font-weight: 600; text-decoration: none; transition: 0.3s; box-shadow: 0 10px 20px rgba(168, 85, 247, 0.3); }
-.btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(168, 85, 247, 0.5); }
-.btn-secondary { background: transparent; border: 1px solid var(--glass-border); margin-left: 15px; }
+.btn-steam { 
+  display: inline-block; 
+  padding: 18px 45px; 
+  background: var(--accent); 
+  color: white; 
+  border-radius: 40px; 
+  font-weight: 600; 
+  text-decoration: none; 
+  transition: 0.3s; 
+  box-shadow: 0 10px 25px var(--accent-glow);
+}
+.btn-steam:hover { transform: translateY(-5px); box-shadow: 0 15px 35px var(--accent-glow); }
 
-@media (max-width: 768px) { header h1 { font-size: 2.5rem; } ul { grid-template-columns: 1fr; } }
+@media (max-width: 768px) {
+  header h1 { font-size: 2.8rem; }
+  .skills-grid { grid-template-columns: 1fr; }
+  section { padding: 30px; }
+  .back-btn { top: 20px; left: 20px; }
+}
 </style>
 </head>
 <body>
 
 <header>
-    <a href="index.html" class="back-nav">← Back to Portfolio</a>
-    <img src="newlogotranspare.png" alt="Within Time">
+    <a href="index.html" class="back-btn">← Back to Portfolio</a>
+    <img src="newlogotranspare.png" alt="Within Time Logo">
     <h1>Within Time</h1>
 </header>
 
 <div class="container">
     <section>
-        <h2>Overview</h2>
-        <p>Within Time is a TBRPG developed with the Godot engine and Team INNERMINDS. It's a love letter to the SNES JRPG era, modernized with deep tactical systems and high-fidelity pixel art. The story follows Yunis Caelum and his companions as they navigate a dangerous world in search of their lost friend, June Clavis.</p>
-        <img src="withintimegif.gif" alt="Gameplay" class="project-image">
+        <h2>Project Overview</h2>
+        <p>Within Time is a TBRPG that I began developing back in 2023 in an effort to create my first commercial game. It evolved into a large-scale project I’ve dedicated most of my time to, built with the Godot engine and developed alongside my indie team <strong>“Team INNERMINDS”</strong>.</p>
+        <p>The game follows the story of Yunis Caelum and his friends as they delve into a world previously unknown to mankind. Within Time aims to replicate the feel of the classic JRPG era of the SNES whilst adding a level of modernization and uniqueness to truly stand out.</p>
+        <img src="withintimegif.gif" alt="Atmospheric Gameplay" class="project-image">
     </section>
 
     <section>
-        <h2>Gameplay & "Stance" System</h2>
-        <p>The core of Within Time is the "STANCE" system. Players must manage momentum by exploiting weaknesses and executing perfect blocks. Higher momentum unlocks Dual Skills and Stance Skills, rewarding players for planning several moves ahead.</p>
-        <img src="gif2.gif" alt="Combat" class="project-image">
+        <h2>The "STANCE" Combat System</h2>
+        <p>Within Time features a unique take on turn-based combat, utilizing our proprietary <strong>'STANCE' system</strong> that rewards tactical play and deep knowledge. Exploiting enemy weaknesses, gaining critical hits, dodging, or blocking all contribute to your 'momentum'.</p>
+        <p>Higher momentum allows you to utilize powerful mechanics like 'DUAL SKILLS' or 'STANCE SKILLS'. However, misplays cause your momentum to drop quickly, allowing the enemy to overpower your team. Success requires planning three moves ahead.</p>
+        <img src="gif2.gif" alt="Stance Combat in Action" class="project-image">
     </section>
 
     <section>
-        <h2>Technical Skills</h2>
-        <ul>
-            <li>Advanced GDScript Architecture</li>
-            <li>Modular UI/UX Systems</li>
-            <li>Team Git Workflow & Management</li>
-            <li>Aseprite Pixel Art Integration</li>
+        <h2>Development History</h2>
+        <p>Originally starting as <em>'Our Mind'</em> in 2022, the project began as a prototype in RPGMakerMV. While a demo was released to Steam, I wasn't satisfied with the engine's limitations. This led to a long restructuring period where we explored Unity and Game Maker Studio 2 before finally settling on <strong>Godot</strong> in early 2025.</p>
+        <p>Over the last 10 months, we’ve completely rewritten the story, revamped the art style, and officially formed Team INNERMINDS. We are currently preparing to release a high-fidelity demo by the end of the year.</p>
+        <img src="gif3.gif" alt="World Exploration" class="project-image">
+    </section>
+
+    <section>
+        <h2>Core Competencies</h2>
+        <ul class="skills-grid">
+            <li>Advanced GDScript & Modular Architecture</li>
+            <li>Physics-based Interaction Systems</li>
+            <li>Team Collaboration via Git Control</li>
+            <li>Pixel Art & UI Design Integration</li>
             <li>FL Studio Music Composition</li>
-            <li>Dynamic Lighting & Shaders</li>
+            <li>Agile Project Management</li>
         </ul>
     </section>
 
     <div class="footer-actions">
-        <a href="https://store.steampowered.com/app/2302230/Within_Time" target="_blank" class="btn">View on Steam</a>
-        <a href="index.html" class="btn btn-secondary">Return Home</a>
+        <a href="https://store.steampowered.com/app/2302230/Within_Time" target="_blank" class="btn-steam">Wishlist on Steam</a>
     </div>
 </div>
 
