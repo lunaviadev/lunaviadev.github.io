@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Par for the Course | Project</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root { --bg: #0a0a0c; --card-bg: rgba(255, 255, 255, 0.03); --accent: #a855f7; --text-main: #f0f0f0; --text-dim: #a1a1aa; --glass-border: rgba(255, 255, 255, 0.1); }
+body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text-main); margin: 0; line-height: 1.8; opacity: 0; animation: fadeIn 0.8s ease forwards; }
+@keyframes fadeIn { to { opacity: 1; } }
+
+header { 
+    height: 45vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: radial-gradient(circle at center, #2e1065 0%, #0a0a0c 100%);
+    border-bottom: 1px solid var(--glass-border);
+}
+header h1 { font-size: 3.5rem; margin: 0; letter-spacing: -2px; color: var(--accent); }
+
+.container { max-width: 800px; margin: -50px auto 100px; padding: 0 20px; }
+section { background: var(--card-bg); border: 1px solid var(--glass-border); padding: 45px; border-radius: 24px; backdrop-filter: blur(15px); margin-bottom: 30px; }
+h2 { color: var(--accent); font-size: 1.5rem; }
+
+.status-tag { display: inline-block; padding: 5px 15px; background: rgba(168, 85, 247, 0.2); color: var(--accent); border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 20px; }
+</style>
+</head>
+<body>
+
+<header>
+    <div class="status-tag">ACTIVE DEVELOPMENT</div>
+    <h1>Par for the Course</h1>
+</header>
+
+<div class="container">
+    <section>
+        <h2>The Concept</h2>
+        <p>Currently in the early prototyping phase, <strong>Par for the Course</strong> is a technical exploration into physics-based arcade gameplay. While the core theme centers around golf, the mechanics focus on momentum, environment destruction, and precision controls.</p>
+    </section>
+
+    <section>
+        <h2>Development Goals</h2>
+        <ul>
+            <li>Custom Physics Engine Integration</li>
+            <li>Procedural Level Generation</li>
+            <li>Advanced Particle & Collision Systems</li>
+            <li>Dynamic Camera Panning</li>
+        </ul>
+    </section>
+
+    <div style="text-align: center;">
+        <a href="index.html" style="display: inline-block; padding: 12px 35px; background: var(--accent); color: white; border-radius: 30px; font-weight: 600; text-decoration: none;">Return to Portfolio</a>
+    </div>
+</div>
+
+</body>
+</html>
