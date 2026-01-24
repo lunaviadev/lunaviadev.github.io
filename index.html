@@ -4,268 +4,243 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Josephine Bellas | Portfolio</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
+:root {
+  --bg: #0a0a0c;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --accent: #a855f7;
+  --accent-glow: rgba(168, 85, 247, 0.4);
+  --text-main: #f0f0f0;
+  --text-dim: #a1a1aa;
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
 html { scroll-behavior: smooth; }
 body {
   font-family: 'Poppins', sans-serif;
   margin:0; padding:0;
-  background:#1a1a1a;
-  color:#f0f0f0;
+  background: var(--bg);
+  color: var(--text-main);
   overflow-x:hidden;
+  line-height: 1.6;
 }
+
+/* Professional Glow Background */
+body::before {
+  content: '';
+  position: fixed;
+  top: -10%; left: -10%;
+  width: 40%; height: 40%;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  z-index: -1;
+  filter: blur(80px);
+}
+
 a { color: inherit; text-decoration: none; }
-img { display:block; max-width:100%; height:auto; }
 
-/* fade in */
-#page-wrapper { opacity:0; transition: opacity 1.2s ease; transition-delay: 0.3s; }
-
-/* header */
+/* Header - Modern Minimalist */
 header {
-  position: relative;
-  text-align:center;
-  padding:60px 20px 30px;
-  background: linear-gradient(135deg, #0e0e0e 0%, #612c9c 50%, #2c2c2c 100%);
-  color:white;
-  opacity:0;
-  transform:translateY(-20px);
-  transition: opacity 1s ease, transform 1s ease;
+  padding: 100px 20px 60px;
+  text-align: center;
+  background: radial-gradient(circle at center, rgba(97, 44, 156, 0.15) 0%, transparent 70%);
+}
+
+header img { 
+  width: 100px; height: 100px; 
+  border-radius: 50%; 
+  border: 2px solid var(--accent);
+  padding: 5px;
+  margin-bottom: 20px;
+  transition: 0.5s ease;
+}
+
+header h1 { 
+  font-size: 3rem; margin: 0; 
+  letter-spacing: -1px; 
+  background: linear-gradient(to bottom, #fff, #a1a1aa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+header p { color: var(--text-dim); max-width: 600px; margin: 15px auto; font-weight: 300; }
+
+/* Navigation */
+.nav-container {
+  display: flex; justify-content: center;
+  gap: 15px; margin-bottom: 50px;
+}
+
+.nav-btn {
+  background: var(--card-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-dim);
+  padding: 10px 25px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.nav-btn.active {
+  background: var(--accent);
+  color: white;
+  box-shadow: 0 0 20px var(--accent-glow);
+  border-color: transparent;
+}
+
+/* Projects Grid */
+.content-wrapper { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+.section { display: none; animation: fadeIn 0.6s ease forwards; }
+.section.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+/* Featured Project - Span 3 columns */
+.featured-project {
+  grid-column: span 3;
+  display: flex;
+  background: var(--card-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
   overflow: hidden;
+  transition: 0.4s ease;
 }
-header::after { content: ''; position:absolute; inset:0; background:rgba(0,0,0,0.3); z-index:0; }
-header img, header h1, header p { position:relative; z-index:1; }
-header.visible { opacity:1; transform:translateY(0); }
-header img { max-width:120px; border-radius:50%; margin-bottom:20px; transition: transform 0.3s ease; }
-header h1 { margin:0 0 10px; font-size:2.6rem; font-weight:600; letter-spacing: 1px; transition: text-shadow 0.3s ease; }
-header p { font-size:1.1rem; font-weight:300; max-width:600px; margin:0 auto; line-height:1.6; }
-header:hover img { transform: scale(1.08); }
-header:hover h1 { text-shadow: 0 0 10px #a569ff, 0 0 20px #a569ff; }
 
-/* buttons */
-.buttons { display:flex; justify-content:center; margin:40px 0 20px; gap:20px; opacity:0; transform:translateY(20px); transition: opacity 1s ease, transform 1s ease; }
-.buttons.visible { opacity:1; transform:translateY(0); }
-.buttons button {
-  padding:12px 25px;
-  font-size:1rem;
-  font-weight:500;
-  border:none;
-  border-radius:25px;
-  cursor:pointer;
-  background:#7b3fe3;
-  color:white;
-  transition: background 0.3s, transform 0.2s;
+.featured-project:hover { border-color: var(--accent); transform: translateY(-5px); }
+
+.featured-img { width: 60%; object-fit: cover; }
+.featured-info { padding: 40px; width: 40%; display: flex; flex-direction: column; justify-content: center; }
+
+/* Small Project Cards */
+.project-card {
+  background: var(--card-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: 0.4s ease;
+  display: flex;
+  flex-direction: column;
 }
-.buttons button:hover { background:#612c9c; transform: translateY(-3px); }
-.buttons button.active { background:#612c9c; color:white; }
 
-/* content */
-.content { max-width:1000px; margin:0 auto 50px; padding:0 20px; min-height:300px; position:relative; }
-.section { position:absolute; top:0; left:0; width:100%; opacity:0; transform:translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; pointer-events:none; }
-.section.active { opacity:1; transform:translateY(0); pointer-events:auto; }
+.project-card:hover { border-color: var(--accent); transform: translateY(-5px); }
 
-/* programming section */
-.projects { display:flex; flex-wrap:wrap; gap:20px; }
-.featured-project, .project-card-small {
-  border-radius:10px;
-  overflow:hidden;
-  position:relative;
-  cursor:pointer;
-  box-shadow:0 4px 12px rgba(0,0,0,0.5);
-  transition: transform 0.3s;
+.project-card img { width: 100%; height: 200px; object-fit: cover; }
+.project-card-info { padding: 20px; flex-grow: 1; }
+
+.tag {
+  font-size: 0.7rem; text-transform: uppercase; 
+  color: var(--accent); font-weight: 600; letter-spacing: 1px;
 }
-.featured-project { flex:1 1 100%; background:#2a2a2a; }
-.project-card-small { flex:1 1 calc(33% - 20px); background:#2a2a2a; }
-.featured-project:hover, .project-card-small:hover { transform: translateY(-5px) scale(1.02); }
-.project-card-content, .featured-content { padding:15px; }
-.project-card-content h3, .featured-content h3 { margin:0 0 5px; font-weight:600; }
-.project-card-content p, .featured-content p { font-size:0.9rem; margin:0; font-weight:300; }
-.overlay {
-  position:absolute; top:0; left:0; right:0; bottom:0;
-  background:rgba(97,44,156,0.95); color:white;
-  opacity:0; display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
-  text-align:center; padding:20px; transition: opacity 0.3s; pointer-events:none;
-  overflow-y:auto; max-height:90%;
-}
-.featured-project.active .overlay, .project-card-small.active .overlay { opacity:1; pointer-events:auto; }
-.featured-project:hover .overlay, .project-card-small:hover .overlay { opacity:1; pointer-events:auto; }
 
-.view-project-btn {
-  margin-top:15px; padding:10px 25px; border:none; border-radius:25px;
-  background:#7b3fe3; color:white; font-weight:600;
-  cursor:pointer; transition: background 0.3s, transform 0.2s;
-  flex-shrink:0;
+.btn-main {
+  display: inline-block; margin-top: 15px;
+  padding: 8px 20px; background: var(--accent);
+  border-radius: 20px; font-size: 0.9rem; font-weight: 600;
+  transition: 0.3s;
 }
-.view-project-btn:hover { background:#612c9c; transform: scale(1.05); }
 
-/* art */
-.art-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:15px; }
-.art-card { position:relative; overflow:hidden; border-radius:10px; cursor:pointer; transition: transform 0.3s; }
-.art-card img { width:100%; display:block; transition: transform 0.3s; }
-.art-card:hover img, .art-card.active img { transform:scale(1.1); }
-.art-card-caption {
-  position:absolute; bottom:0; left:0; right:0;
-  background:rgba(0,0,0,0.6); color:white; text-align:center;
-  padding:10px; opacity:0; transition: opacity 0.3s;
+/* About Section */
+.about-glass {
+  background: var(--card-bg);
+  border: 1px solid var(--glass-border);
+  padding: 40px; border-radius: 24px;
+  backdrop-filter: blur(10px);
 }
-.art-card:hover .art-card-caption, .art-card.active .art-card-caption { opacity:1; }
 
-/* about me */
-.about-content {
-  padding:20px; line-height:1.7; font-size:1rem;
-  background:#2a2a2a; border-radius:10px;
-  max-height:500px; overflow-y:auto;
+/* Art Grid */
+.art-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
 }
-.about-content p { opacity:0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
-.about-content p.visible { opacity:1; transform: translateY(0); }
+.art-item {
+  border-radius: 15px; overflow: hidden;
+  border: 1px solid var(--glass-border);
+  transition: 0.3s;
+}
+.art-item:hover { transform: scale(1.02); border-color: var(--accent); }
 
-@media (max-width:768px) {
-  .projects { flex-direction:column; }
-  .project-card-small { flex:1 1 100%; }
-  .about-content { max-height:none; }
+@media (max-width: 850px) {
+  .projects-grid { grid-template-columns: 1fr; }
+  .featured-project { grid-column: span 1; flex-direction: column; }
+  .featured-img, .featured-info { width: 100%; }
 }
 </style>
 </head>
 <body>
-<div id="page-wrapper">
 
 <header>
-  <img src="DEVLOGO.png" alt="Developer Logo">
+  <img src="DEVLOGO.png" alt="Lunavia">
   <h1>Josephine Bellas</h1>
-  <p>I'm Josie, also known as Lunavia online! I'm a 20-year-old UK-based developer and full-time Game Development student.</p>
+  <p>Game Developer & Student | Specializing in Godot & Unity</p>
 </header>
 
-<div class="buttons">
-  <button class="active" data-target="programming">Programming</button>
-  <button data-target="about">About Me</button>
-  <button data-target="art">Art</button>
+<div class="nav-container">
+  <button class="nav-btn active" onclick="showSection('programming')">Projects</button>
+  <button class="nav-btn" onclick="showSection('art')">Art</button>
+  <button class="nav-btn" onclick="showSection('about')">About</button>
 </div>
 
-<div class="content">
+<div class="content-wrapper">
+  
+  <div id="programming" class="section active">
+    <div class="projects-grid">
+      
+      <a href="project-within-time.html" class="featured-project">
+        <img src="timeforanewera.png" alt="Within Time" class="featured-img">
+        <div class="featured-info">
+          <span class="tag">Main Project</span>
+          <h2>Within Time</h2>
+          <p>A TBRPG built in Godot following the story of Yunis Caelum. A massive world of secrets and tactical "Stance" combat.</p>
+          <span class="btn-main">Explore Case Study</span>
+        </div>
+      </a>
 
-<!-- Programming -->
-<div class="section active" id="programming">
-  <h2>Programming Projects</h2>
-  <div class="projects">
+      <a href="project-protocol.html" class="project-card">
+        <img src="coverart2.png" alt="Protocol">
+        <div class="project-card-info">
+          <span class="tag">Game Jam</span>
+          <h3>Protocol: Shutdown</h3>
+          <p>Cyberpunk twin-stick shooter made in 7 days for Brackey's Jam.</p>
+        </div>
+      </a>
 
-    <div class="featured-project">
-      <img src="timeforanewera.png" alt="Within Time">
-      <div class="featured-content"><h3>Within Time</h3><p>Main project in development.</p></div>
-      <div class="overlay">
-        <p>Within Time is a TBRPG that I began developing back in 2023 in an effort to create my first commercial game...</p>
-        <a href="project-within-time.html" class="view-project-btn">View Project</a>
+      <a href="project-butterfly.html" class="project-card">
+        <img src="LABANN2.png" alt="Like a Butterfly">
+        <div class="project-card-info">
+          <span class="tag">Visual Novel</span>
+          <h3>Like a Butterfly</h3>
+          <p>A narrative-driven Unity experience exploring transgender identity.</p>
+        </div>
+      </a>
+
+      <div class="project-card" style="opacity: 0.6; cursor: default;">
+        <div style="height: 200px; background: #222; display: flex; align-items: center; justify-content: center;">
+            <span style="font-size: 3rem;">?</span>
+        </div>
+        <div class="project-card-info">
+          <span class="tag">In Development</span>
+          <h3>Coming Soon</h3>
+          <p>A new experimental project is currently in the early prototype phase.</p>
+        </div>
       </div>
+
     </div>
-
-    <div class="project-card-small">
-      <img src="coverart2.png" alt="Protocol: Shutdown">
-      <div class="project-card-content"><h3>Protocol: Shutdown</h3><p>Made for Brackey's Gamejam 2025.2</p></div>
-      <div class="overlay">
-        <p>Protocol: Shutdown was made in one week as part of Brackey's Gamejam 2025.2</p>
-        <a href="project-protocol.html" class="view-project-btn">View Project</a>
-      </div>
-    </div>
-
-    <div class="project-card-small">
-      <img src="LABANN2.png" alt="Like a Butterfly">
-      <div class="project-card-content"><h3>Like a Butterfly</h3><p>Releasing Soon</p></div>
-      <div class="overlay">
-        <p>Like a Butterfly is a visual novel developed in Unity that tells the story of a transgender girl navigating her daily struggles.</p>
-        <a href="project-butterfly.html" class="view-project-btn">View Project</a>
-      </div>
-    </div>
-
   </div>
-</div>
 
-<!-- About Me -->
-<div class="section" id="about">
-  <h2>About Me</h2>
-  <div class="about-content">
-    <p>Hi! I'm Josephine Bellas (Josie for short), also known as Lunavia online. I’m a 20-year-old UK-based developer and full-time Game Development student.</p>
-    <p>I'm currently in the process of making my first commercial game 'Within Time' alongside my studio 'Team INNERMINDS'.</p>
-    <p>I'm familiar with many engines and languages, specialising mostly in GDScript/Godot and C#/Unity. I also have knowledge in Unreal Engine, C++, HTML/JS, and small amounts of C.</p>
-    <p>I create all my artwork with Clip Studio Paint (traditional digital art) or Aseprite (2D pixel art) and use an XP Pen 15.6 Pro as my art tablet.</p>
-    <p>For music I use FL Studio 21 and play electric guitar, which I often use for my recorded tracks.</p>
-    <p>I’ve been programming for roughly 3 years and drawing for over 5. If any of my work interests you, you can contact me on Discord — ‘lunavia.gd’.</p>
-  </div>
-</div>
-
-<!-- Art -->
-<div class="section" id="art">
-  <h2>Art</h2>
-  <div class="art-grid">
-    <div class="art-card"><img src="art1.png" alt="Art 1"><div class="art-card-caption">Within Time promotional art</div></div>
-    <div class="art-card"><img src="art2.png" alt="Art 2"><div class="art-card-caption">Within Time title screen art</div></div>
-    <div class="art-card"><img src="art3.png" alt="Art 3"><div class="art-card-caption">Within Time area concept art</div></div>
-    <div class="art-card"><img src="art4.jpg" alt="Art 4"><div class="art-card-caption">Within Time in-game art</div></div>
-    <div class="art-card"><img src="art5.png" alt="Art 5"><div class="art-card-caption">Protocol: Shutdown area art</div></div>
-    <div class="art-card"><img src="art6.png" alt="Art 6"><div class="art-card-caption">Protocol: Shutdown promotional piece</div></div>
-  </div>
-</div>
-
-</div>
-</div>
-
-<script>
-const pageWrapper = document.getElementById('page-wrapper');
-const buttons=document.querySelectorAll('.buttons button');
-const sections=document.querySelectorAll('.section');
-const programmingCards=document.querySelectorAll('.featured-project, .project-card-small');
-const artCards=document.querySelectorAll('.art-card');
-
-window.addEventListener('load',()=>{
-  setTimeout(()=>{
-    pageWrapper.style.opacity='1';
-    document.querySelector('header').classList.add('visible');
-    document.querySelector('.buttons').classList.add('visible');
-  },300);
-});
-
-buttons.forEach(button=>{
-  button.addEventListener('click',()=>{
-    buttons.forEach(btn=>btn.classList.remove('active'));
-    button.classList.add('active');
-    sections.forEach(section=>section.classList.remove('active'));
-    const targetId=button.getAttribute('data-target');
-    const targetSection=document.getElementById(targetId);
-    targetSection.classList.add('active');
-
-    if(targetId==="about"){
-      const paragraphs=document.querySelectorAll("#about .about-content p");
-      paragraphs.forEach((p,i)=>{
-        p.classList.remove("visible");
-        setTimeout(()=>{p.classList.add("visible");},i*300);
-      });
-    }
-  });
-});
-
-programmingCards.forEach(card=>{
-  card.addEventListener('click', e=>{
-    if(window.innerWidth<=768){
-      e.preventDefault();
-      card.classList.toggle('active');
-    }
-  });
-});
-artCards.forEach(card=>{
-  card.addEventListener('click', e=>{
-    if(window.innerWidth<=768){
-      card.classList.toggle('active');
-    }
-  });
-});
-document.addEventListener('click', e=>{
-  if(window.innerWidth<=768){
-    const isCard=e.target.closest('.featured-project, .project-card-small, .art-card');
-    if(!isCard){
-      programmingCards.forEach(card=>card.classList.remove('active'));
-      artCards.forEach(card=>card.classList.remove('active'));
-    }
-  }
-});
-</script>
-</body>
-</html>
+  <div id="about" class="section">
+    <div class="about-glass">
+        <h2>About Me</h2>
+        <p>I'm Josephine Bellas (Josie), a 20-year-old UK developer
