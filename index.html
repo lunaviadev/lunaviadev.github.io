@@ -3,23 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Josephine Bellas | Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<title>Josephine Bellas | CEO & Founder of Team INNERMINDS</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --bg: #0a0a0c;
-  --card-bg: rgba(255, 255, 255, 0.03);
-  --accent: #a855f7;
-  --accent-glow: rgba(168, 85, 247, 0.4);
-  --text-main: #f0f0f0;
-  --text-dim: #a1a1aa;
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --bg: #030305;
+  --card-bg: rgba(20, 20, 25, 0.4);
+  --accent: #b829ff;
+  --accent-secondary: #00f0ff;
+  --accent-glow: rgba(184, 41, 255, 0.5);
+  --text-main: #ffffff;
+  --text-dim: #9ca3af;
+  --glass-border: rgba(255, 255, 255, 0.08);
 }
 
 html { scroll-behavior: smooth; }
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Outfit', 'Poppins', sans-serif;
   margin:0; padding:0;
   background: var(--bg);
   color: var(--text-main);
@@ -27,100 +28,154 @@ body {
   line-height: 1.6;
 }
 
-/* Dynamic Glow Background */
+/* Advanced Dynamic Background */
 body::before {
   content: '';
   position: fixed;
-  top: -10%; left: -10%;
-  width: 50%; height: 50%;
-  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  top: -20%; left: -10%;
+  width: 60%; height: 60%;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
   z-index: -1;
-  filter: blur(100px);
+  filter: blur(120px);
+  animation: pulseGlow 8s infinite alternate;
+}
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -20%; right: -10%;
+  width: 50%; height: 50%;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.15) 0%, transparent 60%);
+  z-index: -1;
+  filter: blur(120px);
+}
+
+@keyframes pulseGlow {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.1); opacity: 1; }
 }
 
 a { color: inherit; text-decoration: none; }
 
 /* Header */
 header {
-  padding: 100px 20px 60px;
+  padding: 12vh 20px 8vh;
   text-align: center;
-  background: radial-gradient(circle at center, rgba(97, 44, 156, 0.1) 0%, transparent 70%);
+  position: relative;
+}
+
+.title-badge {
+  display: inline-block;
+  background: linear-gradient(90deg, rgba(184,41,255,0.2), rgba(0,240,255,0.2));
+  border: 1px solid var(--accent);
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-main);
+  margin-bottom: 25px;
+  box-shadow: 0 0 20px rgba(184, 41, 255, 0.3);
 }
 
 header img { 
-  width: 110px; height: 110px; 
+  width: 130px; height: 130px; 
   border-radius: 50%; 
-  border: 2px solid var(--accent);
+  border: 3px solid transparent;
+  background: linear-gradient(var(--bg), var(--bg)) padding-box, linear-gradient(45deg, var(--accent), var(--accent-secondary)) border-box;
   padding: 5px;
   margin-bottom: 25px;
   transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-header img:hover { transform: scale(1.1) rotate(5deg); }
+header img:hover { transform: scale(1.1) rotate(5deg); box-shadow: 0 0 30px var(--accent-glow); }
 
 header h1 { 
-  font-size: 3.5rem; margin: 0; 
+  font-size: 4.5rem; margin: 0; 
+  font-weight: 800;
   letter-spacing: -2px; 
-  background: linear-gradient(to bottom, #fff 30%, #a1a1aa 100%);
+  background: linear-gradient(to right, #fff 30%, #a1a1aa 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-header p { color: var(--text-dim); max-width: 600px; margin: 15px auto; font-weight: 300; font-size: 1.1rem; }
+header p { 
+  color: var(--text-dim); 
+  max-width: 650px; 
+  margin: 20px auto; 
+  font-weight: 300; 
+  font-size: 1.2rem; 
+}
 
 /* Navigation */
 .nav-container {
   display: flex; justify-content: center;
   flex-wrap: wrap;
   gap: 15px; margin-bottom: 60px;
+  position: sticky;
+  top: 20px;
+  z-index: 100;
 }
 
 .nav-btn {
-  background: var(--card-bg);
+  background: rgba(10, 10, 12, 0.8);
+  backdrop-filter: blur(15px);
   border: 1px solid var(--glass-border);
   color: var(--text-dim);
-  padding: 12px 30px;
+  padding: 12px 35px;
   border-radius: 30px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 500;
+  transition: all 0.4s ease;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   font-size: 0.8rem;
+  font-family: inherit;
 }
 
+.nav-btn:hover { color: #fff; border-color: var(--text-dim); }
 .nav-btn.active {
-  background: var(--accent);
+  background: linear-gradient(45deg, var(--accent), #7e22ce);
   color: white;
-  box-shadow: 0 0 25px var(--accent-glow);
+  box-shadow: 0 10px 25px var(--accent-glow);
   border-color: transparent;
+  transform: translateY(-2px);
 }
 
 /* Sections Transition */
-.content-wrapper { max-width: 1100px; margin: 0 auto; padding: 0 20px 100px; }
-.section { display: none; opacity: 0; transform: translateY(20px); transition: all 0.5s ease; }
+.content-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 20px 100px; }
+.section { display: none; opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
 .section.active { display: block; opacity: 1; transform: translateY(0); }
 
 /* Projects Grid */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
 }
 
 .featured-project {
-  grid-column: span 3;
+  grid-column: span 2;
   display: flex;
   background: var(--card-bg);
   border: 1px solid var(--glass-border);
   border-radius: 24px;
   overflow: hidden;
-  transition: 0.4s ease;
-  backdrop-filter: blur(10px);
+  transition: 0.5s ease;
+  backdrop-filter: blur(20px);
+  position: relative;
 }
-.featured-project:hover { border-color: var(--accent); transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+.featured-project::before {
+  content: ''; position: absolute; inset: 0; background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05)); z-index: 1; pointer-events: none;
+}
+.featured-project:hover { 
+  border-color: var(--accent); 
+  transform: translateY(-10px); 
+  box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 0 40px rgba(184, 41, 255, 0.2); 
+}
 
-.featured-img { width: 65%; object-fit: cover; border-right: 1px solid var(--glass-border); }
-.featured-info { padding: 50px; width: 35%; display: flex; flex-direction: column; justify-content: center; }
+.featured-img { width: 60%; object-fit: cover; border-right: 1px solid var(--glass-border); transition: 0.7s; }
+.featured-project:hover .featured-img { transform: scale(1.03); }
+.featured-info { padding: 60px; width: 40%; display: flex; flex-direction: column; justify-content: center; z-index: 2; }
 
 .project-card {
   background: var(--card-bg);
@@ -130,164 +185,127 @@ header p { color: var(--text-dim); max-width: 600px; margin: 15px auto; font-wei
   transition: 0.4s ease;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
-.project-card:hover { border-color: var(--accent); transform: translateY(-5px); }
-.project-card img { width: 100%; height: 200px; object-fit: cover; transition: 0.5s; }
-.project-card:hover img { transform: scale(1.05); }
-.project-card-info { padding: 25px; flex-grow: 1; }
+.project-card:hover { border-color: var(--accent-secondary); transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0, 240, 255, 0.15); }
+.project-card img { width: 100%; height: 250px; object-fit: cover; transition: 0.6s; }
+.project-card:hover img { transform: scale(1.08); filter: brightness(1.1); }
+.project-card-info { padding: 30px; flex-grow: 1; z-index: 2; background: linear-gradient(to top, var(--card-bg) 80%, transparent); }
 
-.tag { font-size: 0.7rem; text-transform: uppercase; color: var(--accent); font-weight: 600; letter-spacing: 1.5px; margin-bottom: 8px; display: block; }
-.btn-main { display: inline-block; margin-top: 20px; padding: 10px 25px; background: var(--accent); border-radius: 25px; font-size: 0.85rem; font-weight: 600; transition: 0.3s; }
+.tag { font-size: 0.75rem; text-transform: uppercase; color: var(--accent); font-weight: 800; letter-spacing: 2px; margin-bottom: 10px; display: inline-block; background: rgba(184,41,255,0.1); padding: 5px 12px; border-radius: 20px; }
+.tag.secondary { color: var(--accent-secondary); background: rgba(0,240,255,0.1); }
+h2 { font-size: 2.5rem; margin: 10px 0; font-weight: 800; }
+h3 { font-size: 1.8rem; margin: 10px 0 15px; font-weight: 600; }
+
+.btn-main { display: inline-flex; align-items: center; justify-content: center; margin-top: 25px; padding: 12px 30px; background: linear-gradient(45deg, var(--accent), #7e22ce); border-radius: 30px; font-size: 0.9rem; font-weight: 600; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; color: white; }
+.btn-main:hover { transform: scale(1.05); box-shadow: 0 10px 20px var(--accent-glow); }
 
 /* About Section */
-.about-layout { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: start; }
-.about-bio { background: var(--card-bg); border: 1px solid var(--glass-border); padding: 40px; border-radius: 24px; backdrop-filter: blur(10px); }
-.skill-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-.skill-item { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; border: 1px solid var(--glass-border); transition: 0.3s; }
-.skill-item:hover { background: rgba(168, 85, 247, 0.1); border-color: var(--accent); }
-.skill-item strong { display: block; color: var(--accent); font-size: 0.9rem; margin-bottom: 5px; }
-.skill-item span { font-size: 0.8rem; color: var(--text-dim); }
-
-/* Art Section */
-.art-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-}
-.art-item {
-  position: relative; border-radius: 15px; overflow: hidden;
-  border: 1px solid var(--glass-border); aspect-ratio: 4/3;
-}
-.art-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s ease; }
-.art-overlay {
-  position: absolute; inset: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8));
-  display: flex; align-items: flex-end; padding: 20px; opacity: 0; transition: 0.3s;
-}
-.art-item:hover .art-overlay { opacity: 1; }
-.art-item:hover img { transform: scale(1.1); }
+.about-layout { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: stretch; }
+.about-bio { background: var(--card-bg); border: 1px solid var(--glass-border); padding: 50px; border-radius: 24px; backdrop-filter: blur(20px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+.about-bio h2 { color: #fff; font-size: 2.5rem; margin-top: 0; background: linear-gradient(90deg, var(--accent), var(--accent-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.about-bio p { font-size: 1.1rem; margin-bottom: 20px; }
+.skill-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.skill-item { background: rgba(255,255,255,0.03); padding: 25px; border-radius: 20px; border: 1px solid var(--glass-border); transition: 0.4s; position: relative; overflow: hidden; }
+.skill-item::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent); transition: 0.4s; }
+.skill-item:hover { background: rgba(184, 41, 255, 0.05); transform: translateX(10px); border-color: rgba(184, 41, 255, 0.3); }
+.skill-item:hover::before { width: 100%; z-index: -1; opacity: 0.1; }
+.skill-item strong { display: block; color: #fff; font-size: 1.1rem; margin-bottom: 8px; font-weight: 600; }
+.skill-item span { font-size: 0.9rem; color: var(--text-dim); }
 
 /* Contact Section */
-.contact-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 20px;
-}
-.contact-card {
-    background: var(--card-bg);
-    border: 1px solid var(--glass-border);
-    padding: 30px;
-    border-radius: 20px;
-    text-align: center;
-    transition: 0.3s;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-}
-.contact-card:hover {
-    border-color: var(--accent);
-    background: rgba(168, 85, 247, 0.05);
-    transform: translateY(-5px);
-}
-.contact-card h3 { margin: 0 0 10px; font-size: 1.1rem; }
-.contact-card p { font-size: 0.85rem; color: var(--text-dim); margin: 0; }
-
-.copy-hint {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    background: var(--accent); font-size: 0.7rem; padding: 4px;
-    transform: translateY(100%); transition: 0.3s;
-}
-.contact-card:hover .copy-hint { transform: translateY(0); }
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
+.contact-card { background: var(--card-bg); border: 1px solid var(--glass-border); padding: 40px; border-radius: 24px; text-align: center; transition: 0.4s; cursor: pointer; position: relative; overflow: hidden; backdrop-filter: blur(10px); }
+.contact-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(184,41,255,0.1), transparent); opacity: 0; transition: 0.4s; }
+.contact-card:hover { border-color: var(--accent); transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
+.contact-card:hover::before { opacity: 1; }
+.contact-card h3 { margin: 0 0 10px; font-size: 1.4rem; color: #fff; position: relative; z-index: 2; }
+.contact-card p { font-size: 1rem; color: var(--text-dim); margin: 0; position: relative; z-index: 2; }
 
 @media (max-width: 900px) {
   .projects-grid { grid-template-columns: 1fr; }
   .featured-project { flex-direction: column; grid-column: span 1; }
-  .featured-img, .featured-info { width: 100%; }
+  .featured-img { width: 100%; height: 300px; border-right: none; border-bottom: 1px solid var(--glass-border); }
+  .featured-info { width: 100%; padding: 30px; }
   .about-layout { grid-template-columns: 1fr; }
+  header h1 { font-size: 3rem; }
 }
 </style>
 </head>
 <body>
 
 <header>
+  <div class="title-badge">CEO & Founder, Team INNERMINDS</div>
+  <br>
   <img src="DEVLOGO.png" alt="Lunavia">
   <h1>Josephine Bellas</h1>
-  <p>20 Y/O U.K developer with speciality in Godot, Unity and Pixel Art.</p>
+  <p>20 Y/O U.K Game Developer & Director. Specializing in highly-polished systems in Godot and Unity, blending deep mechanics with striking aesthetics.</p>
 </header>
 
 <div class="nav-container">
-  <button class="nav-btn active" onclick="showSection('programming')">Projects</button>
-  <button class="nav-btn" onclick="showSection('about')">About</button>
-  <button class="nav-btn" onclick="showSection('art')">Art Gallery</button>
-  <button class="nav-btn" onclick="showSection('contact')">Contact</button>
+  <button class="nav-btn active" onclick="showSection('programming')">Industry Projects</button>
+  <button class="nav-btn" onclick="showSection('about')">About The Dev</button>
+  <button class="nav-btn" onclick="showSection('art')">Art & Assets</button>
+  <button class="nav-btn" onclick="showSection('contact')">Connect</button>
 </div>
 
 <div class="content-wrapper">
   
   <div id="programming" class="section active">
     <div class="projects-grid">
+      
       <a href="project-within-time.html" class="featured-project">
         <img src="timeforanewera.png" alt="Within Time" class="featured-img">
         <div class="featured-info">
-          <span class="tag">Flagship Project</span>
+          <span class="tag">Flagship Commercial Title</span>
           <h2>Within Time</h2>
-          <p>A TBRPG built in Godot. Explore a massive world of secrets with tactical "Stance" combat.</p>
-          <span class="btn-main">View Project</span>
+          <p>As the CEO and Lead Developer of Team INNERMINDS, I direct this ambitious TBRPG built in Godot. It features an exclusive "STANCE" combat system, 13 playable characters, and a massive world seamlessly blending SNES-era nostalgia with modern, tactical depth.</p>
+          <span class="btn-main">Explore Project Details</span>
         </div>
       </a>
+
+      <a href="project-colorways.html" class="project-card">
+        <img src="https://img.itch.zone/aW1nLzE1MDU2Mjc1LnBuZw==/original/H3eQ7V.png" alt="Colourways">
+        <div class="project-card-info">
+          <span class="tag secondary">3D Puzzle Platformer</span>
+          <h3>Colourways</h3>
+          <p>A minimalist 3D puzzle platformer revolving around intuitive core paint mechanics. Created as a standout submission for the UCA Technical Art Game Jam.</p>
+        </div>
+      </a>
+
       <a href="project-protocol.html" class="project-card">
         <img src="coverart2.png" alt="Protocol">
         <div class="project-card-info">
           <span class="tag">Unity / Twin-Stick</span>
           <h3>Protocol: Shutdown</h3>
-          <p>Cyberpunk shooter made for Brackey's Jam 2025.2.</p>
+          <p>A high-octane Cyberpunk shooter developed in 7 days for Brackey's Jam 2025.2. Features aggressive weapon-discard mechanics and fluid dungeon-crawler movement.</p>
         </div>
       </a>
-      <a href="project-butterfly.html" class="project-card">
-        <img src="LABANN2.png" alt="Like a Butterfly">
-        <div class="project-card-info">
-          <span class="tag">Narrative / Unity</span>
-          <h3>Like a Butterfly</h3>
-          <p>Experimental visual novel exploring identity and struggles.</p>
-        </div>
-      </a>
-      <a href="project-par.html" class="project-card">
-        <div style="height: 200px; background: linear-gradient(45deg, #1a1a1a, #2e1065); display: flex; align-items: center; justify-content: center;">
-            <h4 style="letter-spacing: 2px;">PAR FOR THE COURSE</h4>
-        </div>
-        <div class="project-card-info">
-          <span class="tag">In Development</span>
-          <h3>Par for the Course</h3>
-          <p>Physics-based arcade golf exploration. Coming soon.</p>
-        </div>
-      </a>
+
     </div>
   </div>
 
   <div id="about" class="section">
     <div class="about-layout">
         <div class="about-bio">
-            <h2 style="margin-top:0; color: var(--accent);">The Developer</h2>
-            <p>I'm <strong>Josie</strong> (Lunavia), a 20-year-old UK-based developer and full-time Game Development student.</p>
-            <p>I specialize in Godot and Unity with strong skills in 2D Art. I lead <strong>Team INNERMINDS</strong>, an indie collective focused on creating "Within Time."</p>
-            <p style="color: var(--text-dim);">My workflow integrates Godot, Unity, FL Studio, and Clip Studio Paint to create holistic experiences.</p>
+            <h2>The Architect</h2>
+            <p>I'm <strong>Josie</strong> (Lunavia), a 20-year-old UK-based Game Developer, Director, and full-time Game Development student. I build highly cohesive, systems-driven games from the ground up.</p>
+            <p>I am the <strong>CEO and Founder of Team INNERMINDS</strong>, a dedicated independent studio currently developing our flagship commercial title, <em>"Within Time."</em> Leading a multifaceted team, I oversee everything from core programming architecture to narrative direction and aesthetic consistency.</p>
+            <p style="color: var(--text-dim);">My technical workflow spans deep engine mechanics in Godot and Unity, married seamlessly with asset production through FL Studio and Clip Studio Paint. I don't just write code; I craft holistic, polished experiences.</p>
         </div>
         <div class="skill-grid">
-            <div class="skill-item"><strong>Engines</strong><span>Godot, Unity, Unreal</span></div>
-            <div class="skill-item"><strong>Languages</strong><span>GDScript, C#, C++, JS</span></div>
-            <div class="skill-item"><strong>Visual Arts</strong><span>Clip Studio, Aseprite</span></div>
-            <div class="skill-item"><strong>Audio</strong><span>FL Studio 21, Guitar</span></div>
+            <div class="skill-item"><strong>Engine Architecture</strong><span>Godot, Unity, Unreal Engine</span></div>
+            <div class="skill-item"><strong>Core Programming</strong><span>GDScript, C#, C++, JavaScript</span></div>
+            <div class="skill-item"><strong>Visual Production</strong><span>Clip Studio, Aseprite, Tech Art</span></div>
+            <div class="skill-item"><strong>Audio Engineering</strong><span>FL Studio 21, Acoustic/Electric Guitar</span></div>
         </div>
     </div>
   </div>
 
   <div id="art" class="section">
-    <div class="art-grid">
-        <div class="art-item"><img src="art1.png" alt="Art 1"><div class="art-overlay"><span>Within Time Promo</span></div></div>
-        <div class="art-item"><img src="art2.png" alt="Art 2"><div class="art-overlay"><span>Title Screen</span></div></div>
-        <div class="art-item"><img src="art3.png" alt="Art 3"><div class="art-overlay"><span>Concept Art</span></div></div>
-        <div class="art-item"><img src="art4.jpg" alt="Art 4"><div class="art-overlay"><span>In-game Scene</span></div></div>
-        <div class="art-item"><img src="art5.png" alt="Art 5"><div class="art-overlay"><span>Protocol Environment</span></div></div>
-        <div class="art-item"><img src="art6.png" alt="Art 6"><div class="art-overlay"><span>Protocol Promo</span></div></div>
+    <div style="text-align: center; color: var(--text-dim); padding: 50px;">
+        <h2>Visual Development</h2>
+        <p>Gallery content goes here...</p>
     </div>
   </div>
 
@@ -295,16 +313,16 @@ header p { color: var(--text-dim); max-width: 600px; margin: 15px auto; font-wei
     <div class="contact-grid">
         <a href="mailto:lunaviadev@gmail.com" class="contact-card">
             <h3>Email</h3>
-            <p>Direct Inquiries</p>
+            <p>Direct Business Inquiries</p>
         </a>
         <a href="https://x.com/withintimegame" target="_blank" class="contact-card">
-            <h3>Twitter</h3>
+            <h3>Twitter / X</h3>
             <p>@Lunavia</p>
         </a>
         <div class="contact-card" onclick="copyDiscord('lunavia.gd')">
             <h3>Discord</h3>
             <p>lunavia.gd</p>
-            <div class="copy-hint" id="discord-hint">Click to copy handle</div>
+            <div class="copy-hint" id="discord-hint" style="color: var(--accent-secondary); margin-top: 15px; font-size: 0.85rem; font-weight: 600;">Click to copy handle</div>
         </div>
         <a href="https://store.steampowered.com/app/2302230/Within_Time" target="_blank" class="contact-card">
             <h3>Steam</h3>
@@ -312,7 +330,7 @@ header p { color: var(--text-dim); max-width: 600px; margin: 15px auto; font-wei
         </a>
         <a href="https://lunavia.itch.io" target="_blank" class="contact-card">
             <h3>Itch.io</h3>
-            <p>Game Jam Projects</p>
+            <p>Game Jam Vault</p>
         </a>
     </div>
   </div>
@@ -330,11 +348,11 @@ function showSection(id) {
 function copyDiscord(handle) {
     navigator.clipboard.writeText(handle);
     const hint = document.getElementById('discord-hint');
-    hint.innerText = "Copied to Clipboard!";
-    hint.style.background = "#22c55e"; // Green for success
+    hint.innerText = "✓ Copied to Clipboard!";
+    hint.style.color = "#00f0ff"; 
     setTimeout(() => {
         hint.innerText = "Click to copy handle";
-        hint.style.background = "var(--accent)";
+        hint.style.color = "var(--accent-secondary)";
     }, 2000);
 }
 </script>

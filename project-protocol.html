@@ -4,36 +4,39 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Protocol: Shutdown | Project</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-/* Use the same :root and body styles as Within Time for consistency */
-:root { --bg: #0a0a0c; --card-bg: rgba(255, 255, 255, 0.03); --accent: #a855f7; --text-main: #f0f0f0; --text-dim: #a1a1aa; --glass-border: rgba(255, 255, 255, 0.1); }
-body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text-main); margin: 0; line-height: 1.8; opacity: 0; animation: fadeIn 0.8s ease forwards; }
+:root { --bg: #030305; --card-bg: rgba(20, 20, 25, 0.6); --accent: #b829ff; --text-main: #f0f0f0; --text-dim: #9ca3af; --glass-border: rgba(255, 255, 255, 0.08); }
+body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text-main); margin: 0; line-height: 1.8; opacity: 0; animation: fadeIn 0.8s ease forwards; }
 @keyframes fadeIn { to { opacity: 1; } }
 
 header { 
-    height: 45vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
-    background: linear-gradient(rgba(10,10,12,0.8), rgba(10,10,12,1)), url('coverart2.png');
-    background-size: cover; background-position: center; border-bottom: 1px solid var(--glass-border);
+    height: 55vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: linear-gradient(rgba(3,3,5,0.7), rgba(3,3,5,1)), url('coverart2.png');
+    background-size: cover; background-position: center; border-bottom: 1px solid var(--glass-border); position: relative;
 }
-header img { max-width: 180px; margin-bottom: 15px; }
-header h1 { font-size: 3rem; margin: 0; letter-spacing: -1px; }
+header img { max-width: 220px; margin-bottom: 15px; filter: drop-shadow(0 0 20px rgba(184,41,255,0.5)); }
+header h1 { font-size: 3.5rem; margin: 0; font-weight: 800; letter-spacing: -1px; }
+
+.back-btn { position: absolute; top: 40px; left: 40px; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); padding: 12px 25px; border-radius: 30px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; color: #fff; text-decoration: none; }
+.back-btn:hover { background: #fff; color: #000; }
 
 .container { max-width: 900px; margin: -50px auto 100px; padding: 0 20px; }
-section { background: var(--card-bg); border: 1px solid var(--glass-border); padding: 45px; border-radius: 24px; backdrop-filter: blur(15px); margin-bottom: 30px; }
-h2 { color: var(--accent); font-size: 1.5rem; margin-top: 0; }
-.project-image { width: 100%; border-radius: 12px; margin: 20px 0; border: 1px solid var(--glass-border); }
-ul { padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-ul li { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 10px; font-size: 0.9rem; }
+section { background: var(--card-bg); border: 1px solid var(--glass-border); padding: 50px; border-radius: 24px; backdrop-filter: blur(20px); margin-bottom: 30px; box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
+h2 { color: var(--accent); font-size: 2rem; margin-top: 0; font-weight: 800; }
+.project-image { width: 100%; border-radius: 16px; margin: 25px 0; border: 1px solid var(--glass-border); }
+ul { padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+ul li { background: rgba(255,255,255,0.03); border-left: 3px solid var(--accent); padding: 15px; border-radius: 12px; font-size: 1rem; font-weight: 600; }
 
 .footer-actions { text-align: center; margin-top: 40px; }
-.btn { display: inline-block; padding: 12px 35px; background: var(--accent); color: white; border-radius: 30px; font-weight: 600; text-decoration: none; transition: 0.3s; }
-.btn:hover { transform: scale(1.05); }
+.btn { display: inline-block; padding: 15px 40px; background: linear-gradient(45deg, var(--accent), #7e22ce); color: white; border-radius: 30px; font-weight: 800; text-decoration: none; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+.btn:hover { transform: scale(1.05); box-shadow: 0 10px 25px rgba(184, 41, 255, 0.4); }
 </style>
 </head>
 <body>
 
 <header>
+    <a href="index.html" class="back-btn">← Back</a>
     <img src="pshutdownlogo.png" alt="Protocol Logo">
     <h1>Protocol: Shutdown</h1>
 </header>
@@ -47,14 +50,12 @@ ul li { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 10px; 
 
     <section>
         <h2>Unique Mechanics</h2>
-        <p>We implemented a "Discard Ability" system—you can only hold one weapon at a time, but discarding a gun triggers a powerful special ability, forcing players to constantly cycle through their arsenal. The game also takes heavy inspiration from dungeon crawlers
-          in order to feel unique and immersive. Theres a fluid movement system with dodge rolling and responsive controls amongst differing enemies with varying attacks to continiously spice up exploration.
-        </p>
+        <p>We implemented an aggressive "Discard Ability" system—you can only hold one weapon at a time, but discarding a gun triggers a powerful special ability, forcing players to constantly cycle through their arsenal. Drawing heavy inspiration from dungeon crawlers, we developed a fluid movement system complete with dodge rolling and highly responsive controls to counter varied enemy AI.</p>
         <img src="pshutdownimage2.png" alt="Boss Fight" class="project-image">
     </section>
 
     <section>
-        <h2>Skills Demonstrated</h2>
+        <h2>Technical Architecture</h2>
         <ul>
             <li>Rapid Prototyping (Unity)</li>
             <li>Collaborative Git Workflow</li>
@@ -67,7 +68,6 @@ ul li { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 10px; 
 
     <div class="footer-actions">
         <a href="https://bradleycurtis.itch.io/protocolshutdown" target="_blank" class="btn">Play on Itch.io</a>
-        <a href="index.html" class="btn" style="background:transparent; border: 1px solid var(--glass-border); margin-left:10px;">Back</a>
     </div>
 </div>
 

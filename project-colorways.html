@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colourways | Project</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root { --bg: #030305; --card-bg: rgba(20, 20, 25, 0.6); --accent: #00f0ff; --text-main: #f0f0f0; --text-dim: #9ca3af; --glass-border: rgba(255, 255, 255, 0.08); }
+body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text-main); margin: 0; line-height: 1.8; opacity: 0; animation: fadeIn 0.8s ease forwards; }
+@keyframes fadeIn { to { opacity: 1; } }
+
+header { 
+    height: 50vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: linear-gradient(rgba(3,3,5,0.6), rgba(3,3,5,1));
+    background-size: cover; background-position: center; border-bottom: 1px solid var(--glass-border);
+}
+header h1 { font-size: 4rem; margin: 0; font-weight: 800; letter-spacing: -1px; color: #fff; text-shadow: 0 0 30px rgba(0,240,255,0.5); }
+header p { color: var(--accent); font-size: 1.2rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
+
+.back-btn { position: absolute; top: 40px; left: 40px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); padding: 12px 25px; border-radius: 30px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; color: #fff; text-decoration: none; }
+.back-btn:hover { background: #fff; color: #000; }
+
+.container { max-width: 900px; margin: -50px auto 100px; padding: 0 20px; }
+section { background: var(--card-bg); border: 1px solid var(--glass-border); padding: 50px; border-radius: 24px; backdrop-filter: blur(20px); margin-bottom: 30px; }
+h2 { color: var(--accent); font-size: 2rem; margin-top: 0; font-weight: 800; }
+.meta-tags { display: flex; gap: 10px; margin-bottom: 20px; }
+.meta-tags span { background: rgba(0,240,255,0.1); color: var(--accent); padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+
+.footer-actions { text-align: center; margin-top: 40px; }
+.btn { display: inline-block; padding: 15px 40px; background: var(--accent); color: #000; border-radius: 30px; font-weight: 800; text-decoration: none; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+.btn:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(0,240,255,0.4); }
+</style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="back-btn">← Back</a>
+    <h1>Colourways</h1>
+    <p>3D Puzzle Platformer</p>
+</header>
+
+<div class="container">
+    <section>
+        <div class="meta-tags">
+            <span>UCA Technical Art Game Jam</span>
+            <span>Minimalist</span>
+            <span>Core Paint Mechanics</span>
+        </div>
+        <h2>Project Overview</h2>
+        <p>Developed alongside Harry-Dillamore, BradleyCurtis, and princessbleach, <strong>Colourways</strong> is a 3D puzzle platformer that challenges players with intuitive core paint mechanics. Created as a standout submission for the UCA Technical Art Game Jam, the game relies heavily on momentum, rapid puzzle-solving, and precise mechanical execution.</p>
+        <p>With an overwhelmingly positive reception regarding its engaging difficulty curve and concept, we are currently planning to expand its core systems into more complex levels and interactable elements.</p>
+    </section>
+
+    <div class="footer-actions">
+        <a href="https://harry-dillamore.itch.io/colorways" target="_blank" class="btn">Play the Build on Itch.io</a>
+    </div>
+</div>
+
+</body>
+</html>
