@@ -6,54 +6,98 @@
 <title>Colourways | Project</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-:root { --bg: #030305; --card-bg: rgba(20, 20, 25, 0.6); --accent: #00f0ff; --text-main: #f0f0f0; --text-dim: #9ca3af; --glass-border: rgba(255, 255, 255, 0.08); }
-body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text-main); margin: 0; line-height: 1.8; opacity: 0; animation: fadeIn 0.8s ease forwards; }
+/* UNIFIED CSS FROM WITHIN TIME */
+:root {
+  --bg: #030305;
+  --card-bg: rgba(20, 20, 25, 0.6);
+  --accent: #b829ff;
+  --accent-glow: rgba(184, 41, 255, 0.4);
+  --text-main: #f0f0f0;
+  --text-dim: #9ca3af;
+  --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  margin:0; padding:0; background: var(--bg); color: var(--text-main); line-height: 1.8;
+  opacity: 0; animation: fadeIn 0.8s ease forwards;
+}
+body::before {
+  content: ''; position: fixed; top: -10%; left: -10%; width: 50%; height: 50%;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%); z-index: -1; filter: blur(100px);
+}
 @keyframes fadeIn { to { opacity: 1; } }
 
-header { 
-    height: 50vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
-    background: linear-gradient(rgba(3,3,5,0.6), rgba(3,3,5,1));
-    background-size: cover; background-position: center; border-bottom: 1px solid var(--glass-border);
+/* Cinematic Header */
+header {
+  height: 70vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  /* Add a screenshot from the game as the background URL here */
+  background: linear-gradient(to bottom, rgba(3,3,5,0.4), rgba(3,3,5,1)), url('https://img.itch.zone/aW1nLzE1MDU2Mjc1LnBuZw==/original/H3eQ7V.png');
+  background-size: cover; background-position: center; border-bottom: 1px solid var(--glass-border); text-align: center; position: relative;
 }
-header h1 { font-size: 4rem; margin: 0; font-weight: 800; letter-spacing: -1px; color: #fff; text-shadow: 0 0 30px rgba(0,240,255,0.5); }
-header p { color: var(--accent); font-size: 1.2rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
+.role-badge { background: var(--accent); color: #fff; padding: 6px 15px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; box-shadow: 0 0 20px var(--accent-glow); }
+header h1 { font-size: 5rem; font-weight: 800; margin: 0; letter-spacing: -2px; text-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+header p.subtitle { font-size: 1.4rem; font-weight: 300; color: #e5e7eb; max-width: 800px; margin-top: 15px; }
 
-.back-btn { position: absolute; top: 40px; left: 40px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); padding: 12px 25px; border-radius: 30px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; color: #fff; text-decoration: none; }
-.back-btn:hover { background: #fff; color: #000; }
+.back-btn {
+  position: absolute; top: 40px; left: 40px; background: rgba(0,0,0,0.5); backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border); padding: 12px 25px; border-radius: 30px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; color: #fff; text-decoration: none; z-index: 10;
+}
+.back-btn:hover { background: #fff; color: #000; transform: translateX(-5px); }
 
-.container { max-width: 900px; margin: -50px auto 100px; padding: 0 20px; }
-section { background: var(--card-bg); border: 1px solid var(--glass-border); padding: 50px; border-radius: 24px; backdrop-filter: blur(20px); margin-bottom: 30px; }
-h2 { color: var(--accent); font-size: 2rem; margin-top: 0; font-weight: 800; }
-.meta-tags { display: flex; gap: 10px; margin-bottom: 20px; }
-.meta-tags span { background: rgba(0,240,255,0.1); color: var(--accent); padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+.container { max-width: 1000px; margin: -60px auto 100px; padding: 0 20px; position: relative; z-index: 2; }
+section { background: var(--card-bg); border: 1px solid var(--glass-border); padding: 60px; border-radius: 24px; backdrop-filter: blur(25px); margin-bottom: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+h2 { color: var(--accent); font-size: 2.2rem; font-weight: 800; margin-top: 0; margin-bottom: 25px; display: flex; align-items: center; gap: 15px; }
+h2::after { content: ''; height: 2px; flex-grow: 1; background: linear-gradient(90deg, var(--accent), transparent); }
 
-.footer-actions { text-align: center; margin-top: 40px; }
-.btn { display: inline-block; padding: 15px 40px; background: var(--accent); color: #000; border-radius: 30px; font-weight: 800; text-decoration: none; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
-.btn:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(0,240,255,0.4); }
+.project-image { width: 100%; border-radius: 16px; margin: 30px 0; border: 1px solid var(--glass-border); box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
+
+/* Feature Grid */
+.feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px; }
+.feature-box { background: rgba(255,255,255,0.03); padding: 25px; border-radius: 16px; border: 1px solid var(--glass-border); text-align: center; transition: 0.3s; }
+.feature-box:hover { transform: translateY(-5px); border-color: var(--accent); background: rgba(184,41,255,0.05); }
+.feature-box h3 { color: #fff; font-size: 1.5rem; margin: 0 0 10px; font-weight: 800; }
+.feature-box p { color: var(--text-dim); margin: 0; font-size: 0.9rem; }
+
+.footer-actions { text-align: center; margin-top: 60px; }
+.btn-steam { display: inline-block; padding: 20px 50px; background: linear-gradient(45deg, var(--accent), #7e22ce); color: white; border-radius: 40px; font-weight: 800; font-size: 1.1rem; text-decoration: none; text-transform: uppercase; letter-spacing: 2px; transition: 0.4s; box-shadow: 0 15px 35px var(--accent-glow); }
+.btn-steam:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 20px 45px var(--accent-glow); }
 </style>
 </head>
 <body>
 
 <header>
-    <a href="index.html" class="back-btn">← Back</a>
+    <a href="index.html" class="back-btn">← Back to Portfolio</a>
+    <div class="role-badge">Co-Developer / Technical Art Jam</div>
     <h1>Colourways</h1>
-    <p>3D Puzzle Platformer</p>
+    <p class="subtitle">A minimalist 3D puzzle platformer revolving around intuitive core paint mechanics.</p>
 </header>
 
 <div class="container">
     <section>
-        <div class="meta-tags">
-            <span>UCA Technical Art Game Jam</span>
-            <span>Minimalist</span>
-            <span>Core Paint Mechanics</span>
-        </div>
         <h2>Project Overview</h2>
-        <p>Developed alongside Harry-Dillamore, BradleyCurtis, and princessbleach, <strong>Colourways</strong> is a 3D puzzle platformer that challenges players with intuitive core paint mechanics. Created as a standout submission for the UCA Technical Art Game Jam, the game relies heavily on momentum, rapid puzzle-solving, and precise mechanical execution.</p>
-        <p>With an overwhelmingly positive reception regarding its engaging difficulty curve and concept, we are currently planning to expand its core systems into more complex levels and interactable elements.</p>
+        <p>Developed alongside Harry Dillamore, Bradley Curtis, and Zoe Efstathiou, <strong>Colourways</strong> is a 3D puzzle platformer that challenges players to master rapid movement through environmental painting. Created as a standout submission for the UCA Technical Art Game Jam, the game relies heavily on momentum, rapid puzzle-solving, and precise mechanical execution.</p>
+        
+        <img src="cwah2.png" alt="Colourways Gameplay" class="project-image">
+        
+        <div class="feature-grid">
+            <div class="feature-box"><h3>3D</h3><p>Puzzle Platforming</p></div>
+            <div class="feature-box"><h3>Paint</h3><p>Core Traversal Mechanics</p></div>
+            <div class="feature-box"><h3>Minimal</h3><p>Clean Visual Aesthetic</p></div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Future Development Plans</h2>
+        <p>Following an overwhelmingly positive reception after our showcase at Guildford Games Festival 26 regarding its engaging difficulty curve and accessible concept, the team is currently looking to expand the core systems into a fully fleshed-out title. We plan to introduce more complex level geometry, interactive elements, and entirely new ways to utilize the paint mechanics in 3D space.</p>
+        
+        <div style="width: 100%; height: 350px; background: rgba(255,255,255,0.05); border-radius: 16px; margin: 30px 0; border: 1px dashed var(--accent); display: flex; align-items: center; justify-content: center; color: var(--text-dim);">
+            [ Add Secondary Screenshot / Concept Art Here ]
+        </div>
     </section>
 
     <div class="footer-actions">
-        <a href="https://harry-dillamore.itch.io/colorways" target="_blank" class="btn">Play the Build on Itch.io</a>
+        <a href="https://harry-dillamore.itch.io/colorways" target="_blank" class="btn-steam">Play the Build on Itch.io</a>
     </div>
 </div>
 

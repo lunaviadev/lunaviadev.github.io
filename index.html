@@ -30,23 +30,12 @@ body {
 
 /* Advanced Dynamic Background */
 body::before {
-  content: '';
-  position: fixed;
-  top: -20%; left: -10%;
-  width: 60%; height: 60%;
-  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
-  z-index: -1;
-  filter: blur(120px);
-  animation: pulseGlow 8s infinite alternate;
+  content: ''; position: fixed; top: -20%; left: -10%; width: 60%; height: 60%;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%); z-index: -1; filter: blur(120px); animation: pulseGlow 8s infinite alternate;
 }
 body::after {
-  content: '';
-  position: fixed;
-  bottom: -20%; right: -10%;
-  width: 50%; height: 50%;
-  background: radial-gradient(circle, rgba(0, 240, 255, 0.15) 0%, transparent 60%);
-  z-index: -1;
-  filter: blur(120px);
+  content: ''; position: fixed; bottom: -20%; right: -10%; width: 50%; height: 50%;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.15) 0%, transparent 60%); z-index: -1; filter: blur(120px);
 }
 
 @keyframes pulseGlow {
@@ -57,89 +46,27 @@ body::after {
 a { color: inherit; text-decoration: none; }
 
 /* Header */
-header {
-  padding: 12vh 20px 8vh;
-  text-align: center;
-  position: relative;
-}
+header { padding: 12vh 20px 8vh; text-align: center; position: relative; }
 
 .title-badge {
-  display: inline-block;
-  background: linear-gradient(90deg, rgba(184,41,255,0.2), rgba(0,240,255,0.2));
-  border: 1px solid var(--accent);
-  padding: 8px 20px;
-  border-radius: 50px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--text-main);
-  margin-bottom: 25px;
-  box-shadow: 0 0 20px rgba(184, 41, 255, 0.3);
+  display: inline-block; background: linear-gradient(90deg, rgba(184,41,255,0.2), rgba(0,240,255,0.2)); border: 1px solid var(--accent); padding: 8px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--text-main); margin-bottom: 25px; box-shadow: 0 0 20px rgba(184, 41, 255, 0.3);
 }
 
 header img { 
-  width: 130px; height: 130px; 
-  border-radius: 50%; 
-  border: 3px solid transparent;
+  width: 130px; height: 130px; border-radius: 50%; border: 3px solid transparent;
   background: linear-gradient(var(--bg), var(--bg)) padding-box, linear-gradient(45deg, var(--accent), var(--accent-secondary)) border-box;
-  padding: 5px;
-  margin-bottom: 25px;
-  transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  padding: 5px; margin-bottom: 25px; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 header img:hover { transform: scale(1.1) rotate(5deg); box-shadow: 0 0 30px var(--accent-glow); }
 
-header h1 { 
-  font-size: 4.5rem; margin: 0; 
-  font-weight: 800;
-  letter-spacing: -2px; 
-  background: linear-gradient(to right, #fff 30%, #a1a1aa 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-header p { 
-  color: var(--text-dim); 
-  max-width: 650px; 
-  margin: 20px auto; 
-  font-weight: 300; 
-  font-size: 1.2rem; 
-}
+header h1 { font-size: 4.5rem; margin: 0; font-weight: 800; letter-spacing: -2px; background: linear-gradient(to right, #fff 30%, #a1a1aa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+header p { color: var(--text-dim); max-width: 650px; margin: 20px auto; font-weight: 300; font-size: 1.2rem; }
 
 /* Navigation */
-.nav-container {
-  display: flex; justify-content: center;
-  flex-wrap: wrap;
-  gap: 15px; margin-bottom: 60px;
-  position: sticky;
-  top: 20px;
-  z-index: 100;
-}
-
-.nav-btn {
-  background: rgba(10, 10, 12, 0.8);
-  backdrop-filter: blur(15px);
-  border: 1px solid var(--glass-border);
-  color: var(--text-dim);
-  padding: 12px 35px;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: all 0.4s ease;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  font-size: 0.8rem;
-  font-family: inherit;
-}
-
+.nav-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 60px; position: sticky; top: 20px; z-index: 100; }
+.nav-btn { background: rgba(10, 10, 12, 0.8); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); color: var(--text-dim); padding: 12px 35px; border-radius: 30px; cursor: pointer; transition: all 0.4s ease; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.8rem; font-family: inherit; }
 .nav-btn:hover { color: #fff; border-color: var(--text-dim); }
-.nav-btn.active {
-  background: linear-gradient(45deg, var(--accent), #7e22ce);
-  color: white;
-  box-shadow: 0 10px 25px var(--accent-glow);
-  border-color: transparent;
-  transform: translateY(-2px);
-}
+.nav-btn.active { background: linear-gradient(45deg, var(--accent), #7e22ce); color: white; box-shadow: 0 10px 25px var(--accent-glow); border-color: transparent; transform: translateY(-2px); }
 
 /* Sections Transition */
 .content-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 20px 100px; }
@@ -147,46 +74,15 @@ header p {
 .section.active { display: block; opacity: 1; transform: translateY(0); }
 
 /* Projects Grid */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
-}
-
-.featured-project {
-  grid-column: span 2;
-  display: flex;
-  background: var(--card-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 24px;
-  overflow: hidden;
-  transition: 0.5s ease;
-  backdrop-filter: blur(20px);
-  position: relative;
-}
-.featured-project::before {
-  content: ''; position: absolute; inset: 0; background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05)); z-index: 1; pointer-events: none;
-}
-.featured-project:hover { 
-  border-color: var(--accent); 
-  transform: translateY(-10px); 
-  box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 0 40px rgba(184, 41, 255, 0.2); 
-}
-
+.projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
+.featured-project { grid-column: span 2; display: flex; background: var(--card-bg); border: 1px solid var(--glass-border); border-radius: 24px; overflow: hidden; transition: 0.5s ease; backdrop-filter: blur(20px); position: relative; }
+.featured-project::before { content: ''; position: absolute; inset: 0; background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05)); z-index: 1; pointer-events: none; }
+.featured-project:hover { border-color: var(--accent); transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 0 40px rgba(184, 41, 255, 0.2); }
 .featured-img { width: 60%; object-fit: cover; border-right: 1px solid var(--glass-border); transition: 0.7s; }
 .featured-project:hover .featured-img { transform: scale(1.03); }
 .featured-info { padding: 60px; width: 40%; display: flex; flex-direction: column; justify-content: center; z-index: 2; }
 
-.project-card {
-  background: var(--card-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 20px;
-  overflow: hidden;
-  transition: 0.4s ease;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
+.project-card { background: var(--card-bg); border: 1px solid var(--glass-border); border-radius: 20px; overflow: hidden; transition: 0.4s ease; display: flex; flex-direction: column; position: relative; }
 .project-card:hover { border-color: var(--accent-secondary); transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0, 240, 255, 0.15); }
 .project-card img { width: 100%; height: 250px; object-fit: cover; transition: 0.6s; }
 .project-card:hover img { transform: scale(1.08); filter: brightness(1.1); }
@@ -196,7 +92,6 @@ header p {
 .tag.secondary { color: var(--accent-secondary); background: rgba(0,240,255,0.1); }
 h2 { font-size: 2.5rem; margin: 10px 0; font-weight: 800; }
 h3 { font-size: 1.8rem; margin: 10px 0 15px; font-weight: 600; }
-
 .btn-main { display: inline-flex; align-items: center; justify-content: center; margin-top: 25px; padding: 12px 30px; background: linear-gradient(45deg, var(--accent), #7e22ce); border-radius: 30px; font-size: 0.9rem; font-weight: 600; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; color: white; }
 .btn-main:hover { transform: scale(1.05); box-shadow: 0 10px 20px var(--accent-glow); }
 
@@ -239,21 +134,19 @@ h3 { font-size: 1.8rem; margin: 10px 0 15px; font-weight: 600; }
   <br>
   <img src="DEVLOGO.png" alt="Lunavia">
   <h1>Josephine Bellas</h1>
-  <p>20 Y/O U.K Game Developer & Director. Specializing in highly-polished systems in Godot and Unity, blending deep mechanics with striking aesthetics.</p>
+  <p>20 Y/O U.K Game Developer & Director. Gameplay & Systems specialist.</p>
 </header>
 
 <div class="nav-container">
-  <button class="nav-btn active" onclick="showSection('programming')">Industry Projects</button>
-  <button class="nav-btn" onclick="showSection('about')">About The Dev</button>
-  <button class="nav-btn" onclick="showSection('art')">Art & Assets</button>
-  <button class="nav-btn" onclick="showSection('contact')">Connect</button>
+  <button class="nav-btn active" onclick="showSection('programming')">My Projects</button>
+  <button class="nav-btn" onclick="showSection('about')">About Me</button>
+  <button class="nav-btn" onclick="showSection('contact')">Socials</button>
 </div>
 
 <div class="content-wrapper">
   
   <div id="programming" class="section active">
     <div class="projects-grid">
-      
       <a href="project-within-time.html" class="featured-project">
         <img src="timeforanewera.png" alt="Within Time" class="featured-img">
         <div class="featured-info">
@@ -263,16 +156,14 @@ h3 { font-size: 1.8rem; margin: 10px 0 15px; font-weight: 600; }
           <span class="btn-main">Explore Project Details</span>
         </div>
       </a>
-
       <a href="project-colorways.html" class="project-card">
-        <img src="https://img.itch.zone/aW1nLzE1MDU2Mjc1LnBuZw==/original/H3eQ7V.png" alt="Colourways">
+        <img src="cwimg.png" alt="Colourways">
         <div class="project-card-info">
           <span class="tag secondary">3D Puzzle Platformer</span>
           <h3>Colourways</h3>
           <p>A minimalist 3D puzzle platformer revolving around intuitive core paint mechanics. Created as a standout submission for the UCA Technical Art Game Jam.</p>
         </div>
       </a>
-
       <a href="project-protocol.html" class="project-card">
         <img src="coverart2.png" alt="Protocol">
         <div class="project-card-info">
@@ -281,7 +172,6 @@ h3 { font-size: 1.8rem; margin: 10px 0 15px; font-weight: 600; }
           <p>A high-octane Cyberpunk shooter developed in 7 days for Brackey's Jam 2025.2. Features aggressive weapon-discard mechanics and fluid dungeon-crawler movement.</p>
         </div>
       </a>
-
     </div>
   </div>
 
@@ -289,23 +179,16 @@ h3 { font-size: 1.8rem; margin: 10px 0 15px; font-weight: 600; }
     <div class="about-layout">
         <div class="about-bio">
             <h2>The Architect</h2>
-            <p>I'm <strong>Josie</strong> (Lunavia), a 20-year-old UK-based Game Developer, Director, and full-time Game Development student. I build highly cohesive, systems-driven games from the ground up.</p>
+            <p>I'm <strong>Josie</strong> (Lunavia), a 20-year-old UK-based Game Developer, Director, and full-time Game Development student. I focus on creating unique and fleshed out experiences that often reinvent and rethink tropes of many game genres.</p>
             <p>I am the <strong>CEO and Founder of Team INNERMINDS</strong>, a dedicated independent studio currently developing our flagship commercial title, <em>"Within Time."</em> Leading a multifaceted team, I oversee everything from core programming architecture to narrative direction and aesthetic consistency.</p>
-            <p style="color: var(--text-dim);">My technical workflow spans deep engine mechanics in Godot and Unity, married seamlessly with asset production through FL Studio and Clip Studio Paint. I don't just write code; I craft holistic, polished experiences.</p>
+            <p style="color: var(--text-dim);">My technical workflow spans rich mechanics and memorable experiences in Godot and Unity with additional skillsets in C++ and Blueprinting.</p>
         </div>
         <div class="skill-grid">
-            <div class="skill-item"><strong>Engine Architecture</strong><span>Godot, Unity, Unreal Engine</span></div>
+            <div class="skill-item"><strong>Engine Architecture</strong><span>3 Years of Experience in Godot and Unity, With 2 years of experience in Unreal Engine. Credited for working on projects featured at Game Dev Local Expo 26 and Guildford Games Festival 26.</span></div>
             <div class="skill-item"><strong>Core Programming</strong><span>GDScript, C#, C++, JavaScript</span></div>
-            <div class="skill-item"><strong>Visual Production</strong><span>Clip Studio, Aseprite, Tech Art</span></div>
-            <div class="skill-item"><strong>Audio Engineering</strong><span>FL Studio 21, Acoustic/Electric Guitar</span></div>
+            <div class="skill-item"><strong>Visual Production</strong><span>5+ Years of pixel art experience and specialism in Aseprite, alongside 8+ years of digital art in Clip Studio Paint.</span></div>
+            <div class="skill-item"><strong>Audio Engineering</strong><span>FL Studio 21, 10+ Years of expereince on Acoustic/Electric Guitars</span></div>
         </div>
-    </div>
-  </div>
-
-  <div id="art" class="section">
-    <div style="text-align: center; color: var(--text-dim); padding: 50px;">
-        <h2>Visual Development</h2>
-        <p>Gallery content goes here...</p>
     </div>
   </div>
 
