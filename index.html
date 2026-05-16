@@ -3,195 +3,199 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Josie Bellas | Game Developer</title>
-<link href="https://fonts.googleapis.com/css2?family=Trebuchet+MS:wght@400;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<title>Josie Bellas | SYSTEM.A34</title>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Trebuchet+MS:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  /* Frutiger Aero Color Palette */
-  --sky-blue: #00b4ff;
-  --aero-light: #e0f7fa;
-  --aero-white: rgba(255, 255, 255, 0.85);
-  --glass-highlight: rgba(255, 255, 255, 0.9);
-  --glass-shadow: rgba(0, 50, 100, 0.15);
-  --text-dark: #1e3a5f;
-  --text-mid: #4a6fa5;
-  --nature-green: #7fd13b;
-  --gloss-gradient: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.3) 48%, rgba(255,255,255,0.0) 50%, rgba(255,255,255,0.2) 100%);
+  --y2k-blue: #0033cc;
+  --y2k-cyan: #00f0ff;
+  --y2k-light: #e0f7fa;
+  --win-bg: rgba(0, 15, 45, 0.85);
+  --win-border: #4287f5;
+  --title-bar: linear-gradient(90deg, #000080, #1084d0);
+  --scanline-color: rgba(0, 0, 0, 0.2);
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; height: 100%; }
 
 body {
-  font-family: 'Nunito', 'Trebuchet MS', sans-serif;
+  font-family: 'Courier Prime', 'Courier New', monospace;
   margin: 0; padding: 0;
-  color: var(--text-dark);
+  color: var(--y2k-light);
   line-height: 1.6;
-  background: 
-    radial-gradient(circle at 15% 50%, rgba(255, 255, 255, 0.6) 0%, transparent 50%),
-    radial-gradient(circle at 85% 30%, rgba(127, 209, 59, 0.15) 0%, transparent 50%),
-    linear-gradient(180deg, #b2ebf2 0%, #e1f5fe 40%, #ffffff 100%);
-  background-attachment: fixed;
+  background-color: #001133;
   overflow-x: hidden;
-}
-
-/* Bubbles Background */
-body::after {
-  content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background-image: 
-    radial-gradient(circle, rgba(255,255,255,0.4) 10%, transparent 10.5%),
-    radial-gradient(circle, rgba(255,255,255,0.4) 10%, transparent 10.5%);
-  background-size: 60px 60px;
-  background-position: 0 0, 30px 30px;
-  opacity: 0.3; z-index: -1; pointer-events: none;
-}
-
-a { color: var(--sky-blue); text-decoration: none; font-weight: bold; }
-a:hover { text-decoration: underline; }
-
-/* Aero Glossy Containers */
-.aero-panel {
-  background: var(--aero-white);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  border-radius: 20px;
-  box-shadow: 
-    inset 0 1px 2px rgba(255,255,255,1),
-    0 8px 25px var(--glass-shadow);
-  backdrop-filter: blur(10px);
-  padding: 40px;
-  margin-bottom: 30px;
   position: relative;
-  overflow: hidden;
+  min-height: 100vh;
 }
-.aero-panel::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 40%;
-  background: linear-gradient(180deg, rgba(255,255,255,0.6) 0%, transparent 100%);
-  pointer-events: none; border-radius: 20px 20px 0 0;
+
+/* --- Y2K / Webcore Background Effects --- */
+
+/* Deep Blue Sky/Water Backdrop */
+body::before {
+  content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle at center 30%, #1a5cff 0%, #001133 80%);
+  z-index: -3; pointer-events: none;
 }
+
+/* Pseudo-3D Checkerboard / Grid Floor */
+.grid-floor {
+  position: fixed; bottom: -20vh; left: -50vw; width: 200vw; height: 60vh;
+  background-image: 
+    linear-gradient(transparent 48%, var(--y2k-cyan) 49%, var(--y2k-cyan) 51%, transparent 52%),
+    linear-gradient(90deg, transparent 48%, var(--y2k-cyan) 49%, var(--y2k-cyan) 51%, transparent 52%);
+  background-size: 60px 60px;
+  transform: perspective(600px) rotateX(75deg);
+  z-index: -2; pointer-events: none;
+  opacity: 0.3;
+  animation: gridMove 10s linear infinite;
+}
+@keyframes gridMove {
+  0% { transform: perspective(600px) rotateX(75deg) translateY(0); }
+  100% { transform: perspective(600px) rotateX(75deg) translateY(60px); }
+}
+
+/* CRT Scanlines Overlay */
+.scanlines {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  background: repeating-linear-gradient(
+    0deg,
+    var(--scanline-color),
+    var(--scanline-color) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  z-index: 9999; pointer-events: none;
+}
+
+a { color: var(--y2k-cyan); text-decoration: none; font-weight: bold; }
+a:hover { background: var(--y2k-cyan); color: #000; }
+
+/* --- Retro Window Panels --- */
+.win-window {
+  background: var(--win-bg);
+  border: 2px solid var(--win-border);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(0, 150, 255, 0.2);
+  margin-bottom: 40px;
+  backdrop-filter: blur(4px);
+  position: relative;
+  display: none; /* Controlled by JS */
+  animation: crtOn 0.4s ease-out forwards;
+}
+.win-window.active { display: block; }
+
+@keyframes crtOn {
+  0% { transform: scaleY(0.01) scaleX(0); opacity: 0; }
+  50% { transform: scaleY(0.01) scaleX(1); opacity: 1; }
+  100% { transform: scaleY(1) scaleX(1); opacity: 1; }
+}
+
+.title-bar {
+  background: var(--title-bar);
+  padding: 4px 8px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 2px solid var(--win-border);
+  font-family: 'Trebuchet MS', sans-serif;
+  font-weight: bold; letter-spacing: 1px; color: white;
+}
+.title-controls span {
+  display: inline-block; width: 14px; height: 14px;
+  background: #ccc; border: 1px solid #fff;
+  box-shadow: inset -1px -1px #000;
+  margin-left: 4px; cursor: pointer;
+}
+
+.win-content { padding: 25px; }
 
 /* Header */
-header {
-  text-align: center; padding: 60px 20px 30px;
-}
-.profile-pic {
-  width: 140px; height: 140px; border-radius: 50%;
-  border: 4px solid white;
-  box-shadow: 0 10px 20px rgba(0, 180, 255, 0.3), inset 0 2px 5px rgba(0,0,0,0.1);
-  margin-bottom: 20px; background: white;
+header { text-align: center; padding: 6vh 20px 4vh; position: relative; z-index: 10; }
+.compact-disc-logo {
+  font-family: 'Arial', sans-serif; font-size: 0.8rem; font-weight: 900;
+  letter-spacing: 3px; border: 1px solid var(--y2k-cyan);
+  display: inline-block; padding: 5px 15px; border-radius: 20px;
+  margin-bottom: 20px; text-transform: uppercase;
 }
 header h1 {
-  font-size: 3.5rem; margin: 0; font-weight: 800; letter-spacing: -1px;
-  color: #0077b6; text-shadow: 1px 1px 0px white, 0 4px 10px rgba(0,180,255,0.2);
+  font-family: 'Trebuchet MS', sans-serif; font-size: 3.5rem; margin: 0;
+  color: #fff; text-shadow: 0 0 10px var(--y2k-cyan), 2px 2px 0 var(--y2k-blue);
+  letter-spacing: -1px;
 }
 header p {
-  color: var(--text-mid); font-size: 1.2rem; max-width: 600px; margin: 10px auto;
+  color: var(--y2k-cyan); font-size: 1.1rem; max-width: 600px; margin: 10px auto;
 }
 
-/* Frutiger Buttons / Navigation */
+/* Nav / Buttons */
 .nav-container {
-  display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap;
-  position: sticky; top: 20px; z-index: 100;
+  display: flex; justify-content: center; gap: 15px; margin-bottom: 40px;
+  position: relative; z-index: 100; flex-wrap: wrap;
 }
-.glossy-btn {
-  background: linear-gradient(180deg, #42c2ff 0%, #0099ff 100%);
-  border: 1px solid #007bb5; border-radius: 30px;
-  padding: 12px 30px; color: white; font-size: 1.1rem; font-weight: 700;
-  cursor: pointer; position: relative; overflow: hidden;
-  box-shadow: inset 0 1px 1px rgba(255,255,255,0.8), 0 4px 10px rgba(0,150,255,0.3);
-  transition: all 0.2s ease; font-family: inherit;
+.tech-btn {
+  background: #c0c0c0; border: 2px solid #fff;
+  border-right-color: #888; border-bottom-color: #888;
+  color: #000; font-family: 'Trebuchet MS', sans-serif; font-weight: bold;
+  padding: 8px 25px; font-size: 1rem; cursor: pointer; text-transform: uppercase;
+  transition: all 0.1s;
 }
-.glossy-btn::after {
-  content: ''; position: absolute; top: 2px; left: 2px; right: 2px; height: 45%;
-  background: linear-gradient(180deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.1) 100%);
-  border-radius: 28px 28px 10px 10px; pointer-events: none;
+.tech-btn:active {
+  border: 2px solid #888; border-right-color: #fff; border-bottom-color: #fff;
+  background: #a0a0a0;
 }
-.glossy-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: inset 0 1px 1px rgba(255,255,255,0.8), 0 6px 15px rgba(0,150,255,0.5);
-  filter: brightness(1.1);
-}
-.glossy-btn.active {
-  background: linear-gradient(180deg, #88d445 0%, #63a826 100%);
-  border-color: #4a821a;
-  box-shadow: inset 0 1px 1px rgba(255,255,255,0.8), 0 6px 15px rgba(127,209,59,0.4);
-}
+.tech-btn.active { background: var(--y2k-cyan); }
 
-/* Sections */
-.content-wrapper { max-width: 1000px; margin: 0 auto; padding: 0 20px 80px; }
-.section { display: none; animation: slideUp 0.5s ease forwards; }
-.section.active { display: block; }
+/* Main Content Wrapper */
+.content-wrapper { max-width: 900px; margin: 0 auto; padding: 0 20px 80px; position: relative; z-index: 10; }
 
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+/* Readout Typography */
+h2 { color: var(--y2k-cyan); border-bottom: 1px dotted var(--y2k-cyan); padding-bottom: 5px; margin-top: 0; text-transform: uppercase; }
+.data-label { color: #88ccff; font-weight: bold; }
 
-h2 { color: #0077b6; font-size: 2.2rem; margin-top: 0; border-bottom: 2px solid rgba(0, 180, 255, 0.2); padding-bottom: 10px; }
-
-/* About Section Customization */
+/* About Section */
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-.bio-text { font-size: 1.1rem; }
-.bio-text p { margin-bottom: 15px; }
+.tech-box { border: 1px solid var(--win-border); padding: 15px; background: rgba(0,0,0,0.4); }
 .interests-badge {
-  display: inline-block; background: rgba(0, 180, 255, 0.1); color: #0077b6;
-  padding: 5px 12px; border-radius: 20px; font-size: 0.9rem; font-weight: bold; margin: 5px;
-  border: 1px solid rgba(0, 180, 255, 0.3);
+  display: inline-block; background: transparent; color: var(--y2k-cyan);
+  padding: 2px 8px; border: 1px solid var(--y2k-cyan); font-size: 0.85rem; margin: 3px;
 }
-
 .skill-list { list-style: none; padding: 0; margin: 0; }
-.skill-list li {
-  background: white; border-radius: 12px; padding: 15px; margin-bottom: 15px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid rgba(0, 180, 255, 0.1);
-  position: relative; overflow: hidden;
-}
-.skill-list li strong { color: #0077b6; display: block; font-size: 1.1rem; }
-.skill-list li span { font-size: 0.95rem; color: var(--text-mid); }
+.skill-list li { margin-bottom: 15px; border-bottom: 1px dashed rgba(0, 240, 255, 0.3); padding-bottom: 10px; }
+.skill-list li strong { color: #fff; display: block; font-size: 1rem; }
+.skill-list li span { font-size: 0.9rem; color: #a0c0d0; }
 
-/* Projects Grid (Condensed into single page cards) */
+/* Projects Grid */
 .project-card {
-  display: flex; flex-direction: column; background: white; border-radius: 16px;
-  overflow: hidden; margin-bottom: 30px;
-  box-shadow: 0 5px 15px rgba(0,50,100,0.08); border: 1px solid rgba(200,230,255,0.5);
+  display: flex; flex-direction: column; background: rgba(0,0,0,0.5);
+  border: 1px solid var(--win-border); margin-bottom: 30px;
 }
 @media (min-width: 768px) {
   .project-card { flex-direction: row; }
-  .project-card.reverse { flex-direction: row-reverse; }
-  .project-img-wrapper { width: 45%; flex-shrink: 0; }
+  .project-img-wrapper { width: 45%; flex-shrink: 0; border-right: 1px solid var(--win-border); }
   .project-info { width: 55%; }
 }
-.project-img-wrapper {
-  background: #eef9ff; position: relative; min-height: 250px;
-  display: flex; align-items: center; justify-content: center; overflow: hidden;
-}
-.project-img-wrapper img {
-  width: 100%; height: 100%; object-fit: cover; transition: 0.4s ease;
-}
-.project-card:hover .project-img-wrapper img { transform: scale(1.05); }
+.project-img-wrapper { background: #000; position: relative; min-height: 220px; overflow: hidden; display: flex; align-items: center; }
+.project-img-wrapper img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.2) hue-rotate(-10deg); opacity: 0.8; }
+.project-img-wrapper::after { content: ''; position: absolute; top:0; left:0; right:0; bottom:0; box-shadow: inset 0 0 20px #000; pointer-events: none; }
 
-.project-info { padding: 30px; display: flex; flex-direction: column; justify-content: center; }
-.project-title { font-size: 1.8rem; font-weight: 800; color: #0077b6; margin: 0 0 10px 0; }
-.project-role { color: var(--nature-green); font-weight: bold; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
-.project-desc { font-size: 1rem; color: var(--text-mid); margin-bottom: 20px; }
-.project-features {
-  list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;
-}
-.project-features li {
-  font-size: 0.85rem; font-weight: bold; background: #f0f9ff; padding: 6px 12px;
-  border-radius: 8px; color: #0077b6; border: 1px solid #cceeff;
-}
-.project-btn { align-self: flex-start; }
+.project-info { padding: 25px; display: flex; flex-direction: column; justify-content: center; }
+.project-title { font-family: 'Trebuchet MS', sans-serif; font-size: 1.8rem; font-weight: bold; color: #fff; margin: 0 0 5px 0; }
+.project-role { color: var(--y2k-cyan); font-size: 0.85rem; text-transform: uppercase; margin-bottom: 15px; }
+.project-desc { font-size: 0.95rem; margin-bottom: 20px; }
+.project-features { list-style: none; padding: 0; margin: 0 0 20px 0; }
+.project-features li::before { content: '>'; color: var(--y2k-cyan); margin-right: 8px; }
+.tech-link { display: inline-block; border: 1px solid var(--y2k-cyan); padding: 5px 15px; color: var(--y2k-cyan); text-transform: uppercase; font-size: 0.85rem; align-self: flex-start; }
+.tech-link:hover { background: var(--y2k-cyan); color: #000; }
 
 /* Contact Cards */
-.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
 .contact-item {
-  background: white; border-radius: 16px; padding: 25px; text-align: center;
-  border: 1px solid rgba(0,180,255,0.2); box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  transition: 0.3s; cursor: pointer;
+  border: 1px solid var(--win-border); padding: 20px; text-align: center;
+  background: rgba(0, 10, 30, 0.6); cursor: pointer; transition: 0.2s;
 }
-.contact-item:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,180,255,0.15); border-color: var(--sky-blue); }
-.contact-item h3 { margin: 0 0 5px; color: #0077b6; }
-.contact-item p { margin: 0; color: var(--text-mid); font-size: 0.9rem; }
+.contact-item:hover { background: var(--y2k-cyan); color: #000; }
+.contact-item:hover h3, .contact-item:hover p, .contact-item:hover .data-label { color: #000; }
+.contact-item h3 { margin: 0 0 5px; font-family: 'Trebuchet MS', sans-serif; font-size: 1.2rem; }
+.contact-item p { margin: 0; font-size: 0.9rem; }
 
 @media (max-width: 768px) {
   .about-grid { grid-template-columns: 1fr; }
@@ -201,167 +205,187 @@ h2 { color: #0077b6; font-size: 2.2rem; margin-top: 0; border-bottom: 2px solid 
 </head>
 <body>
 
+<div class="scanlines"></div>
+<div class="grid-floor"></div>
+
 <header>
-  <img src="DEVLOGO.png" alt="Lunavia" class="profile-pic" onerror="this.src='https://via.placeholder.com/140/e0f7fa/00b4ff?text=J';">
-  <h1>Josephine Bellas</h1>
-  <p>20 Y/O U.K Game Developer & Director. Gameplay & Systems specialist.</p>
+  <div class="compact-disc-logo">DIGITAL DATA.READ // A-34</div>
+  <h1>JOSEPHINE_BELLAS</h1>
+  <p>[20 Y/O U.K Game Developer & Director. Gameplay & Systems specialist.]</p>
 </header>
 
 <div class="nav-container">
-  <button class="glossy-btn" onclick="showSection('about', this)">About Me</button>
-  <button class="glossy-btn active" onclick="showSection('projects', this)">Games I've Made</button>
-  <button class="glossy-btn" onclick="showSection('contact', this)">Socials & Links</button>
+  <button class="tech-btn" onclick="showSection('about', this)">ABOUT_ME.EXE</button>
+  <button class="tech-btn active" onclick="showSection('projects', this)">PROJECTS.DIR</button>
+  <button class="tech-btn" onclick="showSection('contact', this)">COMM_LINKS.BAT</button>
 </div>
 
 <div class="content-wrapper">
   
-  <!-- ABOUT SECTION -->
-  <div id="about" class="section aero-panel">
-    <h2>Hi, I'm Josie (Lunavia)! 👋</h2>
-    <div class="about-grid">
-      <div class="bio-text">
-        <p>I'm a 20-year-old UK-based Game Developer, Director, and full-time Game Development student. I focus on creating unique, fleshed-out experiences that reinvent the tropes of classic genres.</p>
-        <p>I am the <strong>CEO and Founder of Team INNERMINDS</strong>, a dedicated independent studio currently developing our flagship commercial title, <em>"Within Time."</em> I oversee everything from core programming architecture to narrative direction and aesthetic consistency.</p>
-        <p>Outside of game dev, I am absolutely obsessed with early 2000s webcore aesthetics, Frutiger Aero design, and playing the acoustic/electric guitar. I love bringing that nostalgic, colorful energy into the modern digital space!</p>
+  <div id="about" class="win-window aero-panel">
+    <div class="title-bar">
+      <span>C:\SYSTEM\ABOUT_ME.EXE</span>
+      <div class="title-controls"><span>_</span><span>☐</span><span>X</span></div>
+    </div>
+    <div class="win-content">
+      <h2>IDENT_RECORD</h2>
+      <div class="about-grid">
+        <div class="tech-box">
+          <p><span class="data-label">NAME:</span> Josie (Lunavia)</p>
+          <p><span class="data-label">FUNCTION:</span> Game Developer, Director, Full-time Game Dev Student.</p>
+          <p><span class="data-label">AFFILIATION:</span> CEO & Founder of Team INNERMINDS.</p>
+          <p><span class="data-label">OBJECTIVE:</span> Creating unique, fleshed-out experiences that reinvent the tropes of classic genres. Overseeing core programming architecture to narrative direction and aesthetic consistency on flagship title "Within Time".</p>
+          
+          <p><span class="data-label">SUBJECT_INTERESTS:</span></p>
+          <div>
+            <span class="interests-badge">Webcore 2000s</span>
+            <span class="interests-badge">Frutiger Aero</span>
+            <span class="interests-badge">Electric Guitar</span>
+            <span class="interests-badge">Pixel Art</span>
+          </div>
+        </div>
         
-        <div style="margin-top: 20px;">
-          <span class="interests-badge">✨ Webcore 2000s</span>
-          <span class="interests-badge">🫧 Frutiger Aero</span>
-          <span class="interests-badge">🎸 Electric Guitar</span>
-          <span class="interests-badge">👾 Pixel Art</span>
+        <div class="tech-box">
+          <h3 style="margin-top:0; color: var(--y2k-cyan);">[SYSTEM_SKILLS]</h3>
+          <ul class="skill-list">
+            <li>
+              <strong>Engine Architecture</strong>
+              <span>3 Yrs Godot/Unity, 2 Yrs Unreal. Exhibited Game Dev Local Expo & Guildford Games Fest 26.</span>
+            </li>
+            <li>
+              <strong>Core Programming</strong>
+              <span>GDScript, C#, C++, JavaScript</span>
+            </li>
+            <li>
+              <strong>Visual Production</strong>
+              <span>5+ Yrs Aseprite, 8+ Yrs Clip Studio Paint.</span>
+            </li>
+            <li>
+              <strong>Audio Engineering</strong>
+              <span>FL Studio 21, 10+ Yrs Acoustic/Electric Guitar.</span>
+            </li>
+          </ul>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div id="projects" class="win-window active">
+    <div class="title-bar">
+      <span>C:\SYSTEM\PROJECTS.DIR</span>
+      <div class="title-controls"><span>_</span><span>☐</span><span>X</span></div>
+    </div>
+    <div class="win-content">
       
-      <div>
-        <h3 style="color: #0077b6; margin-top:0;">My Toolbelt</h3>
-        <ul class="skill-list">
-          <li>
-            <strong>Engine Architecture</strong>
-            <span>3 Years Godot & Unity, 2 Years Unreal. Featured at Game Dev Local Expo & Guildford Games Fest 26.</span>
-          </li>
-          <li>
-            <strong>Core Programming</strong>
-            <span>GDScript, C#, C++, JavaScript</span>
-          </li>
-          <li>
-            <strong>Visual Production</strong>
-            <span>5+ Years Aseprite (Pixel Art), 8+ Years Clip Studio Paint.</span>
-          </li>
-          <li>
-            <strong>Audio Engineering</strong>
-            <span>FL Studio 21, 10+ Years of experience on Guitar.</span>
-          </li>
-        </ul>
+      <div class="project-card">
+        <div class="project-img-wrapper">
+          <img src="libraryheader.png" alt="BCKSPCE" onerror="this.src='https://via.placeholder.com/600x400/001133/00f0ff?text=BCKSPCE_IMG_MISSING';">
+        </div>
+        <div class="project-info">
+          <div class="project-role">[Brand New Steam Title]</div>
+          <h3 class="project-title">BCKSPCE</h3>
+          <p class="project-desc">My newest release on Steam! When an unknown friend request comes in you begin to question your friendship with Stella, your digital sanctuary quickly unravels as the truth comes out. A narrative-driven psychological thriller told entirely through a retro desktop interface.</p>
+          <ul class="project-features">
+            <li>Available on Steam</li>
+            <li>Early Internet</li>
+            <li>Visual Novel</li>
+            <li>LGBTQ+</li>
+          </ul>
+          <a href="https://store.steampowered.com/app/4650350/BCKSPCE/" target="_blank" class="tech-link">EXECUTE STEAM_PAGE</a>
+        </div>
       </div>
+
+      <div class="project-card">
+        <div class="project-img-wrapper" style="order: 2; border-right: none; border-left: 1px solid var(--win-border);">
+          <img src="timeforanewera.png" alt="Within Time" onerror="this.src='https://via.placeholder.com/600x400/001133/00f0ff?text=WITHINTIME_IMG_MISSING';">
+        </div>
+        <div class="project-info" style="order: 1;">
+          <div class="project-role">[Flagship Commercial Title]</div>
+          <h3 class="project-title">Within Time</h3>
+          <p class="project-desc">As the CEO and Lead Developer of Team INNERMINDS, I direct this ambitious TBRPG built in Godot. It seamlessly blends SNES-era nostalgia with modern tactical depth.</p>
+          <ul class="project-features">
+            <li>Built in Godot</li>
+            <li>"STANCE" Combat System</li>
+            <li>13 Playable Characters</li>
+            <li>Tactical RPG Elements</li>
+          </ul>
+          <a href="https://store.steampowered.com/app/2302230/Within_Time" target="_blank" class="tech-link">EXECUTE STEAM_PAGE</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-img-wrapper">
+          <img src="cwimg.png" alt="Colourways" onerror="this.src='https://via.placeholder.com/600x400/001133/00f0ff?text=COLOURWAYS_IMG_MISSING';">
+        </div>
+        <div class="project-info">
+          <div class="project-role">[Co-Developer / Tech Art Jam]</div>
+          <h3 class="project-title">Colourways</h3>
+          <p class="project-desc">A minimalist 3D puzzle platformer revolving around intuitive core paint mechanics. Created as a standout submission for the UCA Technical Art Game Jam.</p>
+          <ul class="project-features">
+            <li>3D Puzzle Platforming</li>
+            <li>Paint Traversal Mechanics</li>
+            <li>Clean Visual Aesthetic</li>
+            <li>Guildford Games Fest 26</li>
+          </ul>
+          <a href="https://harry-dillamore.itch.io/colorways" target="_blank" class="tech-link">EXECUTE ITCH_IO</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-img-wrapper" style="order: 2; border-right: none; border-left: 1px solid var(--win-border);">
+          <img src="coverart2.png" alt="Protocol" onerror="this.src='https://via.placeholder.com/600x400/001133/00f0ff?text=PROTOCOL_IMG_MISSING';">
+        </div>
+        <div class="project-info" style="order: 1;">
+          <div class="project-role">[Co-Developer / Brackey's Jam]</div>
+          <h3 class="project-title">Protocol: Shutdown</h3>
+          <p class="project-desc">A high-octane cyberpunk twin-stick shooter developed in just 7 days. Tasks players with saving retro computer systems using an aggressive "Discard Ability" system.</p>
+          <ul class="project-features">
+            <li>Unity Engine</li>
+            <li>7-Day Prototyping</li>
+            <li>"Discard" Combat System</li>
+            <li>Fluid Dungeon-Crawler Movement</li>
+          </ul>
+          <a href="https://bradleycurtis.itch.io/protocolshutdown" target="_blank" class="tech-link">EXECUTE ITCH_IO</a>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <!-- PROJECTS SECTION (Condensed!) -->
-  <div id="projects" class="section active">
-    
-    <!-- BCKSPCE (New Steam Game) -->
-    <div class="project-card">
-      <div class="project-img-wrapper">
-        <!-- Add a screenshot of BCKSPCE here -->
-        <img src="bckspce-image.png" alt="BCKSPCE Game" onerror="this.src='https://via.placeholder.com/600x400/eef9ff/0077b6?text=BCKSPCE+Screenshot';">
-      </div>
-      <div class="project-info">
-        <div class="project-role">✨ Brand New Steam Title</div>
-        <h3 class="project-title">BCKSPCE</h3>
-        <p class="project-desc">My newest release on Steam! [Replace this text with a quick 1-2 sentence summary of what BCKSPCE is about, its genre, and what players do in the game!]</p>
-        <ul class="project-features">
-          <li>Available on Steam</li>
-          <li>Feature 2 (e.g., Fast Paced)</li>
-          <li>Feature 3</li>
-          <li>Feature 4</li>
-        </ul>
-        <a href="https://store.steampowered.com/app/4650350/BCKSPCE/" target="_blank" class="glossy-btn project-btn" style="font-size: 0.9rem;">View on Steam</a>
-      </div>
+  <div id="contact" class="win-window">
+    <div class="title-bar">
+      <span>C:\SYSTEM\COMM_LINKS.BAT</span>
+      <div class="title-controls"><span>_</span><span>☐</span><span>X</span></div>
     </div>
-
-    <!-- WITHIN TIME -->
-    <div class="project-card reverse">
-      <div class="project-img-wrapper">
-        <img src="timeforanewera.png" alt="Within Time" onerror="this.src='https://via.placeholder.com/600x400/e0f7fa/00b4ff?text=Within+Time';">
+    <div class="win-content">
+      <h2>INITIALIZE_CONTACT</h2>
+      <div class="contact-grid">
+        <a href="mailto:lunaviadev@gmail.com" class="contact-item">
+          <span class="data-label">PORT_01</span>
+          <h3>Email</h3>
+          <p>lunaviadev@gmail.com</p>
+        </a>
+        <a href="https://x.com/withintimegame" target="_blank" class="contact-item">
+          <span class="data-label">PORT_02</span>
+          <h3>Twitter / X</h3>
+          <p>@Lunavia</p>
+        </a>
+        <div class="contact-item" onclick="copyDiscord('lunavia.gd')">
+          <span class="data-label">PORT_03</span>
+          <h3>Discord</h3>
+          <p id="discord-hint">lunavia.gd (Click to Copy)</p>
+        </div>
+        <a href="https://store.steampowered.com/app/2302230/Within_Time" target="_blank" class="contact-item">
+          <span class="data-label">PORT_04</span>
+          <h3>Steam</h3>
+          <p>INNERMINDS Studio</p>
+        </a>
+        <a href="https://lunavia.itch.io" target="_blank" class="contact-item">
+          <span class="data-label">PORT_05</span>
+          <h3>Itch.io</h3>
+          <p>Game Jam Vault</p>
+        </a>
       </div>
-      <div class="project-info">
-        <div class="project-role">Flagship Commercial Title</div>
-        <h3 class="project-title">Within Time</h3>
-        <p class="project-desc">As the CEO and Lead Developer of Team INNERMINDS, I direct this ambitious TBRPG built in Godot. It seamlessly blends SNES-era nostalgia with modern tactical depth.</p>
-        <ul class="project-features">
-          <li>Built in Godot</li>
-          <li>"STANCE" Combat System</li>
-          <li>13 Playable Characters</li>
-          <li>Tactical RPG Elements</li>
-        </ul>
-        <a href="https://store.steampowered.com/app/2302230/Within_Time" target="_blank" class="glossy-btn project-btn" style="font-size: 0.9rem;">Steam Page</a>
-      </div>
-    </div>
-
-    <!-- COLOURWAYS -->
-    <div class="project-card">
-      <div class="project-img-wrapper">
-        <img src="cwimg.png" alt="Colourways" onerror="this.src='https://via.placeholder.com/600x400/f0f9ff/0077b6?text=Colourways';">
-      </div>
-      <div class="project-info">
-        <div class="project-role">Co-Developer / Technical Art Jam</div>
-        <h3 class="project-title">Colourways</h3>
-        <p class="project-desc">A minimalist 3D puzzle platformer revolving around intuitive core paint mechanics. Created as a standout submission for the UCA Technical Art Game Jam alongside Harry Dillamore and team.</p>
-        <ul class="project-features">
-          <li>3D Puzzle Platforming</li>
-          <li>Paint Traversal Mechanics</li>
-          <li>Clean Visual Aesthetic</li>
-          <li>Guildford Games Fest 26</li>
-        </ul>
-        <a href="https://harry-dillamore.itch.io/colorways" target="_blank" class="glossy-btn project-btn" style="font-size: 0.9rem;">Play on Itch.io</a>
-      </div>
-    </div>
-
-    <!-- PROTOCOL SHUTDOWN -->
-    <div class="project-card reverse">
-      <div class="project-img-wrapper">
-        <img src="coverart2.png" alt="Protocol" onerror="this.src='https://via.placeholder.com/600x400/e0f7fa/00b4ff?text=Protocol';">
-      </div>
-      <div class="project-info">
-        <div class="project-role">Co-Developer / Brackey's Jam 2025.2</div>
-        <h3 class="project-title">Protocol: Shutdown</h3>
-        <p class="project-desc">A high-octane cyberpunk twin-stick shooter developed in just 7 days. Tasks players with saving retro computer systems using an aggressive "Discard Ability" system where dropping a gun triggers a special attack.</p>
-        <ul class="project-features">
-          <li>Unity Engine</li>
-          <li>7-Day Prototyping</li>
-          <li>"Discard" Combat System</li>
-          <li>Fluid Dungeon-Crawler Movement</li>
-        </ul>
-        <a href="https://bradleycurtis.itch.io/protocolshutdown" target="_blank" class="glossy-btn project-btn" style="font-size: 0.9rem;">Play on Itch.io</a>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- CONTACT SECTION -->
-  <div id="contact" class="section aero-panel">
-    <h2>Let's Connect!</h2>
-    <div class="contact-grid">
-      <a href="mailto:lunaviadev@gmail.com" class="contact-item">
-        <h3>Email</h3>
-        <p>lunaviadev@gmail.com</p>
-      </a>
-      <a href="https://x.com/withintimegame" target="_blank" class="contact-item">
-        <h3>Twitter / X</h3>
-        <p>@Lunavia</p>
-      </a>
-      <div class="contact-item" onclick="copyDiscord('lunavia.gd')">
-        <h3>Discord</h3>
-        <p id="discord-hint">lunavia.gd (Click to Copy)</p>
-      </div>
-      <a href="https://store.steampowered.com/app/2302230/Within_Time" target="_blank" class="contact-item">
-        <h3>Steam</h3>
-        <p>INNERMINDS Studio</p>
-      </a>
-      <a href="https://lunavia.itch.io" target="_blank" class="contact-item">
-        <h3>Itch.io</h3>
-        <p>Game Jam Vault</p>
-      </a>
     </div>
   </div>
 
@@ -370,8 +394,8 @@ h2 { color: #0077b6; font-size: 2.2rem; margin-top: 0; border-bottom: 2px solid 
 <script>
 function showSection(id, btn) {
   // Hide all sections
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.glossy-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.win-window').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tech-btn').forEach(b => b.classList.remove('active'));
   
   // Show target section
   document.getElementById(id).classList.add('active');
@@ -381,11 +405,11 @@ function showSection(id, btn) {
 function copyDiscord(handle) {
   navigator.clipboard.writeText(handle);
   const hint = document.getElementById('discord-hint');
-  hint.innerText = "✓ Copied to Clipboard!";
-  hint.style.color = "#7fd13b"; 
+  hint.innerText = "✓ COPIED_TO_CLIPBOARD";
+  hint.style.color = "#fff"; 
   setTimeout(() => {
     hint.innerText = "lunavia.gd (Click to Copy)";
-    hint.style.color = "var(--text-mid)";
+    hint.style.color = "";
   }, 2000);
 }
 </script>
