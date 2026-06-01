@@ -3,422 +3,1061 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Josie | ABOUT ME</title>
-<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Trebuchet+MS:wght@400;700&display=swap" rel="stylesheet">
-
+<title>josie ✦ lunavia's page</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
+/* ══════════════════════════════════════════
+   ROOT & RESET
+══════════════════════════════════════════ */
 :root {
-  --y2k-blue: #0033cc;
-  --y2k-cyan: #00f0ff;
-  --y2k-light: #e0f7fa;
-  --win-bg: rgba(0, 15, 45, 0.85);
-  --win-border: #4287f5;
-  --title-bar: linear-gradient(90deg, #000080, #1084d0);
-  --scanline-color: rgba(0, 0, 0, 0.2);
+  --win-gray:   #c0c0c0;
+  --win-light:  #dfdfdf;
+  --win-mid:    #808080;
+  --win-dark:   #404040;
+  --win-black:  #000000;
+  --win-white:  #ffffff;
+  --title-grad: linear-gradient(90deg, #000080 0%, #1084d0 100%);
+  --desktop:    #008080;
+  --pc98-bg:    #000033;
+  --pc98-bg2:   #000022;
+  --pc98-border:#0000cc;
+  --pc98-hi:    #000066;
+  --pc98-text:  #ccccff;
+  --pc98-yellow:#ffff88;
+  --pc98-pink:  #ff88ff;
+  --pc98-cyan:  #00ffff;
 }
 
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; height: 100%; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { height: 100%; }
+
+/* Win98 scrollbar */
+::-webkit-scrollbar            { width: 16px; background: var(--win-gray); }
+::-webkit-scrollbar-thumb      { background: var(--win-gray); border: 2px solid; border-color: #fff #808080 #808080 #fff; }
+::-webkit-scrollbar-track      { background: var(--win-gray); }
+::-webkit-scrollbar-button     { height: 16px; background: var(--win-gray); border: 1px solid #808080; }
 
 body {
-  font-family: 'Courier Prime', 'Courier New', monospace;
-  margin: 0; padding: 0;
-  color: var(--y2k-light);
-  line-height: 1.6;
-  background-color: #001133;
-  overflow-x: hidden;
-  position: relative;
+  font-family: 'Tahoma', 'Arial', sans-serif;
+  font-size: 11px;
+  background-color: var(--desktop);
+  background-image:
+    radial-gradient(circle, rgba(0,100,100,0.25) 1px, transparent 1px);
+  background-size: 4px 4px;
   min-height: 100vh;
+  overflow-x: hidden;
+  cursor: default;
 }
 
-/* --- Y2K / Webcore Background Effects --- */
+/* ══════════════════════════════════════════
+   BOOT SCREEN
+══════════════════════════════════════════ */
+#boot-screen {
+  position: fixed; inset: 0; z-index: 99999;
+  background: #000;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 8px;
+  transition: opacity 0.5s;
+}
+#boot-screen.fade-out { opacity: 0; pointer-events: none; }
 
-/* Deep Blue Sky/Water Backdrop */
-body::before {
-  content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background: radial-gradient(circle at center 30%, #1a5cff 0%, #001133 80%);
-  z-index: -3; pointer-events: none;
+.boot-logo {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(0.8rem, 3vw, 1.4rem);
+  color: #fff;
+  text-align: center;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+  text-shadow: 0 0 20px #0077ff, 0 0 40px #0033ff;
+  animation: logoGlow 2s ease-in-out infinite alternate;
+}
+@keyframes logoGlow {
+  from { text-shadow: 0 0 10px #0077ff; }
+  to   { text-shadow: 0 0 30px #00aaff, 0 0 60px #0055ff; }
 }
 
-/* Pseudo-3D Checkerboard / Grid Floor */
-.grid-floor {
-  position: fixed; bottom: -20vh; left: -50vw; width: 200vw; height: 60vh;
-  background-image: 
-    linear-gradient(transparent 48%, var(--y2k-cyan) 49%, var(--y2k-cyan) 51%, transparent 52%),
-    linear-gradient(90deg, transparent 48%, var(--y2k-cyan) 49%, var(--y2k-cyan) 51%, transparent 52%);
-  background-size: 60px 60px;
-  transform: perspective(600px) rotateX(75deg);
-  z-index: -2; pointer-events: none;
-  opacity: 0.3;
-  animation: gridMove 10s linear infinite;
+.boot-sub {
+  font-family: 'VT323', monospace;
+  font-size: 1rem;
+  color: #808080;
+  margin-bottom: 12px;
 }
-@keyframes gridMove {
-  0% { transform: perspective(600px) rotateX(75deg) translateY(0); }
-  100% { transform: perspective(600px) rotateX(75deg) translateY(60px); }
+.boot-bar-wrap {
+  width: min(320px, 80vw); height: 20px;
+  border: 2px solid; border-color: #808080 #fff #fff #808080;
+  background: #000; overflow: hidden;
 }
-
-/* CRT Scanlines Overlay */
-.scanlines {
-  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+.boot-bar {
+  height: 100%; width: 0%;
   background: repeating-linear-gradient(
-    0deg,
-    var(--scanline-color),
-    var(--scanline-color) 1px,
-    transparent 1px,
-    transparent 3px
+    90deg, #000080 0px, #1084d0 10px, #000080 20px
   );
-  z-index: 9999; pointer-events: none;
+  background-size: 20px 100%;
+  transition: width 0.08s;
+  animation: barShimmer 0.5s linear infinite;
+}
+@keyframes barShimmer {
+  0%   { background-position: 0 0; }
+  100% { background-position: 20px 0; }
+}
+.boot-msg {
+  font-family: 'VT323', monospace;
+  font-size: 0.95rem;
+  color: #aaa;
+  margin-top: 4px;
+  min-height: 1.2em;
 }
 
-a { color: var(--y2k-cyan); text-decoration: none; font-weight: bold; }
-a:hover { background: var(--y2k-cyan); color: #000; }
-
-/* --- Retro Window Panels --- */
-.win-window {
-  background: var(--win-bg);
-  border: 2px solid var(--win-border);
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(0, 150, 255, 0.2);
-  margin-bottom: 40px;
-  backdrop-filter: blur(4px);
+/* ══════════════════════════════════════════
+   DESKTOP
+══════════════════════════════════════════ */
+.desktop {
+  min-height: 100vh;
+  padding: 16px 8px 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
-  display: none; /* Controlled by JS */
-  animation: crtOn 0.4s ease-out forwards;
-}
-.win-window.active { display: block; }
-
-@keyframes crtOn {
-  0% { transform: scaleY(0.01) scaleX(0); opacity: 0; }
-  50% { transform: scaleY(0.01) scaleX(1); opacity: 1; }
-  100% { transform: scaleY(1) scaleX(1); opacity: 1; }
 }
 
-.title-bar {
-  background: var(--title-bar);
-  padding: 4px 8px;
-  display: flex; justify-content: space-between; align-items: center;
-  border-bottom: 2px solid var(--win-border);
-  font-family: 'Trebuchet MS', sans-serif;
-  font-weight: bold; letter-spacing: 1px; color: white;
+.desktop-icons {
+  position: fixed; top: 16px; left: 8px;
+  display: flex; flex-direction: column; gap: 12px;
+  z-index: 5;
 }
-.title-controls span {
-  display: inline-block; width: 14px; height: 14px;
-  background: #ccc; border: 1px solid #fff;
-  box-shadow: inset -1px -1px #000;
-  margin-left: 4px; cursor: pointer;
+.desktop-icon {
+  display: flex; flex-direction: column; align-items: center;
+  width: 64px; gap: 3px; cursor: pointer;
+  color: #fff; font-size: 0.65rem; text-align: center;
+  text-shadow: 1px 1px 2px #000, -1px -1px 2px #000;
+  padding: 3px; border: 1px solid transparent;
+  transition: border-color 0.1s, background 0.1s;
+}
+.desktop-icon:hover {
+  border-color: rgba(255,255,255,0.6);
+  background: rgba(0, 0, 128, 0.5);
+}
+.d-icon { font-size: 2rem; line-height: 1; }
+
+/* ══════════════════════════════════════════
+   MAIN WINDOW
+══════════════════════════════════════════ */
+.main-window {
+  width: 100%; max-width: 900px;
+  background: var(--win-gray);
+  /* Win98 double-inset border */
+  box-shadow:
+    inset -1px -1px 0 #000,
+    inset  1px  1px 0 #fff,
+    inset -2px -2px 0 #808080,
+    inset  2px  2px 0 #dfdfdf;
+  border: 2px solid; border-color: #dfdfdf #000 #000 #dfdfdf;
+  animation: winOpen 0.25s ease-out;
+  transform-origin: top center;
+}
+@keyframes winOpen {
+  0%   { transform: scaleY(0.02) scaleX(0.4); opacity: 0; }
+  60%  { transform: scaleY(0.02) scaleX(1);   opacity: 1; }
+  100% { transform: scaleY(1)    scaleX(1);   opacity: 1; }
+}
+@keyframes winClose {
+  0%   { transform: scale(1); opacity: 1; }
+  60%  { transform: scaleX(1) scaleY(0.02); opacity: 1; }
+  100% { transform: scale(0); opacity: 0; }
 }
 
-.win-content { padding: 25px; }
+/* ══════════════════════════════════════════
+   TITLE BAR
+══════════════════════════════════════════ */
+.win-title-bar {
+  background: var(--title-grad);
+  padding: 3px 4px 3px 6px;
+  height: 22px;
+  display: flex; align-items: center; gap: 5px;
+  user-select: none;
+}
+.win-title-icon { font-size: 0.95rem; line-height: 1; }
+.win-title-text {
+  font-family: 'Tahoma', sans-serif;
+  font-size: 11px; font-weight: bold;
+  color: #fff; flex: 1;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.win-title-btns { display: flex; gap: 2px; }
+.wb {
+  width: 16px; height: 14px;
+  background: var(--win-gray);
+  border: 1px solid; border-color: #fff #000 #000 #fff;
+  font-size: 7px; font-weight: bold; font-family: 'Tahoma', sans-serif;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: #000; line-height: 1;
+}
+.wb:active { border-color: #000 #fff #fff #000; }
+.wb-close { background: #d04040; color: #fff; border-color: #ff9090 #800000 #800000 #ff9090; }
+.wb-close:hover { background: #ff2020; }
 
-/* Header */
-header { text-align: center; padding: 6vh 20px 4vh; position: relative; z-index: 10; }
-.compact-disc-logo {
-  font-family: 'Arial', sans-serif; font-size: 0.8rem; font-weight: 900;
-  letter-spacing: 3px; border: 1px solid var(--y2k-cyan);
-  display: inline-block; padding: 5px 15px; border-radius: 20px;
-  margin-bottom: 20px; text-transform: uppercase;
+/* ══════════════════════════════════════════
+   MENU BAR
+══════════════════════════════════════════ */
+.win-menubar {
+  background: var(--win-gray);
+  padding: 2px 4px;
+  display: flex; gap: 0;
+  border-bottom: 1px solid var(--win-mid);
 }
-header h1 {
-  font-family: 'Trebuchet MS', sans-serif; font-size: 3.5rem; margin: 0;
-  color: #fff; text-shadow: 0 0 10px var(--y2k-cyan), 2px 2px 0 var(--y2k-blue);
-  letter-spacing: -1px;
+.mi {
+  padding: 2px 8px; font-size: 11px;
+  cursor: pointer; border: 1px solid transparent;
 }
-header p {
-  color: var(--y2k-cyan); font-size: 1.1rem; max-width: 600px; margin: 10px auto;
+.mi:hover { background: #000080; color: #fff; }
+
+/* ══════════════════════════════════════════
+   IDENTITY TAGS  (pronouns.page style)
+══════════════════════════════════════════ */
+.identity-section {
+  background: var(--win-gray);
+  padding: 8px 10px 10px;
+  border-bottom: 2px solid; border-color: #808080 #fff #fff #808080;
+}
+.id-header {
+  font-family: 'VT323', monospace;
+  font-size: 1.15rem; color: #000080;
+  margin-bottom: 7px;
+  display: flex; align-items: center; gap: 6px;
+}
+.blink { animation: blink 1s step-end infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+.tags-row { display: flex; flex-wrap: wrap; gap: 5px; }
+
+.id-tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 10px 3px 7px;
+  border-radius: 20px;
+  font-size: 0.72rem; font-weight: bold;
+  font-family: 'Tahoma', sans-serif;
+  cursor: default;
+  border: 1px solid rgba(0,0,0,0.18);
+  position: relative;
+  transition: transform 0.12s, filter 0.12s;
+  white-space: nowrap;
+}
+.id-tag:hover { transform: translateY(-2px); filter: brightness(1.08); }
+
+.t-age     { background: #ffe066; color: #5a3e00; }
+.t-she     { background: #f9bfd8; color: #7a0040; }
+.t-trans   { background: linear-gradient(90deg,#55cdfc 0%,#f7a8b8 40%,#fff 60%,#f7a8b8 80%,#55cdfc 100%); color: #003; }
+.t-bi      { background: linear-gradient(90deg,#d60270,#9b4f96 45%,#0038a8); color: #fff; }
+.t-dev     { background: #7ecff5; color: #003455; }
+.t-music   { background: #c4aaff; color: #2d0066; }
+.t-student { background: #9ee8aa; color: #0a3a10; }
+
+/* tooltip */
+.id-tag .tip {
+  position: absolute; bottom: calc(100% + 6px); left: 50%;
+  transform: translateX(-50%);
+  background: #000; color: #fff;
+  font-size: 0.63rem; padding: 3px 8px;
+  border: 1px solid #808080; white-space: nowrap;
+  font-family: 'Tahoma', sans-serif; font-weight: normal;
+  pointer-events: none; opacity: 0;
+  transition: opacity 0.15s; z-index: 50;
+}
+.id-tag:hover .tip { opacity: 1; }
+
+/* ══════════════════════════════════════════
+   TOOLBAR TABS
+══════════════════════════════════════════ */
+.win-toolbar {
+  background: var(--win-gray);
+  padding: 4px 6px; display: flex; gap: 3px; flex-wrap: wrap;
+  border-bottom: 2px solid; border-color: #808080 #fff #fff #808080;
+}
+.tbtn {
+  background: var(--win-gray);
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  padding: 3px 14px; font-family: 'Tahoma', sans-serif; font-size: 11px;
+  cursor: pointer; display: flex; align-items: center; gap: 5px;
+  white-space: nowrap;
+}
+.tbtn:active, .tbtn.active {
+  border-color: #808080 #fff #fff #808080;
+  background: #b8b8b8;
+}
+.tbtn.active { background: #dce8ff; }
+.tbtn:hover:not(.active) { background: #d0d0d0; }
+
+/* ══════════════════════════════════════════
+   CONTENT AREA
+══════════════════════════════════════════ */
+.win-content {
+  background: #fff;
+  border: 2px solid; border-color: #808080 #fff #fff #808080;
+  margin: 5px; overflow-y: auto; max-height: 68vh;
+  position: relative;
+}
+/* subtle scanlines on the PC98 area */
+.win-content::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 2;
+  background: repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.04) 2px,rgba(0,0,0,0.04) 4px);
 }
 
-/* Nav / Buttons */
-.nav-container {
-  display: flex; justify-content: center; gap: 15px; margin-bottom: 40px;
-  position: relative; z-index: 100; flex-wrap: wrap;
-}
-.tech-btn {
-  background: #c0c0c0; border: 2px solid #fff;
-  border-right-color: #888; border-bottom-color: #888;
-  color: #000; font-family: 'Trebuchet MS', sans-serif; font-weight: bold;
-  padding: 8px 25px; font-size: 1rem; cursor: pointer; text-transform: uppercase;
-  transition: all 0.1s;
-}
-.tech-btn:active {
-  border: 2px solid #888; border-right-color: #fff; border-bottom-color: #fff;
-  background: #a0a0a0;
-}
-.tech-btn.active { background: var(--y2k-cyan); }
+.section { display: none; }
+.section.active { display: block; }
 
-/* Main Content Wrapper */
-.content-wrapper { max-width: 900px; margin: 0 auto; padding: 0 20px 80px; position: relative; z-index: 10; }
-
-/* Readout Typography */
-h2 { color: var(--y2k-cyan); border-bottom: 1px dotted var(--y2k-cyan); padding-bottom: 5px; margin-top: 0; text-transform: uppercase; }
-.data-label { color: #88ccff; font-weight: bold; }
-
-/* About Section */
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-.tech-box { border: 1px solid var(--win-border); padding: 15px; background: rgba(0,0,0,0.4); }
-.interests-badge {
-  display: inline-block; background: transparent; color: var(--y2k-cyan);
-  padding: 2px 8px; border: 1px solid var(--y2k-cyan); font-size: 0.85rem; margin: 3px;
+/* ══════════════════════════════════════════
+   PC98 BBS SHARED
+══════════════════════════════════════════ */
+.forum-board {
+  background: var(--pc98-bg);
+  min-height: 100%;
+  font-family: 'VT323', monospace;
+  color: var(--pc98-text);
 }
-.skill-list { list-style: none; padding: 0; margin: 0; }
-.skill-list li { margin-bottom: 15px; border-bottom: 1px dashed rgba(0, 240, 255, 0.3); padding-bottom: 10px; }
-.skill-list li strong { color: #fff; display: block; font-size: 1rem; }
-.skill-list li span { font-size: 0.9rem; color: #a0c0d0; }
 
-/* Projects Grid */
-.project-card {
-  display: flex; flex-direction: column; background: rgba(0,0,0,0.5);
-  border: 1px solid var(--win-border); margin-bottom: 30px;
+.forum-banner {
+  background: #000055;
+  border-bottom: 2px solid #0000ff;
+  padding: 8px 14px;
+  display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
 }
-@media (min-width: 768px) {
-  .project-card { flex-direction: row; }
-  .project-img-wrapper { width: 45%; flex-shrink: 0; border-right: 1px solid var(--win-border); }
-  .project-info { width: 55%; }
+.fb-title {
+  font-size: 1.5rem;
+  color: var(--pc98-yellow);
+  letter-spacing: 3px;
 }
-.project-img-wrapper { background: #000; position: relative; min-height: 220px; overflow: hidden; display: flex; align-items: center; }
-.project-img-wrapper img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.2) hue-rotate(-10deg); opacity: 0.8; }
-.project-img-wrapper::after { content: ''; position: absolute; top:0; left:0; right:0; bottom:0; box-shadow: inset 0 0 20px #000; pointer-events: none; }
+.fb-sub { font-size: 0.95rem; color: var(--pc98-pink); }
 
-.project-info { padding: 25px; display: flex; flex-direction: column; justify-content: center; }
-.project-title { font-family: 'Trebuchet MS', sans-serif; font-size: 1.8rem; font-weight: bold; color: #fff; margin: 0 0 5px 0; }
-.project-role { color: var(--y2k-cyan); font-size: 0.85rem; text-transform: uppercase; margin-bottom: 15px; }
-.project-desc { font-size: 0.95rem; margin-bottom: 20px; }
-.project-features { list-style: none; padding: 0; margin: 0 0 20px 0; }
-.project-features li::before { content: '>'; color: var(--y2k-cyan); margin-right: 8px; }
-.tech-link { display: inline-block; border: 1px solid var(--y2k-cyan); padding: 5px 15px; color: var(--y2k-cyan); text-transform: uppercase; font-size: 0.85rem; align-self: flex-start; }
-.tech-link:hover { background: var(--y2k-cyan); color: #000; }
-
-/* Contact Cards */
-.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-.contact-item {
-  border: 1px solid var(--win-border); padding: 20px; text-align: center;
-  background: rgba(0, 10, 30, 0.6); cursor: pointer; transition: 0.2s;
+.forum-breadcrumb {
+  background: #000044;
+  padding: 3px 12px;
+  font-size: 0.82rem;
+  color: #666688;
+  border-bottom: 1px solid #000088;
 }
-.contact-item:hover { background: var(--y2k-cyan); color: #000; }
-.contact-item:hover h3, .contact-item:hover p, .contact-item:hover .data-label { color: #000; }
-.contact-item h3 { margin: 0 0 5px; font-family: 'Trebuchet MS', sans-serif; font-size: 1.2rem; }
-.contact-item p { margin: 0; font-size: 0.9rem; }
+.forum-breadcrumb a { color: #4488ff; text-decoration: none; }
+.forum-breadcrumb a:hover { color: var(--pc98-yellow); }
 
-@media (max-width: 768px) {
-  .about-grid { grid-template-columns: 1fr; }
-  header h1 { font-size: 2.5rem; }
+/* ══════════════════════════════════════════
+   ABOUT — FORUM POST
+══════════════════════════════════════════ */
+.post-container { padding: 10px 12px; }
+
+.forum-post {
+  display: flex; border: 1px solid var(--pc98-border);
+  background: var(--pc98-bg2);
+  animation: fadeInPost 0.4s ease-out;
+}
+@keyframes fadeInPost {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.post-sidebar {
+  width: 115px; min-width: 115px;
+  background: #000044;
+  border-right: 1px solid var(--pc98-border);
+  padding: 10px 8px;
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+}
+.post-avi {
+  width: 72px; height: 72px;
+  background: #000066;
+  border: 2px solid #0000ff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.8rem; overflow: hidden;
+  image-rendering: pixelated;
+}
+.post-avi img { width: 100%; height: 100%; object-fit: cover; }
+.post-uname  { color: var(--pc98-yellow); font-size: 1.05rem; font-weight: bold; text-align: center; }
+.post-utitle { color: var(--pc98-pink); font-size: 0.75rem; text-align: center; }
+.post-stats  { font-size: 0.7rem; color: #666688; text-align: center; line-height: 1.7; margin-top: 4px; }
+
+.post-main   { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.post-infobar {
+  background: #000055;
+  padding: 3px 10px;
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 5px;
+  font-size: 0.8rem; color: #8888cc;
+  border-bottom: 1px solid var(--pc98-border);
+}
+.post-body {
+  padding: 12px; font-size: 1.05rem;
+  color: var(--pc98-text); line-height: 1.65;
+}
+.post-body p  { margin-bottom: 10px; }
+.post-body strong { color: var(--pc98-yellow); }
+.post-body em     { color: var(--pc98-pink); }
+.post-body .cmd   { color: var(--pc98-cyan); }
+
+.post-badges {
+  padding: 8px 12px;
+  border-top: 1px solid #000066;
+  display: flex; flex-wrap: wrap; gap: 4px;
+}
+.badge {
+  background: #000055; border: 1px solid #0000cc;
+  color: var(--pc98-cyan);
+  padding: 2px 9px; font-size: 0.82rem;
+  cursor: default; transition: background 0.1s, color 0.1s;
+}
+.badge:hover { background: #000099; color: var(--pc98-yellow); }
+
+.post-sig {
+  padding: 6px 12px;
+  border-top: 1px dotted #000077;
+  font-size: 0.8rem; color: #555577;
+}
+
+/* ══════════════════════════════════════════
+   PROJECTS — FORUM THREADS
+══════════════════════════════════════════ */
+.subforum-header {
+  background: #000055;
+  padding: 5px 12px;
+  font-size: 1.1rem; color: var(--pc98-yellow);
+  border-bottom: 1px solid #0000ff; border-top: 1px solid #0000aa;
+  letter-spacing: 1px; margin-top: 4px;
+}
+.subforum-header:first-of-type { margin-top: 0; }
+
+.thread-row {
+  display: grid;
+  grid-template-columns: 1fr 64px;
+  align-items: center; gap: 8px;
+  padding: 7px 12px;
+  border-bottom: 1px solid #000055;
+  cursor: pointer; transition: background 0.12s;
+}
+.thread-row:hover { background: #000044; }
+.thread-row.open-row { background: #000044; }
+
+.t-icon { font-size: 1.2rem; text-align: center; }
+.t-name { color: #55aaff; font-size: 1.05rem; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.t-name:hover { color: var(--pc98-yellow); }
+.t-sub  { color: #555577; font-size: 0.8rem; margin-top: 2px; }
+.t-meta { color: #444466; font-size: 0.78rem; text-align: right; }
+
+.status-badge {
+  display: inline-block;
+  padding: 1px 7px; font-size: 0.7rem; border: 1px solid;
+}
+.sb-steam  { background: #101c2c; color: #66c0f4; border-color: #4c6b8a; }
+.sb-wip    { background: #331a00; color: #ffaa33; border-color: #995500; }
+.sb-done   { background: #001a00; color: #44ff66; border-color: #006622; }
+
+/* Expandable project detail */
+.proj-detail {
+  display: none; overflow: hidden;
+  background: #00001a;
+  border: 1px solid #000088; border-top: none;
+  margin: 0;
+}
+.proj-detail.open {
+  display: block;
+  animation: slideDown 0.2s ease-out;
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.proj-inner {
+  display: flex; gap: 0;
+}
+.proj-img {
+  width: 190px; min-width: 190px; max-height: 180px;
+  background: #000; overflow: hidden;
+  border-right: 1px solid #000066;
+  display: flex; align-items: center;
+}
+.proj-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: saturate(1.2) contrast(1.05);
+}
+.proj-text { padding: 12px; flex: 1; min-width: 0; }
+.proj-name { color: var(--pc98-yellow); font-size: 1.4rem; margin-bottom: 3px; }
+.proj-role { color: var(--pc98-pink); font-size: 0.85rem; margin-bottom: 8px; }
+.proj-desc { color: #bbbbee; font-size: 0.95rem; line-height: 1.55; margin-bottom: 10px; }
+.proj-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
+.pt { border: 1px solid; padding: 1px 8px; font-size: 0.8rem; }
+.proj-link {
+  display: inline-block;
+  background: #000066; border: 1px solid #0000ff;
+  color: var(--pc98-cyan);
+  padding: 4px 14px; font-size: 0.9rem;
+  text-decoration: none; cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+.proj-link:hover { background: #0000aa; color: var(--pc98-yellow); }
+
+/* ══════════════════════════════════════════
+   LINKS
+══════════════════════════════════════════ */
+.links-inner { padding: 14px 14px 20px; }
+.links-title {
+  color: var(--pc98-yellow); font-size: 1.4rem;
+  border-bottom: 1px solid #0000ff; padding-bottom: 5px; margin-bottom: 14px;
+}
+.links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+}
+.link-card {
+  background: #000044; border: 1px solid #000088;
+  padding: 12px; text-align: center;
+  cursor: pointer; transition: background 0.12s, transform 0.12s;
+  text-decoration: none; display: block; color: inherit;
+}
+.link-card:hover { background: #000077; border-color: #0000ff; transform: translateY(-3px); }
+.lc-icon { font-size: 2rem; display: block; margin-bottom: 5px; }
+.lc-icon-img {
+  width: 44px; height: 44px;
+  object-fit: contain;
+  display: block; margin: 0 auto 7px;
+}
+.lc-icon-svg {
+  width: 44px; height: 44px;
+  display: block; margin: 0 auto 7px;
+  stroke: var(--pc98-yellow); fill: none;
+}
+.lc-name { color: var(--pc98-yellow); font-size: 1rem; display: block; }
+.lc-detail { color: #555577; font-size: 0.8rem; display: block; margin-top: 3px; }
+
+/* ══════════════════════════════════════════
+   STATUS BAR
+══════════════════════════════════════════ */
+.win-status-bar {
+  background: var(--win-gray);
+  border-top: 2px solid; border-color: #808080 #fff #fff #808080;
+  padding: 2px 5px;
+  display: flex; gap: 4px; align-items: center;
+  font-family: 'Tahoma', sans-serif; font-size: 10px;
+  overflow: hidden;
+}
+.sb-panel {
+  border: 1px solid; border-color: #808080 #fff #fff #808080;
+  padding: 1px 6px; height: 16px;
+  display: flex; align-items: center; overflow: hidden;
+}
+.sb-marquee { white-space: nowrap; animation: marquee 22s linear infinite; display: inline-block; }
+@keyframes marquee {
+  0%   { transform: translateX(300px); }
+  100% { transform: translateX(-100%); }
+}
+
+/* ══════════════════════════════════════════
+   TASKBAR
+══════════════════════════════════════════ */
+.taskbar {
+  position: fixed; bottom: 0; left: 0; right: 0; height: 30px;
+  background: var(--win-gray);
+  border-top: 2px solid; border-color: #fff #808080 #808080 #fff;
+  display: flex; align-items: center; padding: 0 4px; gap: 4px;
+  z-index: 1000;
+}
+.start-btn {
+  background: var(--win-gray);
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  padding: 2px 10px; height: 22px;
+  font-family: 'Tahoma', sans-serif; font-size: 11px; font-weight: bold;
+  cursor: pointer; display: flex; align-items: center; gap: 5px;
+}
+.start-btn:active { border-color: #808080 #fff #fff #808080; }
+.tb-div { width: 1px; height: 20px; background: #808080; box-shadow: 1px 0 0 #fff; }
+.tb-items { flex: 1; display: flex; gap: 2px; }
+.tb-item {
+  background: var(--win-gray);
+  border: 2px solid; border-color: #fff #808080 #808080 #fff;
+  padding: 2px 10px; height: 22px;
+  font-family: 'Tahoma', sans-serif; font-size: 11px;
+  display: flex; align-items: center; gap: 4px;
+  cursor: pointer; max-width: 180px; overflow: hidden; white-space: nowrap;
+}
+.tb-item.on { border-color: #808080 #fff #fff #808080; background: #b8b8b8; }
+.tb-clock {
+  border: 1px solid; border-color: #808080 #fff #fff #808080;
+  padding: 2px 8px; height: 22px;
+  font-family: 'Tahoma', sans-serif; font-size: 11px;
+  display: flex; align-items: center; min-width: 48px; justify-content: center;
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 620px) {
+  .desktop { padding: 6px 4px 50px; }
+  .desktop-icons { display: none; }
+
+  .post-sidebar { width: 75px; min-width: 75px; }
+  .post-avi     { width: 52px; height: 52px; font-size: 2rem; }
+  .post-stats   { display: none; }
+
+  .proj-inner   { flex-direction: column; }
+  .proj-img     { width: 100%; min-width: 0; max-height: 140px; border-right: none; border-bottom: 1px solid #000066; }
+
+  .thread-row   { grid-template-columns: 1fr; }
+  .t-meta       { display: none; }
+  .t-meta       { display: none; }
+
+  .win-content  { max-height: 58vh; }
+  .id-tag       { font-size: 0.65rem; padding: 2px 7px 2px 5px; }
+
+  .fb-title     { font-size: 1.15rem; }
+  .post-body    { font-size: 0.95rem; }
+  .forum-banner { padding: 6px 10px; gap: 6px; }
+}
+@media (max-width: 380px) {
+  .win-title-text { font-size: 9px; }
+  .post-sidebar   { display: none; }
 }
 </style>
 </head>
 <body>
 
-<div class="scanlines"></div>
-<div class="grid-floor"></div>
-
-<header>
-  <div class="compact-disc-logo">JB.WEBPAGE</div>
-  <h1>JOSEPHINE (LUNAVIA)</h1>
-  <p>[20 Y/O U.K Game Developer & Director. Gameplay & Systems specialist.]</p>
-</header>
-
-<div class="nav-container">
-  <button class="tech-btn" onclick="showSection('about', this)">ABOUT_ME</button>
-  <button class="tech-btn active" onclick="showSection('projects', this)">PROJECTS</button>
-  <button class="tech-btn" onclick="showSection('contact', this)">LINKS</button>
+<!-- ── BOOT ────────────────────────────── -->
+<div id="boot-screen">
+  <div class="boot-logo">✦ LUNAVIA.EXE ✦</div>
+  <div class="boot-sub">personal system v2.0 — loading…</div>
+  <div class="boot-bar-wrap"><div class="boot-bar" id="boot-bar"></div></div>
+  <div class="boot-msg" id="boot-msg">Initializing…</div>
 </div>
 
-<div class="content-wrapper">
-  
-  <div id="about" class="win-window aero-panel">
-    <div class="title-bar">
-      <span>C:\SYSTEM\ABOUT_ME.EXE</span>
-      <div class="title-controls"><span>_</span><span>☐</span><span>X</span></div>
+<!-- ── DESKTOP ───────────────────────── -->
+<div class="desktop">
+
+  <!-- Desktop icons -->
+  <div class="desktop-icons">
+    <div class="desktop-icon" onclick="showSection('about')">
+      <div class="d-icon">🗂️</div><span>about.txt</span>
     </div>
-    <div class="win-content">
-      <h2>IDENT_RECORD</h2>
-      <div class="about-grid">
-        <div class="tech-box">
-          <p><span class="data-label">NAME:</span> Josephine</p>
-          <p><span class="data-label">JOB:</span> Game Developer, Director, Full-time Game Dev Student.</p>
-          <p><span class="data-label">ROLE:</span> CEO & Founder of Team INNERMINDS.</p>
-          <p><span class="data-label">WHAT I DO:</span> Creating unique, fleshed-out experiences that reinvent the tropes of classic genres. Overseeing core programming architecture to narrative direction and aesthetic consistency on flagship title "Within Time".</p>
-          
-          <p><span class="data-label">MY INTERESTS:</span></p>
-          <div>
-            <span class="interests-badge">Webcore / Y2K</span>
-            <span class="interests-badge">Frutiger Aero</span>
-            <span class="interests-badge">Indie Music</span>
-            <span class="interests-badge">Pixel Art / Digital Painting</span>
-            <span class="interests-badge">Persona / SMT</span>
-            <span class="interests-badge">The Binding of Isaac</span>
-            <span class="interests-badge">Space and Astrology</span>
-            <span class="interests-badge">JoJo's Bizarre Adventure</span>
-            <span class="interests-badge">Saiki K</span>
-            <span class="interests-badge">FFXIV Online</span>
-            <span class="interests-badge">Overwatch</span>
-            <span class="interests-badge">Deadlock</span>
+    <div class="desktop-icon" onclick="showSection('projects')">
+      <div class="d-icon">🎮</div><span>projects</span>
+    </div>
+    <div class="desktop-icon" onclick="showSection('links')">
+      <div class="d-icon">🔗</div><span>links.lnk</span>
+    </div>
+  </div>
+
+  <!-- ── MAIN WINDOW ───────────────── -->
+  <div class="main-window" id="main-window">
+
+    <!-- Title bar -->
+    <div class="win-title-bar">
+      <span class="win-title-icon">💾</span>
+      <span class="win-title-text">josie's page — [lunavia] — C:\USERS\JOSIE\HOMEPAGE.HTM</span>
+      <div class="win-title-btns">
+        <button class="wb" title="Minimise" onclick="minimiseWin()">_</button>
+        <button class="wb" title="Maximise">□</button>
+        <button class="wb wb-close" title="Close" onclick="closeWin()">×</button>
+      </div>
+    </div>
+
+    <!-- Menu bar -->
+    <div class="win-menubar">
+      <span class="mi">File</span>
+      <span class="mi">Edit</span>
+      <span class="mi">View</span>
+      <span class="mi">Favourites</span>
+      <span class="mi">Help</span>
+    </div>
+
+    <!-- ── IDENTITY TAGS ────────────── -->
+    <div class="identity-section">
+      <div class="id-header">⭐ josie / lunavia <span class="blink">_</span></div>
+      <div class="tags-row">
+        <span class="id-tag t-age">🎂 20<span class="tip">20 years old</span></span>
+        <span class="id-tag t-she">♀ she/her<span class="tip">pronouns: she/her</span></span>
+        <span class="id-tag t-trans">🏳️‍⚧️ trans woman<span class="tip">trans & proud!</span></span>
+        <span class="id-tag t-bi">💜 bisexual<span class="tip">bi with a capital B ♡</span></span>
+        <span class="id-tag t-dev">🎮 game dev<span class="tip">developer & director</span></span>
+        <span class="id-tag t-music">🎵 musician<span class="tip">guitarist & composer</span></span>
+        <span class="id-tag t-student">📚 3rd yr student<span class="tip">full-time games dev degree</span></span>
+      </div>
+    </div>
+
+    <!-- ── TOOLBAR ──────────────────── -->
+    <div class="win-toolbar">
+      <button class="tbtn active" id="tab-about"    onclick="showSection('about')">🗂️ ABOUT_ME</button>
+      <button class="tbtn"        id="tab-projects" onclick="showSection('projects')">🎮 PROJECTS</button>
+      <button class="tbtn"        id="tab-links"    onclick="showSection('links')">🔗 LINKS</button>
+    </div>
+
+    <!-- ── CONTENT ──────────────────── -->
+    <div class="win-content" id="win-content">
+
+      <!-- ═══ ABOUT ═══════════════════ -->
+      <div id="section-about" class="section active">
+        <div class="forum-board">
+
+          <div class="forum-banner">
+            <span class="fb-title">★ LUNAVIA BBS ★</span>
+            <span class="fb-sub">// personal page v2.0 // est. 2024 //</span>
+          </div>
+          <div class="forum-breadcrumb">
+            BBS Home &rsaquo; <a href="#">General</a> &rsaquo; <a href="#">Introductions</a> &rsaquo; <strong style="color:#fff">josie's intro post</strong>
+          </div>
+
+          <div class="post-container">
+            <div class="forum-post">
+
+              <div class="post-sidebar">
+                <div class="post-avi">J</div>
+                <div class="post-uname">lunavia</div>
+                <div class="post-utitle">♛ site owner</div>
+                <div class="post-stats">
+                  posts: 404<br>
+                  joined: 2004<br>
+                  rep: ★★★★★<br>
+                  uk 🇬🇧
+                </div>
+              </div>
+
+              <div class="post-main">
+                <div class="post-infobar">
+                  <span>POST #001 — pinned intro</span>
+                  <span>last edited: always</span>
+                </div>
+                <div class="post-body">
+                  <p>hey! i'm <strong>josie</strong> (lunavia online) — a <em>20-year-old trans game developer</em> from the UK. welcome to my little corner of the internet!</p>
+
+                  <p>i'm a <strong>full-time Games Development student</strong> heading into my <em>3rd year</em>, and honestly i spend most of my time buried in game engines, pixel art, and probably too many cups of tea.</p>
+
+                  <p>right now i'm actively developing <strong>two games</strong>:</p>
+                  <p>
+                    <span class="cmd">&gt;</span> <strong>Within Time</strong> — my flagship TBRPG built in Godot. i'm the CEO & Lead Dev of <em>Team INNERMINDS</em>, overseeing everything from systems architecture to narrative &amp; art direction.<br>
+                    <span class="cmd">&gt;</span> <strong>BCKSPCE</strong> — a psychological thriller visual novel told entirely through a retro desktop interface. already live on Steam!
+                  </p>
+
+                  <p>outside of game dev i make music (lots of guitar, some FL Studio), draw pixel art &amp; digital paintings, and sink way too many hours into FFXIV. big fan of anything with that early-2000s internet energy — webcore, Y2K aesthetics, the whole thing.</p>
+
+                  <p>feel free to poke around. enjoy your stay <span class="blink">▌</span></p>
+                </div>
+
+                <div class="post-badges">
+                  <span class="badge">Webcore / Y2K</span>
+                  <span class="badge">Frutiger Aero</span>
+                  <span class="badge">Indie Music</span>
+                  <span class="badge">Pixel Art</span>
+                  <span class="badge">Digital Painting</span>
+                  <span class="badge">Persona / SMT</span>
+                  <span class="badge">Binding of Isaac</span>
+                  <span class="badge">Space &amp; Astrology</span>
+                  <span class="badge">JoJo's Bizarre Adventure</span>
+                  <span class="badge">Saiki K</span>
+                  <span class="badge">FFXIV Online</span>
+                  <span class="badge">Overwatch</span>
+                  <span class="badge">Deadlock</span>
+                </div>
+
+                <div class="post-sig">
+                  &mdash; <em>josie ✦ she/her ✦ team innerminds ✦ making games since forever</em>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /about -->
+
+      <!-- ═══ PROJECTS ═════════════════ -->
+      <div id="section-projects" class="section">
+        <div class="forum-board">
+
+          <div class="forum-banner">
+            <span class="fb-title">★ PROJECT BOARD ★</span>
+            <span class="fb-sub">// click a thread to expand //</span>
+          </div>
+
+          <div class="subforum-header">┌ [ACTIVE DEVELOPMENT] ────────────────</div>
+
+          <!-- BCKSPCE -->
+          <div class="thread-row" id="tr-bckspce" onclick="toggleProj('bckspce')">
+            <div>
+              <div class="t-name">BCKSPCE <span class="status-badge sb-steam">ON STEAM</span></div>
+              <div class="t-sub">psychological thriller visual novel · retro desktop interface · solo dev</div>
+            </div>
+            <div class="t-meta">2024<br>solo</div>
+          </div>
+          <div class="proj-detail" id="proj-bckspce">
+            <div class="proj-inner">
+              <div class="proj-img"><img src="libraryheader.png" alt="BCKSPCE" onerror="this.parentElement.style.display='none'"></div>
+              <div class="proj-text">
+                <div class="proj-name">BCKSPCE</div>
+                <div class="proj-role">[Solo Developer • Steam Release]</div>
+                <div class="proj-desc">When an unknown friend request comes in, you begin to question your friendship with Stella. Your digital sanctuary quickly unravels as the truth comes out. A narrative-driven psychological thriller told entirely through a retro desktop interface.</div>
+                <div class="proj-tags">
+                  <span class="pt" style="border-color:#66c0f4;color:#66c0f4;">Visual Novel</span>
+                  <span class="pt" style="border-color:#ff88ff;color:#ff88ff;">LGBTQ+</span>
+                  <span class="pt" style="border-color:#00ffff;color:#00ffff;">Early Internet</span>
+                  <span class="pt" style="border-color:#ffff44;color:#ffff44;">Psychological Thriller</span>
+                </div>
+                <a href="https://store.steampowered.com/app/4650350/BCKSPCE/" target="_blank" class="proj-link">▶ OPEN STEAM PAGE</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Within Time -->
+          <div class="thread-row" id="tr-within" onclick="toggleProj('within')">
+            <div>
+              <div class="t-name">Within Time <span class="status-badge sb-wip">IN DEV</span></div>
+              <div class="t-sub">flagship TBRPG · Godot engine · Team INNERMINDS · CEO &amp; Lead Dev</div>
+            </div>
+            <div class="t-meta">ongoing<br>team</div>
+          </div>
+          <div class="proj-detail" id="proj-within">
+            <div class="proj-inner">
+              <div class="proj-img"><img src="timeforanewera.png" alt="Within Time" onerror="this.parentElement.style.display='none'"></div>
+              <div class="proj-text">
+                <div class="proj-name">Within Time</div>
+                <div class="proj-role">[CEO & Lead Developer • Team INNERMINDS • Flagship Title]</div>
+                <div class="proj-desc">As CEO and Lead Developer of Team INNERMINDS, I direct this ambitious TBRPG built in Godot — blending SNES-era nostalgia with modern tactical depth. Features the unique "STANCE" combat system across 13 playable characters.</div>
+                <div class="proj-tags">
+                  <span class="pt" style="border-color:#ffaa33;color:#ffaa33;">TBRPG</span>
+                  <span class="pt" style="border-color:#44ff88;color:#44ff88;">Godot Engine</span>
+                  <span class="pt" style="border-color:#ff88ff;color:#ff88ff;">STANCE System</span>
+                  <span class="pt" style="border-color:#aaaaff;color:#aaaaff;">13 Characters</span>
+                </div>
+                <a href="https://store.steampowered.com/app/2302230/Within_Time" target="_blank" class="proj-link">▶ OPEN STEAM PAGE</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="subforum-header">└ [COMPLETED / JAM PROJECTS] ──────────</div>
+
+          <!-- Colourways -->
+          <div class="thread-row" id="tr-colourways" onclick="toggleProj('colourways')">
+            <div>
+              <div class="t-name">Colourways <span class="status-badge sb-done">COMPLETE</span></div>
+              <div class="t-sub">3D puzzle platformer · UCA Tech Art Jam · Guildford Games Fest 26</div>
+            </div>
+            <div class="t-meta">2024<br>collab</div>
+          </div>
+          <div class="proj-detail" id="proj-colourways">
+            <div class="proj-inner">
+              <div class="proj-img"><img src="cwimg.png" alt="Colourways" onerror="this.parentElement.style.display='none'"></div>
+              <div class="proj-text">
+                <div class="proj-name">Colourways</div>
+                <div class="proj-role">[Co-Developer • UCA Technical Art Game Jam]</div>
+                <div class="proj-desc">A minimalist 3D puzzle platformer built around intuitive paint traversal mechanics. Standout submission for the UCA Technical Art Game Jam — exhibited at Guildford Games Fest 2026.</div>
+                <div class="proj-tags">
+                  <span class="pt" style="border-color:#ff88ff;color:#ff88ff;">3D Platformer</span>
+                  <span class="pt" style="border-color:#00ffff;color:#00ffff;">Paint Mechanics</span>
+                  <span class="pt" style="border-color:#ffff44;color:#ffff44;">GGF26</span>
+                </div>
+                <a href="https://harry-dillamore.itch.io/colorways" target="_blank" class="proj-link">▶ OPEN ITCH.IO</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Protocol -->
+          <div class="thread-row" id="tr-protocol" onclick="toggleProj('protocol')">
+            <div>
+              <div class="t-name">Protocol: Shutdown <span class="status-badge sb-done">COMPLETE</span></div>
+              <div class="t-sub">cyberpunk twin-stick shooter · Brackey's Jam · 7-day prototype</div>
+            </div>
+            <div class="t-meta">2024<br>collab</div>
+          </div>
+          <div class="proj-detail" id="proj-protocol">
+            <div class="proj-inner">
+              <div class="proj-img"><img src="coverart2.png" alt="Protocol: Shutdown" onerror="this.parentElement.style.display='none'"></div>
+              <div class="proj-text">
+                <div class="proj-name">Protocol: Shutdown</div>
+                <div class="proj-role">[Co-Developer • Brackey's Game Jam]</div>
+                <div class="proj-desc">A high-octane cyberpunk twin-stick shooter built in 7 days. Players save retro computer systems using an aggressive "Discard Ability" system with fluid dungeon-crawler movement.</div>
+                <div class="proj-tags">
+                  <span class="pt" style="border-color:#ff4444;color:#ff4444;">Twin-Stick</span>
+                  <span class="pt" style="border-color:#66c0f4;color:#66c0f4;">Unity</span>
+                  <span class="pt" style="border-color:#ffaa33;color:#ffaa33;">7-Day Jam</span>
+                </div>
+                <a href="https://bradleycurtis.itch.io/protocolshutdown" target="_blank" class="proj-link">▶ OPEN ITCH.IO</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /projects -->
+
+      <!-- ═══ LINKS ═════════════════════ -->
+      <div id="section-links" class="section">
+        <div class="forum-board">
+          <div class="forum-banner">
+            <span class="fb-title">★ CONNECTIONS ★</span>
+            <span class="fb-sub">// find me around the web //</span>
+          </div>
+          <div class="links-inner">
+            <div class="links-title">┌ WHERE TO FIND ME ─────────</div>
+            <div class="links-grid">
+              <a href="mailto:lunaviadev@gmail.com" class="link-card">
+                <svg class="lc-icon-svg" viewBox="0 0 24 24" stroke-width="2">
+                  <rect x="2" y="4" width="20" height="16" rx="1"/>
+                  <polyline points="2,4 12,14 22,4"/>
+                </svg>
+                <span class="lc-name">Email</span>
+                <span class="lc-detail">lunaviadev@gmail.com</span>
+              </a>
+              <a href="https://x.com/withintimegame" target="_blank" class="link-card">
+                <img class="lc-icon-img" src="icons/twitter.png" alt="Twitter">
+                <span class="lc-name">Twitter / X</span>
+                <span class="lc-detail">@Lunavia</span>
+              </a>
+              <div class="link-card" onclick="copyDiscord()">
+                <img class="lc-icon-img" src="icons/discord.png" alt="Discord">
+                <span class="lc-name">Discord</span>
+                <span class="lc-detail" id="disc-text">lunavia.gd ← click to copy</span>
+              </div>
+              <a href="https://store.steampowered.com/app/2302230/Within_Time" target="_blank" class="link-card">
+                <img class="lc-icon-img" src="icons/steam.png" alt="Steam">
+                <span class="lc-name">Steam</span>
+                <span class="lc-detail">INNERMINDS Studio</span>
+              </a>
+              <a href="https://lunavia.itch.io" target="_blank" class="link-card">
+                <img class="lc-icon-img" src="icons/itchio.png" alt="Itch.io">
+                <span class="lc-name">Itch.io</span>
+                <span class="lc-detail">Game Jam Vault</span>
+              </a>
+            </div>
           </div>
         </div>
-        
-        <div class="tech-box">
-          <h3 style="margin-top:0; color: var(--y2k-cyan);">[MY SKILLS]</h3>
-          <ul class="skill-list">
-            <li>
-              <strong>Engine Architecture</strong>
-              <span>3 Yrs Godot/Unity, 2 Yrs Unreal. Exhibited Game Dev Local Expo & Guildford Games Fest 26.</span>
-            </li>
-            <li>
-              <strong>Core Programming</strong>
-              <span>GDScript, C#, C++, JavaScript</span>
-            </li>
-            <li>
-              <strong>Visual Production</strong>
-              <span>5+ Yrs Aseprite, 8+ Yrs Clip Studio Paint.</span>
-            </li>
-            <li>
-              <strong>Audio Engineering</strong>
-              <span>FL Studio 21, 10+ Yrs Acoustic/Electric Guitar.</span>
-            </li>
-          </ul>
-        </div>
+      </div><!-- /links -->
+
+    </div><!-- /win-content -->
+
+    <!-- Status bar -->
+    <div class="win-status-bar">
+      <div class="sb-panel" style="flex:0 0 auto;min-width:110px;">Ready</div>
+      <div class="sb-panel" style="flex:1;overflow:hidden;">
+        <span class="sb-marquee">
+          ✦ josie / lunavia ✦ game dev student going into 3rd year ✦ making Within Time &amp; BCKSPCE ✦ team innerminds ✦ she/her ✦ trans ✦ bi ✦ uk based ✦ guitarist ✦ pixel artist ✦&nbsp;
+        </span>
       </div>
+      <div class="sb-panel" style="flex:0 0 auto;min-width:52px;justify-content:center;" id="sb-clock">--:--</div>
     </div>
+
+  </div><!-- /main-window -->
+
+</div><!-- /desktop -->
+
+<!-- ── TASKBAR ──────────────────────────── -->
+<div class="taskbar">
+  <button class="start-btn">⊞ START</button>
+  <div class="tb-div"></div>
+  <div class="tb-items">
+    <div class="tb-item on">💾 josie's page</div>
   </div>
-
-  <div id="projects" class="win-window active">
-    <div class="title-bar">
-      <span>C:\SYSTEM\PROJECTS.DIR</span>
-      <div class="title-controls"><span>_</span><span>☐</span><span>X</span></div>
-    </div>
-    <div class="win-content">
-      
-      <div class="project-card">
-        <div class="project-img-wrapper">
-          <img src="libraryheader.png" alt="BCKSPCE" onerror="this.src='https://via.placeholder.com/600x400/001133/00f0ff?text=BCKSPCE_IMG_MISSING';">
-        </div>
-        <div class="project-info">
-          <div class="project-role">[Brand New Steam Title]</div>
-          <h3 class="project-title">BCKSPCE</h3>
-          <p class="project-desc">My newest release on Steam! When an unknown friend request comes in you begin to question your friendship with Stella, your digital sanctuary quickly unravels as the truth comes out. A narrative-driven psychological thriller told entirely through a retro desktop interface.</p>
-          <ul class="project-features">
-            <li>Available on Steam</li>
-            <li>Early Internet</li>
-            <li>Visual Novel</li>
-            <li>LGBTQ+</li>
-          </ul>
-          <a href="https://store.steampowered.com/app/4650350/BCKSPCE/" target="_blank" class="tech-link">EXECUTE STEAM_PAGE</a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-img-wrapper" style="order: 2; border-right: none; border-left: 1px solid var(--win-border);">
-          <img src="timeforanewera.png" alt="Within Time" onerror="this.src='https://via.placeholder.com/600x400/001133/00f0ff?text=WITHINTIME_IMG_MISSING';">
-        </div>
-        <div class="project-info" style="order: 1;">
-          <div class="project-role">[Flagship Commercial Title]</div>
-          <h3 class="project-title">Within Time</h3>
-          <p class="project-desc">As the CEO and Lead Developer of Team INNERMINDS, I direct this ambitious TBRPG built in Godot. It seamlessly blends SNES-era nostalgia with modern tactical depth.</p>
-          <ul class="project-features">
-            <li>Built in Godot</li>
-            <li>"STANCE" Combat System</li>
-            <li>13 Playable Characters</li>
-            <li>Tactical RPG Elements</li>
-          </ul>
-          <a href="https://store.steampowered.com/app/2302230/Within_Time" target="_blank" class="tech-link">EXECUTE STEAM_PAGE</a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-img-wrapper">
-          <img src="cwimg.png" alt="Colourways" onerror="this.src='https://via.placeholder.com/600x400/001133/00f0ff?text=COLOURWAYS_IMG_MISSING';">
-        </div>
-        <div class="project-info">
-          <div class="project-role">[Co-Developer / Tech Art Jam]</div>
-          <h3 class="project-title">Colourways</h3>
-          <p class="project-desc">A minimalist 3D puzzle platformer revolving around intuitive core paint mechanics. Created as a standout submission for the UCA Technical Art Game Jam.</p>
-          <ul class="project-features">
-            <li>3D Puzzle Platforming</li>
-            <li>Paint Traversal Mechanics</li>
-            <li>Clean Visual Aesthetic</li>
-            <li>Guildford Games Fest 26</li>
-          </ul>
-          <a href="https://harry-dillamore.itch.io/colorways" target="_blank" class="tech-link">EXECUTE ITCH_IO</a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-img-wrapper" style="order: 2; border-right: none; border-left: 1px solid var(--win-border);">
-          <img src="coverart2.png" alt="Protocol" onerror="this.src='https://via.placeholder.com/600x400/001133/00f0ff?text=PROTOCOL_IMG_MISSING';">
-        </div>
-        <div class="project-info" style="order: 1;">
-          <div class="project-role">[Co-Developer / Brackey's Jam]</div>
-          <h3 class="project-title">Protocol: Shutdown</h3>
-          <p class="project-desc">A high-octane cyberpunk twin-stick shooter developed in just 7 days. Tasks players with saving retro computer systems using an aggressive "Discard Ability" system.</p>
-          <ul class="project-features">
-            <li>Unity Engine</li>
-            <li>7-Day Prototyping</li>
-            <li>"Discard" Combat System</li>
-            <li>Fluid Dungeon-Crawler Movement</li>
-          </ul>
-          <a href="https://bradleycurtis.itch.io/protocolshutdown" target="_blank" class="tech-link">EXECUTE ITCH_IO</a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <div id="contact" class="win-window">
-    <div class="title-bar">
-      <span>C:\SYSTEM\COMM_LINKS.BAT</span>
-      <div class="title-controls"><span>_</span><span>☐</span><span>X</span></div>
-    </div>
-    <div class="win-content">
-      <h2>INITIALIZE_CONTACT</h2>
-      <div class="contact-grid">
-        <a href="mailto:lunaviadev@gmail.com" class="contact-item">
-          <span class="data-label">PORT_01</span>
-          <h3>Email</h3>
-          <p>lunaviadev@gmail.com</p>
-        </a>
-        <a href="https://x.com/withintimegame" target="_blank" class="contact-item">
-          <span class="data-label">PORT_02</span>
-          <h3>Twitter / X</h3>
-          <p>@Lunavia</p>
-        </a>
-        <div class="contact-item" onclick="copyDiscord('lunavia.gd')">
-          <span class="data-label">PORT_03</span>
-          <h3>Discord</h3>
-          <p id="discord-hint">lunavia.gd (Click to Copy)</p>
-        </div>
-        <a href="https://store.steampowered.com/app/2302230/Within_Time" target="_blank" class="contact-item">
-          <span class="data-label">PORT_04</span>
-          <h3>Steam</h3>
-          <p>INNERMINDS Studio</p>
-        </a>
-        <a href="https://lunavia.itch.io" target="_blank" class="contact-item">
-          <span class="data-label">PORT_05</span>
-          <h3>Itch.io</h3>
-          <p>Game Jam Vault</p>
-        </a>
-      </div>
-    </div>
-  </div>
-
+  <div class="tb-div"></div>
+  <div class="tb-clock" id="tb-clock">--:--</div>
 </div>
 
 <script>
-function showSection(id, btn) {
-  // Hide all sections
-  document.querySelectorAll('.win-window').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.tech-btn').forEach(b => b.classList.remove('active'));
-  
-  // Show target section
-  document.getElementById(id).classList.add('active');
-  btn.classList.add('active');
+/* ── BOOT ─────────────────────────────── */
+const bootMsgs = [
+  'Loading system files…',
+  'Mounting interests.db…',
+  'Initializing project directory…',
+  'Connecting to BBS…',
+  'Loading lunavia.exe…',
+  'Welcome! ✦'
+];
+let bp = 0;
+const bar = document.getElementById('boot-bar');
+const msg = document.getElementById('boot-msg');
+const bs  = document.getElementById('boot-screen');
+
+function advanceBoot() {
+  if (bp >= bootMsgs.length) {
+    bs.classList.add('fade-out');
+    setTimeout(() => bs.style.display = 'none', 550);
+    return;
+  }
+  bar.style.width = Math.round((bp / bootMsgs.length) * 100) + '%';
+  msg.textContent  = bootMsgs[bp];
+  bp++;
+  setTimeout(advanceBoot, 280 + Math.random() * 180);
+}
+setTimeout(advanceBoot, 500);
+
+/* ── CLOCK ────────────────────────────── */
+function tick() {
+  const d = new Date();
+  const t = d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
+  document.getElementById('tb-clock').textContent = t;
+  document.getElementById('sb-clock').textContent = t;
+}
+tick(); setInterval(tick, 30000);
+
+/* ── TABS ─────────────────────────────── */
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tbtn').forEach(b => b.classList.remove('active'));
+  document.getElementById('section-' + id).classList.add('active');
+  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelectorAll('.proj-detail').forEach(d => d.classList.remove('open'));
+  document.querySelectorAll('.thread-row').forEach(r => r.classList.remove('open-row'));
 }
 
-function copyDiscord(handle) {
-  navigator.clipboard.writeText(handle);
-  const hint = document.getElementById('discord-hint');
-  hint.innerText = "✓ COPIED_TO_CLIPBOARD";
-  hint.style.color = "#fff"; 
+/* ── PROJECT ACCORDION ───────────────── */
+function toggleProj(id) {
+  const detail = document.getElementById('proj-' + id);
+  const row    = document.getElementById('tr-' + id);
+  const wasOpen = detail.classList.contains('open');
+  document.querySelectorAll('.proj-detail').forEach(d => d.classList.remove('open'));
+  document.querySelectorAll('.thread-row').forEach(r => r.classList.remove('open-row'));
+  if (!wasOpen) {
+    detail.classList.add('open');
+    row.classList.add('open-row');
+  }
+}
+
+/* ── DISCORD COPY ────────────────────── */
+function copyDiscord() {
+  navigator.clipboard.writeText('lunavia.gd').catch(() => {});
+  const el = document.getElementById('disc-text');
+  el.textContent = '✓ copied to clipboard!';
+  el.style.color = '#44ff66';
   setTimeout(() => {
-    hint.innerText = "lunavia.gd (Click to Copy)";
-    hint.style.color = "";
-  }, 2000);
+    el.textContent = 'lunavia.gd ← click to copy';
+    el.style.color = '';
+  }, 2200);
+}
+
+/* ── DYNAMIC AGE ─────────────────────── */
+(function() {
+  const birth = new Date(2005, 9, 4); // Oct 4 2005
+  const now   = new Date();
+  let age = now.getFullYear() - birth.getFullYear();
+  const m = now.getMonth() - birth.getMonth();
+  if (m < 0 || (m === 0 && now.getDate() < birth.getDate())) age--;
+  const tag = document.querySelector('.t-age');
+  if (tag) tag.firstChild.textContent = '🎂 ' + age;
+})();
+
+/* ── CLOSE / MINIMISE (cosmetic) ─────── */
+function closeWin() {
+  const w = document.getElementById('main-window');
+  w.style.animation = 'winClose 0.3s ease-in forwards';
+  setTimeout(() => {
+    w.innerHTML = `<div style="font-family:'VT323',monospace;font-size:1.1rem;color:#0f0;background:#000;padding:20px;text-align:center;">
+      [ window closed ]<br><span style="font-size:0.9rem;color:#888;">click anywhere to restore</span>
+    </div>`;
+    w.style.animation = '';
+    document.addEventListener('click', restoreWin, { once: true });
+  }, 300);
+}
+function restoreWin() { location.reload(); }
+function minimiseWin() {
+  const w = document.getElementById('main-window');
+  w.style.transition = 'transform 0.2s, opacity 0.2s';
+  w.style.transform  = 'translateY(60px) scaleY(0.05)';
+  w.style.opacity    = '0';
+  setTimeout(() => {
+    w.style.transform = 'translateY(0) scaleY(1)';
+    w.style.opacity   = '1';
+  }, 1200);
 }
 </script>
 </body>
