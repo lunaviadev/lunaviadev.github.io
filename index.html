@@ -3,1176 +3,801 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Josie · Lunavia · Game Developer</title>
+<title>Lunavia — Game Developer</title>
+<meta name="description" content="Josie.B (Lunavia) — indie game developer, founder of Team INNERMINDS, and solo developer of BCKSPCE and One Final Winter.">
+<meta property="og:title" content="Lunavia — Game Developer">
+<meta property="og:description" content="Indie game developer, founder of Team INNERMINDS. Currently shipping Within Time on Steam.">
+<meta property="og:image" content="timeforanewera.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lunavia — Game Developer">
+<meta name="twitter:description" content="Indie game developer, founder of Team INNERMINDS. Currently shipping Within Time on Steam.">
+<meta name="twitter:image" content="timeforanewera.png">
+<link rel="icon" href="DEVLOGO.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Share+Tech+Mono&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
 
-/* ══════════════════════════════════════════════════
-   DESIGN SYSTEM
-══════════════════════════════════════════════════ */
+/* ── TOKENS ──────────────────────────────── */
 :root {
-  --bg:       #07070e;
-  --s0:       #0d0d1a;
-  --s1:       #121224;
-  --s2:       #1a1a30;
-  --s3:       #22223a;
+  --bg:      #eef5f9;
+  --surface: rgba(255,255,255,0.72);
+  --border:  rgba(255,255,255,0.9);
+  --border2: rgba(0,0,0,0.06);
+  --shadow:  0 1px 3px rgba(15,40,65,0.05), 0 8px 32px rgba(15,40,65,0.06);
 
-  --ch-hi:    #30304e;
-  --ch-lo:    #09090f;
-  --ch-mid:   #1c1c2e;
+  --ink:     #0f1f2d;
+  --mid:     #4a6a82;
+  --light:   #90afc4;
+  --xlight:  #b8cfd9;
 
-  --neon:     #00d4ff;
-  --neon-dim: rgba(0,212,255,0.09);
-  --neon-glow: 0 0 14px rgba(0,212,255,0.45), 0 0 36px rgba(0,212,255,0.15);
-  --neon-b:   #4466ff;
-  --neon-p:   #cc44ff;
-  --neon-r:   #ff2266;
+  --accent:  #1a7aa0;
+  --accent2: #5b9e78;
 
-  --t-hi:     #e2e2fa;
-  --t-mid:    #8888bb;
-  --t-lo:     #44446a;
-
-  --ff-d: 'Orbitron', 'Arial', sans-serif;
-  --ff-m: 'Share Tech Mono', 'Courier New', monospace;
-  --ff-b: 'Inter', 'Arial', sans-serif;
+  --ff:  'Inter', system-ui, sans-serif;
+  --fd:  'Cormorant Garamond', Georgia, serif;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-::-webkit-scrollbar { width: 7px; background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--ch-hi); }
-::-webkit-scrollbar-thumb:hover { background: var(--neon-b); }
 
 body {
-  font-family: var(--ff-b);
+  font-family: var(--ff);
   font-size: 15px;
-  line-height: 1.6;
-  color: var(--t-hi);
+  line-height: 1.65;
+  color: var(--ink);
   background: var(--bg);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Subtle grid */
-body::before {
-  content: '';
-  position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  background-image:
-    linear-gradient(rgba(0,212,255,0.022) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,212,255,0.022) 1px, transparent 1px);
-  background-size: 56px 56px;
-}
-
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: rgba(26,122,160,0.2); }
 a { color: inherit; text-decoration: none; }
 
-/* Chrome bevel panel */
-.chrome {
-  background: linear-gradient(145deg, var(--s1), var(--s0));
-  border: 1px solid var(--ch-hi);
-  border-right-color: var(--ch-lo);
-  border-bottom-color: var(--ch-lo);
-  box-shadow: inset 0 1px 0 rgba(160,160,255,0.04), 0 6px 20px rgba(0,0,0,0.5);
+/* ── BACKGROUND ──────────────────────────── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 900px 700px at 15% 10%,  rgba(140,210,240,0.28) 0%, transparent 70%),
+    radial-gradient(ellipse 700px 600px at 85% 80%,  rgba(120,195,170,0.22) 0%, transparent 70%),
+    radial-gradient(ellipse 600px 400px at 60% 20%,  rgba(180,225,245,0.18) 0%, transparent 70%),
+    var(--bg);
 }
 
-/* ══════════════════════════════════════════════════
-   BOOT SCREEN
-══════════════════════════════════════════════════ */
-#boot {
-  position: fixed; inset: 0; z-index: 9999;
-  background: #000;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  gap: 14px;
-  transition: opacity 0.65s ease;
-}
-#boot.hidden { opacity: 0; pointer-events: none; }
-
-.boot-logo {
-  font-family: var(--ff-d);
-  font-size: clamp(1rem, 4vw, 1.7rem);
-  font-weight: 900;
-  letter-spacing: 6px;
-  color: #fff;
-  text-align: center;
-  animation: bootGlow 1.8s ease-in-out infinite alternate;
-}
-@keyframes bootGlow {
-  from { text-shadow: 0 0 10px var(--neon); }
-  to   { text-shadow: 0 0 28px var(--neon), 0 0 60px rgba(0,212,255,0.35); }
-}
-
-.boot-sub {
-  font-family: var(--ff-m);
-  font-size: 0.72rem;
-  color: var(--t-lo);
-  letter-spacing: 3px;
-}
-
-.boot-bar-outer {
-  width: min(280px, 70vw); height: 3px;
-  background: var(--s1);
-  border: 1px solid var(--ch-hi);
-  overflow: hidden;
-}
-.boot-bar-fill {
-  height: 100%; width: 0%;
-  background: linear-gradient(90deg, var(--neon-b), var(--neon));
-  box-shadow: 0 0 6px var(--neon);
-  transition: width 0.1s;
-}
-
-.boot-msg {
-  font-family: var(--ff-m);
-  font-size: 0.7rem;
-  color: var(--t-mid);
-  min-height: 1em;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-/* ══════════════════════════════════════════════════
-   NAV
-══════════════════════════════════════════════════ */
+/* ── NAV ─────────────────────────────────── */
 .nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  height: 50px;
-  background: rgba(7,7,14,0.94);
-  backdrop-filter: blur(20px) saturate(1.4);
-  border-bottom: 1px solid var(--ch-hi);
-  display: flex; align-items: center;
-  padding: 0 28px; gap: 0;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px;
+  background: rgba(238,245,249,0.82);
+  backdrop-filter: blur(18px) saturate(1.4);
+  border-bottom: 1px solid rgba(255,255,255,0.7);
 }
-
 .nav-logo {
-  font-family: var(--ff-d);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 4px;
-  color: var(--neon);
-  text-shadow: 0 0 10px rgba(0,212,255,0.45);
-  margin-right: auto;
+  font-family: var(--fd);
+  font-size: 1.1rem; font-weight: 300; letter-spacing: 1px;
+  color: var(--ink);
 }
-
-.nav-links { display: flex; }
+.nav-links { display: flex; gap: 32px; }
 .nav-link {
-  font-family: var(--ff-m);
-  font-size: 0.65rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--t-lo);
-  padding: 0 16px; height: 50px;
-  display: flex; align-items: center;
-  border-left: 1px solid transparent;
-  border-right: 1px solid transparent;
-  transition: color 0.2s, border-color 0.2s, background 0.2s;
-  cursor: pointer;
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--light);
+  transition: color 0.2s;
 }
-.nav-link:hover, .nav-link.active {
-  color: var(--neon);
-  border-color: rgba(0,212,255,0.12);
-  background: rgba(0,212,255,0.035);
+.nav-link:hover, .nav-link.active { color: var(--ink); }
+
+/* ── LAYOUT ──────────────────────────────── */
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 1; }
+section { padding: 96px 0; position: relative; z-index: 1; }
+
+.label {
+  font-size: 0.65rem; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--accent); display: block; margin-bottom: 10px;
+}
+.heading {
+  font-family: var(--fd); font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 300; color: var(--ink); line-height: 1.15;
 }
 
-/* ══════════════════════════════════════════════════
-   SECTION SHARED
-══════════════════════════════════════════════════ */
-.wrap { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
-
-section { padding: 96px 0 72px; position: relative; }
-
-.s-head {
-  display: flex; align-items: center; gap: 14px;
-  margin-bottom: 44px;
-}
-.sec-num {
-  font-family: var(--ff-m);
-  font-size: 0.62rem;
-  letter-spacing: 3px;
-  color: var(--neon);
-  text-transform: uppercase;
-  opacity: 0.65;
-}
-.s-title {
-  font-family: var(--ff-d);
-  font-size: clamp(1.2rem, 3vw, 1.7rem);
-  font-weight: 700;
-  letter-spacing: 3px;
-  color: var(--t-hi);
-}
-.s-line {
-  flex: 1; height: 1px;
-  background: linear-gradient(90deg, var(--ch-hi), transparent);
-}
-
-/* Scroll reveal */
 .reveal {
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.55s ease, transform 0.55s ease;
+  opacity: 0; transform: translateY(18px);
+  transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
 }
 .reveal.in { opacity: 1; transform: none; }
 
-/* ══════════════════════════════════════════════════
-   HERO
-══════════════════════════════════════════════════ */
+/* ── HERO ────────────────────────────────── */
 #hero {
-  min-height: 100vh;
-  padding-top: 50px;
-  display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden;
+  min-height: 100vh; padding-top: 56px;
+  display: flex; align-items: center;
+  position: relative; z-index: 1;
 }
-#hero::after {
-  content: '';
-  position: absolute; inset: 0; pointer-events: none;
-  background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.025) 3px, rgba(0,0,0,0.025) 4px);
-}
-#hero::before {
-  content: '';
-  position: absolute; top: 30%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 700px; height: 700px;
-  background: radial-gradient(circle, rgba(0,212,255,0.055) 0%, transparent 68%);
-  pointer-events: none;
-}
-
-.hero-inner {
-  text-align: center;
-  position: relative; z-index: 2;
-  padding: 40px 24px;
-}
+.hero-inner { padding: 0 40px; max-width: 1040px; margin: 0 auto; width: 100%; }
 
 .hero-over {
-  font-family: var(--ff-m);
-  font-size: 0.7rem;
-  letter-spacing: 5px;
-  color: var(--neon);
-  text-transform: uppercase;
-  opacity: 0.75;
-  margin-bottom: 20px;
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 20px; display: block;
 }
-
 .hero-name {
-  font-family: var(--ff-d);
-  font-size: clamp(2.6rem, 9vw, 5.8rem);
-  font-weight: 900;
-  letter-spacing: 4px;
-  line-height: 1.05;
-  color: var(--t-hi);
-  margin-bottom: 4px;
+  font-family: var(--fd);
+  font-size: clamp(4.5rem, 12vw, 9.5rem);
+  font-weight: 300; line-height: 0.9; color: var(--ink); letter-spacing: -1px;
+  margin-bottom: 32px; display: block;
 }
-.hero-name .star {
-  color: var(--neon);
-  text-shadow: var(--neon-glow);
+.hero-name em { font-style: italic; color: var(--ink); display: block; }
+.hero-realname {
+  display: block;
+  font-family: var(--ff);
+  font-size: clamp(0.85rem, 2vw, 1.1rem);
+  font-weight: 400; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--light); margin-top: 18px; font-style: normal;
 }
-
-.hero-rule {
-  width: 54px; height: 2px;
-  background: linear-gradient(90deg, transparent, var(--neon), transparent);
-  margin: 22px auto;
-}
-
 .hero-sub {
-  font-family: var(--ff-m);
-  font-size: clamp(0.68rem, 2vw, 0.88rem);
-  letter-spacing: 5px;
-  color: var(--t-mid);
-  text-transform: uppercase;
-  margin-bottom: 34px;
+  font-size: clamp(1rem, 2vw, 1.25rem); font-weight: 300;
+  color: var(--mid); max-width: 520px; margin-bottom: 48px; line-height: 1.7;
+}
+.hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.btn-primary {
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 13px 28px;
+  background: var(--ink); color: #fff;
+  border: 1px solid var(--ink);
+  transition: background 0.2s, color 0.2s;
+  display: inline-block;
+}
+.btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+.btn-ghost {
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 13px 28px;
+  background: transparent; color: var(--mid);
+  border: 1px solid var(--border2);
+  transition: border-color 0.2s, color 0.2s;
+  display: inline-block;
+}
+.btn-ghost:hover { border-color: var(--ink); color: var(--ink); }
+.hero-scroll-hint {
+  margin-top: 80px; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--xlight); display: flex; align-items: center; gap: 12px;
+}
+.hero-scroll-hint::before { content: ''; width: 24px; height: 1px; background: var(--xlight); }
+
+/* ── PROJECTS CAROUSEL ───────────────────── */
+#projects { padding: 72px 0 0; }
+
+.section-head {
+  margin-bottom: 48px; padding: 0 40px;
+  max-width: 1040px; margin-left: auto; margin-right: auto;
 }
 
-.tags-row {
-  display: flex; flex-wrap: wrap; gap: 7px;
-  justify-content: center;
-  margin-bottom: 38px;
-}
+.carousel-outer { position: relative; z-index: 1; }
 
-.tag {
-  font-family: var(--ff-m);
-  font-size: 0.68rem;
-  letter-spacing: 1px;
-  padding: 5px 14px;
-  border-radius: 20px;
-  border: 1px solid;
-  cursor: default;
-  transition: transform 0.15s, filter 0.15s;
-}
-.tag:hover { transform: translateY(-2px); filter: brightness(1.2); }
-
-.t-age   { background: rgba(255,220,60,0.08); border-color: rgba(255,220,60,0.3); color: #ffdd40; }
-.t-she   { background: rgba(255,110,170,0.08); border-color: rgba(255,110,170,0.3); color: #ff70a8; }
-.t-trans { background: rgba(85,200,250,0.07); border-color: rgba(85,200,250,0.28); color: #90ccee; }
-.t-bi    { background: rgba(210,0,110,0.09); border-color: rgba(210,0,110,0.3); color: #e055a0; }
-.t-dev   { background: rgba(0,212,255,0.07); border-color: rgba(0,212,255,0.3); color: var(--neon); }
-.t-music { background: rgba(150,90,255,0.08); border-color: rgba(150,90,255,0.3); color: #aa70ff; }
-.t-uk    { background: rgba(80,90,180,0.08); border-color: rgba(80,90,180,0.28); color: #7080cc; }
-
-.hero-scroll {
-  font-family: var(--ff-m);
-  font-size: 0.6rem;
-  letter-spacing: 3px;
-  color: var(--t-lo);
-  animation: bob 2.2s ease-in-out infinite;
-}
-@keyframes bob {
-  0%, 100% { transform: translateY(0); opacity: 0.45; }
-  50%       { transform: translateY(7px); opacity: 0.9; }
-}
-
-/* ══════════════════════════════════════════════════
-   QUALIFICATIONS
-══════════════════════════════════════════════════ */
-.quals-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-
-.q-card {
-  padding: 22px 24px;
-}
-
-.q-label {
-  font-family: var(--ff-m);
-  font-size: 0.6rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--neon);
-  margin-bottom: 14px;
-  display: flex; align-items: center; gap: 8px;
-  opacity: 0.8;
-}
-.q-label::after {
-  content: '';
-  flex: 1; height: 1px;
-  background: linear-gradient(90deg, rgba(0,212,255,0.25), transparent);
-}
-
-.q-title {
-  font-family: var(--ff-d);
-  font-size: 0.98rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-  color: var(--t-hi);
-  margin-bottom: 4px;
-}
-.q-sub {
-  font-family: var(--ff-m);
-  font-size: 0.7rem;
-  color: var(--t-mid);
-  letter-spacing: 1px;
-  margin-bottom: 10px;
-}
-.q-detail { font-size: 0.86rem; color: var(--t-mid); line-height: 1.75; }
-
-.role-list { display: flex; flex-direction: column; gap: 11px; }
-.role-name { font-family: var(--ff-m); font-size: 0.76rem; color: var(--t-hi); letter-spacing: 1px; }
-.role-ctx  { font-size: 0.78rem; color: var(--t-lo); margin-top: 2px; }
-
-.skills-wrap { grid-column: 1 / -1; }
-.skills-cloud { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
-.sk-tag {
-  font-family: var(--ff-m);
-  font-size: 0.65rem;
-  letter-spacing: 1px;
-  padding: 5px 13px;
-  background: var(--s2);
-  border: 1px solid var(--ch-hi);
-  border-right-color: var(--ch-lo);
-  border-bottom-color: var(--ch-lo);
-  color: var(--t-mid);
-  cursor: default;
-  transition: border-color 0.18s, color 0.18s, background 0.18s;
-}
-.sk-tag:hover { border-color: var(--neon); color: var(--neon); background: var(--neon-dim); }
-
-/* ══════════════════════════════════════════════════
-   PROJECTS
-══════════════════════════════════════════════════ */
-.proj-stack { display: flex; flex-direction: column; gap: 3px; margin-bottom: 28px; }
-
-.proj-card {
-  position: relative;
+.carousel-viewport {
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.proj-card:hover { transform: translateY(-3px); }
-.proj-card::before {
-  content: '';
-  position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
-  background: var(--pa);
-  box-shadow: 0 0 10px var(--pa);
-  z-index: 2;
+  width: 100%;
 }
 
-.proj-inner {
-  display: flex; min-height: 200px;
+.carousel-track {
+  display: flex;
+  width: 300%; /* 3 slides — update if count changes */
+  transition: transform 0.62s var(--ease);
+  will-change: transform;
 }
 
-.proj-thumb {
-  width: 220px; min-width: 220px;
-  overflow: hidden; position: relative;
+/* Each slide = 1/3 of track = 100% of viewport */
+.slide {
+  width: calc(100% / 3);
   flex-shrink: 0;
 }
-.proj-thumb img {
-  width: 100%; height: 100%; object-fit: cover; display: block;
-  transition: transform 0.4s ease, filter 0.4s ease;
-  filter: saturate(0.88) brightness(0.88);
-}
-.proj-card:hover .proj-thumb img {
-  transform: scale(1.04);
-  filter: saturate(1.1) brightness(0.98);
-}
 
-.proj-body {
-  flex: 1; padding: 24px 28px;
-  display: flex; flex-direction: column; min-width: 0;
-}
-
-.proj-meta-row {
-  display: flex; align-items: center; gap: 12px;
-  flex-wrap: wrap;
-  margin-bottom: 8px;
-}
-
-.status-pill {
-  display: inline-flex; align-items: center; gap: 5px;
-  font-family: var(--ff-m);
-  font-size: 0.58rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 3px 10px;
-  border: 1px solid;
-  border-radius: 2px;
-}
-.status-pill::before { content: '●'; font-size: 0.45rem; }
-.sp-done  { border-color: rgba(40,220,80,0.4); color: #44ee66; background: rgba(40,220,80,0.05); }
-.sp-steam { border-color: rgba(100,192,244,0.4); color: #66c0f4; background: rgba(100,192,244,0.05); }
-.sp-dev   { border-color: rgba(255,160,40,0.4); color: #ffaa30; background: rgba(255,160,40,0.05); }
-
-.proj-year {
-  font-family: var(--ff-m);
-  font-size: 0.6rem;
-  letter-spacing: 2px;
-  color: var(--t-lo);
-}
-
-.proj-name {
-  font-family: var(--ff-d);
-  font-size: clamp(1.15rem, 3vw, 1.6rem);
-  font-weight: 700;
-  letter-spacing: 2px;
-  margin-bottom: 4px;
-}
-
-.proj-role {
-  font-family: var(--ff-m);
-  font-size: 0.7rem;
-  letter-spacing: 1px;
-  color: var(--t-lo);
-  margin-bottom: 13px;
-}
-
-.proj-desc {
-  font-size: 0.87rem;
-  color: var(--t-mid);
-  line-height: 1.78;
-  flex: 1;
-  margin-bottom: 16px;
-}
-
-.proj-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 18px; }
-.pt {
-  font-family: var(--ff-m);
-  font-size: 0.6rem;
-  letter-spacing: 1px;
-  padding: 3px 10px;
-  border: 1px solid;
-  border-radius: 2px;
-  opacity: 0.8;
-}
-
-.proj-btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-family: var(--ff-m);
-  font-size: 0.67rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 8px 18px;
-  border: 1px solid;
-  transition: background 0.2s, box-shadow 0.2s;
-  cursor: pointer; align-self: flex-start;
-}
-.proj-btn:hover { box-shadow: 0 0 14px rgba(0,212,255,0.2); }
-.proj-btn-disabled { opacity: 0.45; cursor: not-allowed; pointer-events: none; }
-
-/* ── BCKSPCE ────────────────────────── */
-.pc-bckspce {
-  --pa: #cc3366;
-  background: linear-gradient(135deg, #130012 0%, #0c0008 100%);
-  border: 1px solid #280018;
-  border-left: none;
-}
-.pc-bckspce .proj-name { color: #e88aa4; }
-.pc-bckspce .proj-btn  { border-color: #cc3366; color: #cc3366; background: rgba(204,51,102,0.04); }
-.pc-bckspce .proj-btn:hover { background: rgba(204,51,102,0.1); box-shadow: 0 0 14px rgba(204,51,102,0.3); }
-
-/* BCKSPCE faux-desktop thumbnail */
-.bckspce-thumb-inner {
-  width: 100%; height: 100%; min-height: 200px;
-  background: #0a0006;
-  display: flex; align-items: center; justify-content: center; padding: 16px;
-}
-.bckspce-win {
-  width: 100%; max-width: 185px;
-  border: 1px solid #cc3366;
-  box-shadow: 0 0 14px rgba(204,51,102,0.18);
-}
-.bckspce-bar {
-  background: linear-gradient(90deg, #4a0028, #2a0016);
-  padding: 4px 9px;
-  font-family: var(--ff-m); font-size: 0.58rem;
-  color: #cc7088; letter-spacing: 1px;
-  display: flex; justify-content: space-between;
-}
-.bckspce-desktop {
-  background: #08000e; padding: 14px 12px; min-height: 110px;
-}
-.bckspce-line {
-  font-family: var(--ff-m); font-size: 0.62rem;
-  color: #cc3366; letter-spacing: 1px; margin-bottom: 9px;
-  line-height: 1.4;
-}
-.bckspce-line.warn { color: #ff2266; }
-
-/* ── WITHIN TIME ────────────────────── */
-.pc-within {
-  --pa: #ffaa33;
-  background: linear-gradient(135deg, #0d1409 0%, #080c05 100%);
-  border: 1px solid #1e2a10;
-  border-left: none;
-}
-.pc-within .proj-name { color: #ffbf55; }
-.pc-within .proj-btn  { border-color: #ffaa33; color: #ffaa33; background: rgba(255,170,51,0.04); }
-.pc-within .proj-btn:hover { background: rgba(255,170,51,0.1); box-shadow: 0 0 14px rgba(255,170,51,0.3); }
-
-/* ── ONE FINAL WINTER ───────────────── */
-.pc-ofw {
-  --pa: #80c8ff;
-  background: linear-gradient(135deg, #060c16 0%, #040810 100%);
-  border: 1px solid #10182e;
-  border-left: none;
-}
-.pc-ofw .proj-name { color: #a0d0ff; }
-.pc-ofw .proj-btn  { border-color: #80c8ff; color: #80c8ff; background: rgba(128,200,255,0.04); }
-.pc-ofw .proj-btn:hover { background: rgba(128,200,255,0.1); box-shadow: 0 0 14px rgba(128,200,255,0.3); }
-
-/* ── JAM VAULT ──────────────────────── */
-.jam-label {
-  font-family: var(--ff-m);
-  font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase;
-  color: var(--t-lo);
-  margin-bottom: 12px;
-  display: flex; align-items: center; gap: 12px;
-}
-.jam-label::after { content: ''; flex: 1; height: 1px; background: var(--ch-hi); }
-
-.jam-grid {
+/* Inner grid: image | text, max-width centered */
+.slide-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 40px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 12px;
+  grid-template-columns: 1fr 1fr;
+  min-height: 480px;
 }
 
-.jam-card {
-  padding: 18px 20px;
-  transition: border-top-color 0.2s, background 0.2s;
-  cursor: default;
+.slide-media {
+  overflow: hidden; position: relative;
+  background: #d4e8f0;
 }
-.jam-card:hover { border-top-color: var(--neon) !important; background: var(--s1); }
+.slide-media img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.6s var(--ease);
+  display: block;
+}
+.slide:hover .slide-media img { transform: scale(1.04); }
 
-.jc-name { font-family: var(--ff-d); font-size: 0.88rem; font-weight: 600; letter-spacing: 1px; color: var(--t-hi); margin-bottom: 5px; }
-.jc-sub  { font-size: 0.78rem; color: var(--t-mid); margin-bottom: 12px; line-height: 1.55; }
-.jc-link { font-family: var(--ff-m); font-size: 0.63rem; letter-spacing: 1px; color: var(--neon); opacity: 0.65; transition: opacity 0.18s; }
-.jam-card:hover .jc-link { opacity: 1; }
-
-/* ══════════════════════════════════════════════════
-   LINKS
-══════════════════════════════════════════════════ */
-.links-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
-  gap: 12px;
-}
-
-.link-card {
-  padding: 20px 16px;
-  text-align: center;
-  cursor: pointer; display: block;
-  transition: transform 0.2s, border-top-color 0.2s, box-shadow 0.2s;
-}
-.link-card:hover {
-  transform: translateY(-4px);
-  border-top-color: var(--neon);
-  box-shadow: 0 0 18px rgba(0,212,255,0.07), 0 8px 24px rgba(0,0,0,0.4);
-}
-
-.lc-svg {
-  width: 36px; height: 36px;
-  stroke: var(--neon); fill: none; stroke-width: 1.5;
-  display: block; margin: 0 auto 10px;
-}
-.lc-img { width: 36px; height: 36px; object-fit: contain; display: block; margin: 0 auto 10px; }
-.lc-name {
-  font-family: var(--ff-d);
-  font-size: 0.68rem; font-weight: 600; letter-spacing: 2px;
-  color: var(--t-hi); margin-bottom: 4px; display: block;
-}
-.lc-detail {
-  font-family: var(--ff-m);
-  font-size: 0.62rem; color: var(--t-lo); display: block;
-  transition: color 0.2s;
-}
-.link-card:hover .lc-detail { color: var(--neon); }
-
-/* ══════════════════════════════════════════════════
-   ABOUT
-══════════════════════════════════════════════════ */
-.bbs-post {
-  display: flex;
-  border: 1px solid var(--ch-hi);
-  background: var(--s0);
-}
-
-.bbs-sidebar {
-  width: 125px; min-width: 125px;
-  background: var(--s1);
-  border-right: 1px solid var(--ch-hi);
-  padding: 20px 14px;
-  display: flex; flex-direction: column; align-items: center; gap: 7px;
-  text-align: center;
-}
-.bbs-avi {
-  width: 76px; height: 76px;
-  background: var(--s2);
-  border: 1px solid var(--neon);
-  box-shadow: 0 0 8px rgba(0,212,255,0.18);
+/* Colour-fill panels for projects without images */
+.fill-bckspce {
+  background: linear-gradient(145deg, #140d1e 0%, #2d1440 50%, #120c1a 100%);
   display: flex; align-items: center; justify-content: center;
-  font-family: var(--ff-d); font-size: 2rem; color: var(--neon);
-  overflow: hidden; image-rendering: pixelated;
-  margin-bottom: 5px;
 }
-.bbs-avi img { width: 100%; height: 100%; object-fit: cover; }
-.bbs-uname  { font-family: var(--ff-d); font-size: 0.7rem; font-weight: 700; color: var(--neon); letter-spacing: 2px; }
-.bbs-utitle { font-family: var(--ff-m); font-size: 0.6rem; color: var(--t-lo); margin-top: 2px; }
-.bbs-stats  { font-family: var(--ff-m); font-size: 0.6rem; color: var(--t-lo); line-height: 1.9; margin-top: 5px; }
-
-.bbs-main { flex: 1; min-width: 0; }
-
-.bbs-topbar {
-  background: var(--s2);
-  border-bottom: 1px solid var(--ch-hi);
-  padding: 5px 16px;
-  font-family: var(--ff-m); font-size: 0.62rem; letter-spacing: 2px; color: var(--t-lo);
-  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px;
+.fill-ofw {
+  background: linear-gradient(145deg, #0a1420 0%, #162840 50%, #080e18 100%);
+  display: flex; align-items: center; justify-content: center;
 }
 
-.bbs-body {
-  padding: 20px 22px;
-  font-size: 0.88rem; color: var(--t-mid); line-height: 1.82;
+.slide-content {
+  background: var(--surface);
+  backdrop-filter: blur(20px) saturate(1.3);
+  border: 1px solid var(--border);
+  border-left: none;
+  padding: 52px 44px;
+  display: flex; flex-direction: column; justify-content: center;
+  box-shadow: var(--shadow);
 }
-.bbs-body p { margin-bottom: 12px; }
-.bbs-body p:last-child { margin-bottom: 0; }
-.bbs-body strong { color: var(--t-hi); font-weight: 500; }
-.bbs-body em { color: var(--neon); font-style: normal; }
+.slide-n {
+  font-size: 0.6rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--xlight); margin-bottom: 8px; display: block;
+}
+.slide-status {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.62rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  margin-bottom: 18px; color: var(--mid);
+}
+.slide-status::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: currentColor; display: block;
+}
+.status-dev  { color: #c08b2a; }
+.status-done { color: var(--accent); }
 
-.bbs-badges {
-  padding: 12px 22px;
-  border-top: 1px solid var(--ch-hi);
-  display: flex; flex-wrap: wrap; gap: 5px;
+.slide-badge {
+  display: inline-block;
+  font-size: 0.58rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  padding: 3px 10px; margin-bottom: 10px;
+  background: var(--accent); color: #fff;
 }
-.badge {
-  font-family: var(--ff-m); font-size: 0.6rem; letter-spacing: 1px;
+
+.slide-title {
+  font-family: var(--fd); font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-weight: 300; line-height: 1; color: var(--ink); margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+.slide-role {
+  font-size: 0.75rem; color: var(--light); margin-bottom: 20px; font-weight: 400;
+}
+.slide-desc {
+  font-size: 0.88rem; color: var(--mid); line-height: 1.8; margin-bottom: 28px;
+}
+.slide-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 28px; }
+.stag {
+  font-size: 0.62rem; font-weight: 500; letter-spacing: 0.5px;
   padding: 3px 10px;
-  background: var(--s2); border: 1px solid var(--ch-hi);
-  color: var(--t-lo); cursor: default;
-  transition: border-color 0.15s, color 0.15s;
+  background: rgba(26,122,160,0.07); color: var(--accent);
+  border: 1px solid rgba(26,122,160,0.15);
 }
-.badge:hover { border-color: var(--neon); color: var(--neon); }
-
-.bbs-sig {
-  padding: 8px 22px;
-  border-top: 1px dashed var(--ch-hi);
-  font-family: var(--ff-m); font-size: 0.62rem; color: var(--t-lo);
+.slide-link {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--ink); display: inline-flex; align-items: center; gap: 8px;
+  transition: color 0.2s; align-self: flex-start;
 }
+.slide-link:hover { color: var(--accent); }
+.slide-link-off { color: var(--xlight); pointer-events: none; }
 
-/* Blinking cursor */
-.blink { animation: blink 1s step-end infinite; }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+/* Carousel controls */
+.car-controls {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 28px 40px 0; max-width: 1040px; margin: 0 auto 96px;
+  position: relative; z-index: 1;
+}
+.car-btn {
+  width: 42px; height: 42px;
+  background: var(--surface); border: 1px solid var(--border2);
+  backdrop-filter: blur(12px);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.2s; color: var(--mid);
+}
+.car-btn:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+.car-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.car-dots { display: flex; gap: 10px; }
+.cdot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--xlight); cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.cdot.on { background: var(--ink); transform: scale(1.4); }
 
-/* ══════════════════════════════════════════════════
-   FOOTER
-══════════════════════════════════════════════════ */
+/* ── JAM WORK ───────────────────────────── */
+.jam-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border2); }
+.jam-card {
+  background: var(--bg); padding: 36px 40px;
+  transition: background 0.2s;
+}
+.jam-card:hover { background: rgba(255,255,255,0.6); }
+.jam-thumb {
+  width: 100%; aspect-ratio: 16/7; overflow: hidden; margin-bottom: 22px;
+}
+.jam-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s var(--ease); }
+.jam-card:hover .jam-thumb img { transform: scale(1.04); }
+.jam-sub  { font-size: 0.65rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; display: block; }
+.jam-name { font-family: var(--fd); font-size: 1.5rem; font-weight: 400; color: var(--ink); margin-bottom: 8px; }
+.jam-desc { font-size: 0.83rem; color: var(--mid); margin-bottom: 18px; line-height: 1.7; }
+.jam-link { font-size: 0.68rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mid); transition: color 0.2s; }
+.jam-card:hover .jam-link { color: var(--accent); }
+
+/* ── QUALIFICATIONS ─────────────────────── */
+.quals-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--border2); }
+.q-panel { background: var(--bg); padding: 36px 38px; }
+.q-top { font-size: 0.65rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; display: block; }
+.q-hed { font-family: var(--fd); font-size: 1.35rem; font-weight: 400; color: var(--ink); margin-bottom: 5px; }
+.q-meta { font-size: 0.72rem; color: var(--light); margin-bottom: 14px; }
+.q-body { font-size: 0.84rem; color: var(--mid); line-height: 1.75; }
+.role-list { display: flex; flex-direction: column; gap: 14px; }
+.role-name { font-size: 0.84rem; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+.role-ctx  { font-size: 0.75rem; color: var(--light); }
+.skills-wrap { grid-column: 1 / -1; background: var(--bg); }
+.bio-wrap { grid-column: 1 / -1; background: var(--bg); }
+.bio-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 4px; }
+.bio-cols p { font-size: 0.88rem; color: var(--mid); line-height: 1.85; }
+.bio-cols strong { color: var(--ink); font-weight: 600; }
+@media (max-width: 800px) { .bio-cols { grid-template-columns: 1fr; gap: 16px; } }
+.sk-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.sk {
+  font-size: 0.7rem; font-weight: 500; letter-spacing: 0.3px;
+  padding: 6px 14px;
+  background: rgba(255,255,255,0.7); color: var(--mid);
+  border: 1px solid var(--border2);
+  cursor: default; transition: all 0.15s;
+}
+.sk:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+/* ── LINKS ───────────────────────────────── */
+.links-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1px; background: var(--border2); }
+.lc {
+  background: var(--bg); padding: 30px 32px;
+  display: block; transition: background 0.2s;
+}
+.lc:hover { background: rgba(255,255,255,0.6); }
+.lc-platform { font-size: 0.62rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 8px; }
+.lc-name { font-family: var(--fd); font-size: 1.15rem; font-weight: 400; color: var(--ink); display: block; margin-bottom: 4px; }
+.lc-handle { font-size: 0.75rem; color: var(--light); transition: color 0.2s; display: block; }
+.lc:hover .lc-handle { color: var(--accent); }
+
+/* ── ABOUT ───────────────────────────────── */
+.about-layout { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; }
+.about-text p { font-size: 0.92rem; color: var(--mid); line-height: 1.9; margin-bottom: 18px; }
+.about-text p:last-child { margin-bottom: 0; }
+.about-text strong { color: var(--ink); font-weight: 600; }
+.about-meta { display: flex; flex-direction: column; gap: 28px; }
+.am-label { font-size: 0.62rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 10px; }
+.am-items { display: flex; flex-wrap: wrap; gap: 6px; }
+.am-item {
+  font-size: 0.72rem; font-weight: 500; color: var(--mid); padding: 4px 12px;
+  background: rgba(255,255,255,0.65); border: 1px solid var(--border2);
+  cursor: default; transition: color 0.15s;
+}
+.am-item:hover { color: var(--ink); }
+
+/* ── DIVIDER ─────────────────────────────── */
+.rule { height: 1px; background: var(--border2); position: relative; z-index: 1; }
+
+/* ── FOOTER ──────────────────────────────── */
 footer {
-  padding: 28px 24px;
-  border-top: 1px solid var(--ch-hi);
-  text-align: center;
+  padding: 40px; position: relative; z-index: 1;
+  display: flex; align-items: center; justify-content: space-between;
 }
-.footer-text {
-  font-family: var(--ff-m);
-  font-size: 0.6rem;
-  color: var(--t-lo);
-  letter-spacing: 2px;
-}
+.foot-name { font-family: var(--fd); font-size: 1rem; font-weight: 300; color: var(--mid); }
+.foot-copy { font-size: 0.65rem; letter-spacing: 1px; color: var(--xlight); }
 
-/* ══════════════════════════════════════════════════
-   RESPONSIVE
-══════════════════════════════════════════════════ */
-@media (max-width: 700px) {
+/* ── RESPONSIVE ──────────────────────────── */
+@media (max-width: 800px) {
   .nav-links { display: none; }
-  section { padding: 68px 0 48px; }
+  .slide-inner { grid-template-columns: 1fr; grid-template-rows: 240px 1fr; padding: 0; }
+  .slide-content { border-left: 1px solid var(--border); border-top: none; padding: 36px 28px; }
   .quals-grid { grid-template-columns: 1fr; }
-  .proj-inner { flex-direction: column; }
-  .proj-thumb { width: 100%; min-width: 0; max-height: 200px; }
-  .bckspce-thumb-inner { min-height: 160px; }
-  .bbs-post { flex-direction: column; }
-  .bbs-sidebar {
-    width: 100%; flex-direction: row; align-items: center;
-    padding: 12px 16px; border-right: none; border-bottom: 1px solid var(--ch-hi);
-    gap: 14px;
-  }
-  .bbs-avi { width: 54px; height: 54px; min-width: 54px; margin: 0; font-size: 1.4rem; }
-  .bbs-stats { display: none; }
-}
-
-@media (max-width: 440px) {
-  .hero-name { letter-spacing: 2px; }
-  .proj-body { padding: 18px 16px; }
-  .tags-row { gap: 5px; }
-  .tag { font-size: 0.62rem; padding: 4px 10px; }
+  .quals-grid .skills-wrap { grid-column: 1; }
+  .about-layout { grid-template-columns: 1fr; gap: 36px; }
+  .hero-name { font-size: 4.5rem; }
+  .jam-grid, .links-list { grid-template-columns: 1fr; }
+  .wrap, .hero-inner, .section-head, .car-controls { padding-left: 24px; padding-right: 24px; }
+  footer { padding: 32px 24px; }
 }
 
 </style>
 </head>
 <body>
 
-<!-- ── BOOT ─────────────────────────────────────── -->
-<div id="boot">
-  <div class="boot-logo">✦ LUNAVIA.EXE ✦</div>
-  <div class="boot-sub">PORTFOLIO v3.0 — INITIALIZING</div>
-  <div class="boot-bar-outer"><div class="boot-bar-fill" id="boot-fill"></div></div>
-  <div class="boot-msg" id="boot-msg">Loading…</div>
-</div>
-
-<!-- ── NAV ──────────────────────────────────────── -->
+<!-- ── NAV ──────────────────────────────── -->
 <nav class="nav">
-  <div class="nav-logo">LUNAVIA ✦</div>
+  <div class="nav-logo">Lunavia</div>
   <div class="nav-links">
-    <a class="nav-link" href="#qualifications">QUALIFICATIONS</a>
-    <a class="nav-link" href="#projects">PROJECTS</a>
-    <a class="nav-link" href="#links">LINKS</a>
-    <a class="nav-link" href="#about">ABOUT</a>
+    <a class="nav-link" href="#projects">Work</a>
+    <a class="nav-link" href="#qualifications">Experience</a>
+    <a class="nav-link" href="#links">Contact</a>
+    <a class="nav-link" href="#about">About</a>
   </div>
 </nav>
 
-<!-- ── HERO ─────────────────────────────────────── -->
+<!-- ── HERO ─────────────────────────────── -->
 <section id="hero">
   <div class="hero-inner">
-    <div class="hero-over">GAME DEVELOPER · UK · SHE/HER</div>
-    <h1 class="hero-name">JOSIE<span class="star"> ✦</span><br>LUNAVIA</h1>
-    <div class="hero-rule"></div>
-    <div class="hero-sub">INDIE DEVELOPER · DIRECTOR · ARTIST</div>
-    <div class="tags-row">
-      <span class="tag t-age">🎂 <span id="dyn-age">20</span></span>
-      <span class="tag t-she">♀ she/her</span>
-      <span class="tag t-trans">🏳️‍⚧️ trans woman</span>
-      <span class="tag t-bi">💜 bisexual</span>
-      <span class="tag t-dev">🎮 game dev</span>
-      <span class="tag t-music">🎵 musician</span>
-      <span class="tag t-uk">🇬🇧 uk</span>
+    <span class="hero-over reveal">Game Developer · Director · Artist</span>
+    <h1 class="hero-name reveal"><em>Lunavia</em><span class="hero-realname">Josie.B</span></h1>
+    <p class="hero-sub reveal">
+      I make games. Founder and Lead Developer of Team INNERMINDS, solo developer, and final-year Games Development student in the UK. Currently shipping <strong>Within Time</strong> on Steam.
+    </p>
+    <div class="hero-actions reveal">
+      <a href="#projects" class="btn-primary">View My Work</a>
+      <a href="https://store.steampowered.com/publisher/lunavia" target="_blank" class="btn-ghost">Steam Studio</a>
     </div>
-    <div class="hero-scroll">▾ SCROLL TO EXPLORE ▾</div>
+    <div class="hero-scroll-hint reveal">Scroll to explore</div>
   </div>
 </section>
 
-<!-- ── QUALIFICATIONS ───────────────────────────── -->
+<!-- ── PROJECTS CAROUSEL ──────────────────── -->
+<section id="projects" style="padding-bottom:0;">
+  <div class="section-head reveal">
+    <span class="label">Selected Work</span>
+    <h2 class="heading">Projects</h2>
+  </div>
+
+  <div class="carousel-outer">
+    <div class="carousel-viewport">
+      <div class="carousel-track" id="car-track">
+
+        <!-- 01 Within Time (featured) -->
+        <div class="slide">
+          <div class="slide-inner">
+            <div class="slide-media">
+              <img src="timeforanewera.png" alt="Within Time key art">
+            </div>
+            <div class="slide-content">
+              <span class="slide-n">01 / 03</span>
+              <span class="slide-badge">Featured Title</span>
+              <span class="slide-status status-dev">In Development</span>
+              <h3 class="slide-title">Within<br>Time</h3>
+              <div class="slide-role">Founder and Lead Developer, Team INNERMINDS</div>
+              <p class="slide-desc">My flagship TBRPG built in Godot. As founder of Team INNERMINDS I direct everything across 13 playable characters: systems architecture, narrative, art direction, and the proprietary STANCE combat system.</p>
+              <div class="slide-tags">
+                <span class="stag">TBRPG</span>
+                <span class="stag">Godot</span>
+                <span class="stag">STANCE System</span>
+                <span class="stag">Team Lead</span>
+                <span class="stag">Steam</span>
+              </div>
+              <a href="https://store.steampowered.com/app/2302230/Within_Time" target="_blank" class="slide-link">Wishlist on Steam</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 02 BCKSPCE -->
+        <div class="slide">
+          <div class="slide-inner">
+            <div class="slide-media">
+              <img src="bckspce-cover.png" alt="BCKSPCE" loading="lazy" onerror="this.parentElement.className+=' fill-bckspce';this.style.display='none'">
+            </div>
+            <div class="slide-content">
+              <span class="slide-n">02 / 03</span>
+              <span class="slide-status status-done">Completed and Released</span>
+              <h3 class="slide-title">BCKSPCE</h3>
+              <div class="slide-role">Solo Developer, Psychological Thriller Visual Novel</div>
+              <p class="slide-desc">A psychological thriller told through a retro desktop interface. An unknown friend request arrives, your digital life begins to unravel. Solo development from concept to release on Steam.</p>
+              <div class="slide-tags">
+                <span class="stag">Visual Novel</span>
+                <span class="stag">Thriller</span>
+                <span class="stag">LGBTQ+</span>
+                <span class="stag">Solo Dev</span>
+                <span class="stag">Steam</span>
+              </div>
+              <a href="https://store.steampowered.com/app/4650350/BCKSPCE/" target="_blank" class="slide-link">View on Steam</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 03 One Final Winter -->
+        <div class="slide">
+          <div class="slide-inner">
+            <div class="slide-media">
+              <img src="COMINGSOON.png" alt="One Final Winter" loading="lazy" onerror="this.parentElement.className+=' fill-ofw';this.style.display='none'">
+            </div>
+            <div class="slide-content">
+              <span class="slide-n">03 / 03</span>
+              <span class="slide-status status-dev">In Development</span>
+              <h3 class="slide-title">One Final<br>Winter</h3>
+              <div class="slide-role">Solo Developer, Sequel to BCKSPCE</div>
+              <p class="slide-desc">The follow-up to BCKSPCE. Returning to the retro desktop thriller format, One Final Winter goes deeper, colder, and darker than its predecessor. Details coming soon.</p>
+              <div class="slide-tags">
+                <span class="stag">Visual Novel</span>
+                <span class="stag">Thriller</span>
+                <span class="stag">Sequel</span>
+                <span class="stag">Solo Dev</span>
+              </div>
+              <span class="slide-link slide-link-off">Announcement TBA</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="car-controls reveal">
+      <button class="car-btn" id="prev" aria-label="Previous project">
+        <svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"/></svg>
+      </button>
+      <div class="car-dots" id="dots">
+        <div class="cdot on" data-i="0"></div>
+        <div class="cdot" data-i="1"></div>
+        <div class="cdot" data-i="2"></div>
+      </div>
+      <button class="car-btn" id="next" aria-label="Next project">
+        <svg viewBox="0 0 24 24"><polyline points="9,18 15,12 9,6"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ── JAM WORK ───────────────────────────── -->
+<div id="jams" style="position:relative;z-index:1;">
+  <div style="max-width:1040px;margin:0 auto;padding:0 40px 18px;position:relative;z-index:1;">
+    <span class="label reveal">Game Jams</span>
+  </div>
+  <div class="jam-grid reveal" style="max-width:1040px;margin:0 auto;padding:0 40px;">
+    <div class="jam-card">
+      <div class="jam-thumb"><img src="coverart2.png" alt="Protocol: Shutdown" loading="lazy"></div>
+      <span class="jam-sub">Brackey's Game Jam 2024</span>
+      <div class="jam-name">Protocol: Shutdown</div>
+      <p class="jam-desc">Cyberpunk twin-stick shooter built in Unity over 7 days. Co-developed from concept to published release.</p>
+      <a href="https://bradleycurtis.itch.io/protocolshutdown" target="_blank" class="jam-link">Play on itch.io</a>
+    </div>
+    <div class="jam-card">
+      <div class="jam-thumb"><img src="cwimg.png" alt="Colourways" loading="lazy"></div>
+      <span class="jam-sub">UCA Technical Art Jam 2024</span>
+      <div class="jam-name">Colourways</div>
+      <p class="jam-desc">3D puzzle platformer exhibited at Guildford Games Festival 2026. Co-developed submission showcasing technical art direction.</p>
+      <a href="https://harry-dillamore.itch.io/colorways" target="_blank" class="jam-link">Play on itch.io</a>
+    </div>
+  </div>
+</div>
+
+<div class="rule" style="margin:72px 0 0;"></div>
+
+<!-- ── QUALIFICATIONS ────────────────────── -->
 <section id="qualifications">
   <div class="wrap">
-    <div class="s-head reveal">
-      <span class="sec-num">01</span>
-      <h2 class="s-title">QUALIFICATIONS</h2>
-      <div class="s-line"></div>
+    <div class="reveal" style="margin-bottom:44px;">
+      <span class="label">Qualifications</span>
+      <h2 class="heading">Education and Experience</h2>
     </div>
     <div class="quals-grid">
-
-      <div class="q-card chrome reveal">
-        <div class="q-label">EDUCATION</div>
-        <div class="q-title">BSc Games Development</div>
-        <div class="q-sub">FINAL YEAR · GRADUATING 2026</div>
-        <div class="q-detail">
-          Specialising in game engineering, narrative systems, and production leadership. Exhibited at Guildford Games Festival 2026.
-        </div>
+      <div class="q-panel reveal">
+        <span class="q-top">Education</span>
+        <div class="q-hed">BSc Games Development</div>
+        <div class="q-meta">Final Year, Graduating 2027</div>
+        <p class="q-body">Specialising in game engineering, narrative systems, and production leadership. Standout project exhibited at Guildford Games Festival 2026.</p>
       </div>
-
-      <div class="q-card chrome reveal">
-        <div class="q-label">EXPERIENCE</div>
+      <div class="q-panel reveal">
+        <span class="q-top">Studio Roles</span>
         <div class="role-list">
           <div>
-            <div class="role-name">CEO &amp; Lead Developer</div>
-            <div class="role-ctx">Team INNERMINDS · Within Time · ongoing</div>
+            <div class="role-name">Founder and Lead Developer</div>
+            <div class="role-ctx">Team INNERMINDS, Within Time, ongoing</div>
           </div>
           <div>
             <div class="role-name">Solo Developer</div>
-            <div class="role-ctx">BCKSPCE · Steam · 2024 · released</div>
+            <div class="role-ctx">BCKSPCE, Steam, 2024, shipped</div>
           </div>
           <div>
             <div class="role-name">Solo Developer</div>
-            <div class="role-ctx">One Final Winter · in development</div>
+            <div class="role-ctx">One Final Winter, in development</div>
+          </div>
+          <div>
+            <div class="role-name">Developer</div>
+            <div class="role-ctx">Unreleased multiplayer title</div>
+          </div>
+        </div>
+      </div>
+      <div class="q-panel reveal">
+        <span class="q-top">Game Jams</span>
+        <div class="role-list">
+          <div>
+            <div class="role-name">Co-Developer</div>
+            <div class="role-ctx">Brackey's Jam 2024, Protocol: Shutdown</div>
           </div>
           <div>
             <div class="role-name">Co-Developer</div>
-            <div class="role-ctx">Brackey's Jam · UCA Tech Art Jam</div>
+            <div class="role-ctx">UCA Tech Art Jam 2024, Colourways</div>
           </div>
         </div>
       </div>
-
-      <div class="q-card chrome reveal skills-wrap">
-        <div class="q-label">CORE SKILLS</div>
-        <div class="skills-cloud">
-          <span class="sk-tag">Godot Engine</span>
-          <span class="sk-tag">Unity</span>
-          <span class="sk-tag">GDScript</span>
-          <span class="sk-tag">C#</span>
-          <span class="sk-tag">Game Design</span>
-          <span class="sk-tag">Narrative Design</span>
-          <span class="sk-tag">Systems Design</span>
-          <span class="sk-tag">Art Direction</span>
-          <span class="sk-tag">Pixel Art</span>
-          <span class="sk-tag">Digital Painting</span>
-          <span class="sk-tag">Music Composition</span>
-          <span class="sk-tag">FL Studio</span>
-          <span class="sk-tag">Team Leadership</span>
-          <span class="sk-tag">Project Management</span>
-          <span class="sk-tag">UI / UX Design</span>
-          <span class="sk-tag">Git &amp; Version Control</span>
+      <div class="q-panel skills-wrap reveal">
+        <span class="q-top">Skills</span>
+        <div class="sk-list">
+          <span class="sk">Godot Engine</span><span class="sk">Unity</span><span class="sk">Unreal Engine</span><span class="sk">GDScript</span><span class="sk">C#</span><span class="sk">GML</span>
+          <span class="sk">Game Design</span><span class="sk">Narrative Design</span><span class="sk">Systems Design</span>
+          <span class="sk">Art Direction</span><span class="sk">Pixel Art</span><span class="sk">Digital Painting</span>
+          <span class="sk">Music Composition</span><span class="sk">FL Studio</span>
+          <span class="sk">Team Leadership</span><span class="sk">Project Management</span>
+          <span class="sk">UI / UX Design</span><span class="sk">Git</span>
         </div>
       </div>
 
+      <div class="q-panel bio-wrap reveal">
+        <span class="q-top">Background</span>
+        <div class="bio-cols">
+          <p>
+            Self-taught since the age of 14, when early experimentation with <strong>RPG Maker</strong> and <strong>JavaScript</strong> laid the groundwork for a serious interest in game development. What followed was years of self-directed learning across engines and languages, developing fluency in <strong>C#</strong> through Unity and <strong>GameMaker Language</strong> through Game Maker Studio, building that knowledge through shipped projects rather than formal instruction.
+          </p>
+          <p>
+            <strong>Unreal Engine</strong> has been part of the toolkit for three years, most notably as the foundation for Colourways. In 2024, <strong>Godot</strong> became the engine of choice for all primary development. Within Time, BCKSPCE, and One Final Winter are each built on its architecture, a deliberate consolidation around a platform that rewards disciplined systems thinking. That same self-directed sensibility extends to visual work: <strong>eight years as a pixel artist</strong>, serving as lead artist on Within Time, have made art direction and asset production as native to the process as writing code.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ── PROJECTS ──────────────────────────────────── -->
-<section id="projects">
-  <div class="wrap">
-    <div class="s-head reveal">
-      <span class="sec-num">02</span>
-      <h2 class="s-title">PROJECTS</h2>
-      <div class="s-line"></div>
-    </div>
+<div class="rule"></div>
 
-    <div class="proj-stack">
-
-      <!-- BCKSPCE -->
-      <div class="proj-card pc-bckspce reveal">
-        <div class="proj-inner">
-          <div class="proj-thumb">
-            <div class="bckspce-thumb-inner">
-              <div class="bckspce-win">
-                <div class="bckspce-bar">
-                  <span>BCKSPCE.EXE</span><span>─ □ ×</span>
-                </div>
-                <div class="bckspce-desktop">
-                  <div class="bckspce-line">███ NEW MESSAGE</div>
-                  <div class="bckspce-line" style="opacity:0.6;">FROM: [unknown]</div>
-                  <div class="bckspce-line" style="opacity:0.5;margin-top:4px;">SUBJECT: we need to talk</div>
-                  <div class="bckspce-line warn blink" style="margin-top:12px;">⚠ ACCEPT?</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="proj-body">
-            <div class="proj-meta-row">
-              <span class="status-pill sp-done">COMPLETED</span>
-              <span class="status-pill sp-steam">ON STEAM</span>
-              <span class="proj-year">2024 · SOLO DEV</span>
-            </div>
-            <div class="proj-name">BCKSPCE</div>
-            <div class="proj-role">Solo Developer · Psychological Thriller Visual Novel</div>
-            <p class="proj-desc">A narrative-driven psychological thriller told entirely through a retro desktop interface. When an unknown friend request comes in, you begin to question your friendship with Stella. Your digital sanctuary quickly unravels as the truth comes out.</p>
-            <div class="proj-tags">
-              <span class="pt" style="border-color:#cc3366;color:#cc3366;">Visual Novel</span>
-              <span class="pt" style="border-color:#993355;color:#993355;">Psychological Thriller</span>
-              <span class="pt" style="border-color:#773355;color:#773355;">LGBTQ+</span>
-              <span class="pt" style="border-color:#553366;color:#553366;">Retro Desktop UI</span>
-            </div>
-            <a href="https://store.steampowered.com/app/4650350/BCKSPCE/" target="_blank" class="proj-btn">▶ VIEW ON STEAM</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Within Time -->
-      <div class="proj-card pc-within reveal">
-        <div class="proj-inner">
-          <div class="proj-thumb">
-            <img src="timeforanewera.png" alt="Within Time" onerror="this.parentElement.style.display='none'">
-          </div>
-          <div class="proj-body">
-            <div class="proj-meta-row">
-              <span class="status-pill sp-dev">IN DEVELOPMENT</span>
-              <span class="proj-year">ONGOING · TEAM INNERMINDS</span>
-            </div>
-            <div class="proj-name">WITHIN TIME</div>
-            <div class="proj-role">CEO &amp; Lead Developer · Team INNERMINDS · Flagship Title</div>
-            <p class="proj-desc">An ambitious turn-based RPG built in Godot, blending SNES-era nostalgia with modern tactical depth. Directing all aspects as CEO of Team INNERMINDS — systems architecture, narrative, and art direction — across 13 playable characters with the unique STANCE combat system.</p>
-            <div class="proj-tags">
-              <span class="pt" style="border-color:#ffaa33;color:#ffaa33;">TBRPG</span>
-              <span class="pt" style="border-color:#cc8800;color:#cc8800;">Godot Engine</span>
-              <span class="pt" style="border-color:#aa6600;color:#aa6600;">STANCE System</span>
-              <span class="pt" style="border-color:#887700;color:#887700;">13 Characters</span>
-            </div>
-            <a href="https://store.steampowered.com/app/2302230/Within_Time" target="_blank" class="proj-btn">▶ VIEW ON STEAM</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- One Final Winter -->
-      <div class="proj-card pc-ofw reveal">
-        <div class="proj-inner">
-          <div class="proj-thumb">
-            <img src="COMINGSOON.png" alt="One Final Winter" onerror="this.parentElement.style.display='none'">
-          </div>
-          <div class="proj-body">
-            <div class="proj-meta-row">
-              <span class="status-pill sp-dev">IN DEVELOPMENT</span>
-              <span class="proj-year">2025 · SOLO DEV</span>
-            </div>
-            <div class="proj-name">ONE FINAL WINTER</div>
-            <div class="proj-role">Solo Developer · Sequel to BCKSPCE</div>
-            <p class="proj-desc">The follow-up to BCKSPCE. Returning to the retro desktop interface format, One Final Winter is a new psychological thriller — deeper, colder, and darker than its predecessor. More details coming soon.</p>
-            <div class="proj-tags">
-              <span class="pt" style="border-color:#80c8ff;color:#80c8ff;">Visual Novel</span>
-              <span class="pt" style="border-color:#5599cc;color:#5599cc;">Psychological Thriller</span>
-              <span class="pt" style="border-color:#3366aa;color:#3366aa;">Sequel to BCKSPCE</span>
-            </div>
-            <span class="proj-btn proj-btn-disabled" style="border-color:#80c8ff;color:#80c8ff;">▶ ANNOUNCEMENT SOON</span>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /proj-stack -->
-
-    <div class="jam-label reveal">GAME JAM VAULT</div>
-    <div class="jam-grid">
-
-      <div class="jam-card chrome reveal">
-        <div class="jc-name">PROTOCOL: SHUTDOWN</div>
-        <div class="jc-sub">Cyberpunk twin-stick shooter · Brackey's Game Jam 2024 · Unity · 7 days · co-dev</div>
-        <span class="status-pill sp-done" style="display:inline-flex;margin-bottom:10px;">COMPLETE</span><br>
-        <a href="https://bradleycurtis.itch.io/protocolshutdown" target="_blank" class="jc-link">▶ OPEN ON ITCH.IO →</a>
-      </div>
-
-      <div class="jam-card chrome reveal">
-        <div class="jc-name">COLOURWAYS</div>
-        <div class="jc-sub">3D puzzle platformer · UCA Technical Art Jam 2024 · exhibited at Guildford Games Fest 2026</div>
-        <span class="status-pill sp-done" style="display:inline-flex;margin-bottom:10px;">COMPLETE</span><br>
-        <a href="https://harry-dillamore.itch.io/colorways" target="_blank" class="jc-link">▶ OPEN ON ITCH.IO →</a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ── LINKS ─────────────────────────────────────── -->
+<!-- ── LINKS ─────────────────────────────── -->
 <section id="links">
   <div class="wrap">
-    <div class="s-head reveal">
-      <span class="sec-num">03</span>
-      <h2 class="s-title">FIND ME</h2>
-      <div class="s-line"></div>
+    <div class="reveal" style="margin-bottom:36px;">
+      <span class="label">Contact and Links</span>
+      <h2 class="heading">Find Me</h2>
     </div>
-    <div class="links-grid">
-
-      <a href="mailto:lunaviadev@gmail.com" class="link-card chrome reveal">
-        <svg class="lc-svg" viewBox="0 0 24 24">
-          <rect x="2" y="4" width="20" height="16" rx="1"/>
-          <polyline points="2,4 12,14 22,4"/>
-        </svg>
-        <span class="lc-name">EMAIL</span>
-        <span class="lc-detail">lunaviadev@gmail.com</span>
+    <div class="links-list reveal">
+      <a href="mailto:lunaviadev@gmail.com" class="lc">
+        <span class="lc-platform">Email</span>
+        <span class="lc-name">Get in Touch</span>
+        <span class="lc-handle">lunaviadev@gmail.com</span>
       </a>
-
-      <a href="https://x.com/withintimegame" target="_blank" class="link-card chrome reveal">
-        <img class="lc-img" src="icons/twitter.png" alt="X / Twitter" onerror="this.outerHTML='<svg class=\'lc-svg\' viewBox=\'0 0 24 24\'><path d=\'M18 6L6 18M6 6l12 12\'/></svg>'">
-        <span class="lc-name">TWITTER / X</span>
-        <span class="lc-detail">@Lunavia</span>
+      <a href="https://x.com/withintimegame" target="_blank" class="lc">
+        <span class="lc-platform">Twitter / X</span>
+        <span class="lc-name">@Lunavia</span>
+        <span class="lc-handle">Updates and announcements</span>
       </a>
-
-      <div class="link-card chrome reveal" onclick="copyDiscord()" style="cursor:pointer;">
-        <img class="lc-img" src="icons/discord.png" alt="Discord" onerror="this.outerHTML='<svg class=\'lc-svg\' viewBox=\'0 0 24 24\'><circle cx=\'12\' cy=\'12\' r=\'10\'/><path d=\'M8 12h8M8 9h5M8 15h5\'/></svg>'">
-        <span class="lc-name">DISCORD</span>
-        <span class="lc-detail" id="disc-text">lunavia.gd · click to copy</span>
+      <div class="lc" onclick="copyDiscord()" style="cursor:pointer;" role="button" tabindex="0">
+        <span class="lc-platform">Discord</span>
+        <span class="lc-name">lunavia.gd</span>
+        <span class="lc-handle" id="disc-txt">Click to copy</span>
       </div>
-
-      <a href="https://store.steampowered.com/developer/innerminds" target="_blank" class="link-card chrome reveal">
-        <img class="lc-img" src="icons/steam.png" alt="Steam" onerror="this.outerHTML='<svg class=\'lc-svg\' viewBox=\'0 0 24 24\'><circle cx=\'12\' cy=\'12\' r=\'10\'/><circle cx=\'12\' cy=\'12\' r=\'4\'/></svg>'">
-        <span class="lc-name">STEAM</span>
-        <span class="lc-detail">INNERMINDS Studio</span>
+      <a href="https://store.steampowered.com/publisher/lunavia" target="_blank" class="lc">
+        <span class="lc-platform">Steam</span>
+        <span class="lc-name">Lunavia</span>
+        <span class="lc-handle">Publisher page</span>
       </a>
-
-      <a href="https://lunavia.itch.io" target="_blank" class="link-card chrome reveal">
-        <img class="lc-img" src="icons/itchio.png" alt="Itch.io" onerror="this.outerHTML='<svg class=\'lc-svg\' viewBox=\'0 0 24 24\'><rect x=\'3\' y=\'6\' width=\'18\' height=\'14\' rx=\'2\'/><path d=\'M3 9h18\'/></svg>'">
-        <span class="lc-name">ITCH.IO</span>
-        <span class="lc-detail">Game Jam Vault</span>
+      <a href="https://lunavia.itch.io" target="_blank" class="lc">
+        <span class="lc-platform">Itch.io</span>
+        <span class="lc-name">lunavia</span>
+        <span class="lc-handle">Game jam releases</span>
       </a>
-
     </div>
   </div>
 </section>
 
-<!-- ── ABOUT ─────────────────────────────────────── -->
+<div class="rule"></div>
+
+<!-- ── ABOUT ─────────────────────────────── -->
 <section id="about">
   <div class="wrap">
-    <div class="s-head reveal">
-      <span class="sec-num">04</span>
-      <h2 class="s-title">ABOUT ME</h2>
-      <div class="s-line"></div>
+    <div class="reveal" style="margin-bottom:44px;">
+      <span class="label">About</span>
+      <h2 class="heading">A bit about me</h2>
     </div>
-
-    <div class="bbs-post reveal">
-
-      <div class="bbs-sidebar">
-        <div class="bbs-avi">
-          <img src="DEVLOGO.png" alt="J" onerror="this.parentElement.textContent='J'">
+    <div class="about-layout">
+      <div class="about-text reveal">
+        <p>
+          I'm <strong>Josie</strong>, a trans game developer from the UK in my final year of a BSc in Games Development, graduating 2027.
+        </p>
+        <p>
+          As <strong>Founder and Lead Developer of Team INNERMINDS</strong>, I oversee all areas of <strong>Within Time</strong>, my flagship TBRPG currently in development on Steam. I'm also the solo developer of both <strong>BCKSPCE</strong> (live on Steam) and its sequel <strong>One Final Winter</strong>, as well as having worked on an unreleased multiplayer title.
+        </p>
+        <p>
+          Outside of game dev I make music, draw pixel art and digital paintings, and spend too much time in FFXIV. Big fan of early-2000s internet energy and all things webcore.
+        </p>
+      </div>
+      <div class="about-meta reveal">
+        <div>
+          <span class="am-label">Currently</span>
+          <div class="am-items">
+            <span class="am-item">Within Time (dev)</span>
+            <span class="am-item">One Final Winter (dev)</span>
+            <span class="am-item">Final year student</span>
+          </div>
         </div>
-        <div class="bbs-uname">LUNAVIA</div>
-        <div class="bbs-utitle">✛ site owner</div>
-        <div class="bbs-stats">
-          posts: 404<br>
-          joined: 2004<br>
-          rep: ★★★★★<br>
-          uk 🇬🇧
+        <div>
+          <span class="am-label">Interests</span>
+          <div class="am-items">
+            <span class="am-item">Webcore / Y2K</span>
+            <span class="am-item">Frutiger Aero</span>
+            <span class="am-item">Pixel Art</span>
+            <span class="am-item">Music</span>
+            <span class="am-item">Persona / SMT</span>
+            <span class="am-item">Binding of Isaac</span>
+            <span class="am-item">FFXIV</span>
+            <span class="am-item">Space</span>
+          </div>
+        </div>
+        <div>
+          <span class="am-label">Identity</span>
+          <div class="am-items">
+            <span class="am-item">She / Her</span>
+            <span class="am-item">Trans</span>
+            <span class="am-item">UK</span>
+          </div>
         </div>
       </div>
-
-      <div class="bbs-main">
-        <div class="bbs-topbar">
-          <span>POST #001 — PINNED INTRO</span>
-          <span>last edited: always <span class="blink">▌</span></span>
-        </div>
-        <div class="bbs-body">
-          <p>hey! i'm <strong>josie</strong> (lunavia online) — a trans game developer from the UK. welcome to my little corner of the internet!</p>
-          <p>i'm in my <strong>final year</strong> of a Games Development degree, and i spend most of my time buried in game engines, writing dialogue trees, and drinking a genuinely irresponsible amount of tea.</p>
-          <p>i wear a lot of hats — <em>CEO &amp; lead dev</em> of Team INNERMINDS on <strong>Within Time</strong>, solo dev on <strong>BCKSPCE</strong> (now live on Steam!), and deep in production on its follow-up, <strong>One Final Winter</strong>.</p>
-          <p>outside of game dev: i make music (lots of guitar, some FL Studio), draw pixel art &amp; digital paintings, and sink way too many hours into FFXIV. big fan of anything with that early-2000s internet energy — webcore, Y2K aesthetics, the whole deal.</p>
-          <p>feel free to poke around. enjoy your stay <span class="blink">▌</span></p>
-        </div>
-        <div class="bbs-badges">
-          <span class="badge">Webcore / Y2K</span>
-          <span class="badge">Frutiger Aero</span>
-          <span class="badge">Indie Music</span>
-          <span class="badge">Pixel Art</span>
-          <span class="badge">Digital Painting</span>
-          <span class="badge">Persona / SMT</span>
-          <span class="badge">Binding of Isaac</span>
-          <span class="badge">Space &amp; Astrology</span>
-          <span class="badge">JoJo's Bizarre Adventure</span>
-          <span class="badge">Saiki K</span>
-          <span class="badge">FFXIV Online</span>
-          <span class="badge">Overwatch</span>
-          <span class="badge">Deadlock</span>
-        </div>
-        <div class="bbs-sig">— <em>josie ✦ she/her ✦ team innerminds ✦ making games since forever</em></div>
-      </div>
-
     </div>
   </div>
 </section>
 
-<!-- ── FOOTER ────────────────────────────────────── -->
+<!-- ── FOOTER ─────────────────────────────── -->
+<div class="rule"></div>
 <footer>
-  <div class="footer-text">JOSIE · LUNAVIA · GAME DEVELOPER · lunaviadev@gmail.com</div>
+  <span class="foot-name">Josie Lunavia</span>
+  <span class="foot-copy">Game Developer · lunaviadev@gmail.com</span>
 </footer>
 
 <script>
-/* ── BOOT ─────────────────────────────────────── */
-const bootMsgs = [
-  'LOADING SYSTEM FILES…',
-  'MOUNTING PORTFOLIO.DB…',
-  'INITIALIZING PROJECT DIRECTORY…',
-  'CONNECTING TO SERVER…',
-  'LOADING LUNAVIA.EXE…',
-  'WELCOME ✦'
-];
-let bp = 0;
-const fill = document.getElementById('boot-fill');
-const msg  = document.getElementById('boot-msg');
-const boot = document.getElementById('boot');
+/* ── CAROUSEL ─────────────────────────────── */
+const track  = document.getElementById('car-track');
+const slides = track.querySelectorAll('.slide');
+const dots   = document.querySelectorAll('#dots .cdot');
+const vp = document.querySelector('.carousel-viewport');
+let cur = 0, timer;
 
-function advanceBoot() {
-  if (bp >= bootMsgs.length) {
-    boot.classList.add('hidden');
-    setTimeout(() => boot.style.display = 'none', 700);
-    return;
-  }
-  fill.style.width = Math.round((bp / bootMsgs.length) * 100) + '%';
-  msg.textContent  = bootMsgs[bp];
-  bp++;
-  setTimeout(advanceBoot, 280 + Math.random() * 200);
+function goTo(n) {
+  cur = (n + slides.length) % slides.length;
+  track.style.transform = `translateX(-${cur * (100 / slides.length)}%)`;
+  dots.forEach((d, i) => d.classList.toggle('on', i === cur));
 }
-setTimeout(advanceBoot, 380);
 
-/* ── DYNAMIC AGE ─────────────────────────────── */
-(function () {
-  const birth = new Date(2005, 9, 4);
-  const now   = new Date();
-  let age = now.getFullYear() - birth.getFullYear();
-  const m = now.getMonth() - birth.getMonth();
-  if (m < 0 || (m === 0 && now.getDate() < birth.getDate())) age--;
-  const el = document.getElementById('dyn-age');
-  if (el) el.textContent = age;
-})();
+document.getElementById('prev').addEventListener('click', () => { reset(); goTo(cur - 1); });
+document.getElementById('next').addEventListener('click', () => { reset(); goTo(cur + 1); });
+dots.forEach(d => d.addEventListener('click', () => { reset(); goTo(+d.dataset.i); }));
 
-/* ── SCROLL REVEAL ───────────────────────────── */
-const revealObserver = new IntersectionObserver(entries => {
-  entries.forEach(e => {
+vp.addEventListener('mouseenter', () => clearInterval(timer));
+vp.addEventListener('mouseleave', () => start());
+
+let sx = 0, dx = 0;
+track.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+track.addEventListener('touchmove',  e => { dx = e.touches[0].clientX - sx; }, { passive: true });
+track.addEventListener('touchend',   () => { if (Math.abs(dx) > 50) { reset(); goTo(cur + (dx < 0 ? 1 : -1)); } dx = 0; });
+
+function start() { timer = setInterval(() => goTo(cur + 1), 6500); }
+function reset() { clearInterval(timer); start(); }
+start();
+
+/* ── SCROLL REVEAL ────────────────────────── */
+const ro = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
     if (e.isIntersecting) {
+      e.target.style.transitionDelay = (i % 3) * 0.07 + 's';
       e.target.classList.add('in');
-      revealObserver.unobserve(e.target);
+      ro.unobserve(e.target);
     }
   });
-}, { threshold: 0.08, rootMargin: '0px 0px -36px 0px' });
+}, { threshold: 0.1, rootMargin: '0px 0px -24px 0px' });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
-document.querySelectorAll('.reveal').forEach((el, i) => {
-  const delay = (i % 5) * 0.07;
-  el.style.transitionDelay = delay + 's';
-  revealObserver.observe(el);
-});
-
-/* ── ACTIVE NAV ──────────────────────────────── */
-const sections  = document.querySelectorAll('section[id]');
-const navLinks  = document.querySelectorAll('.nav-link');
-
-const navObserver = new IntersectionObserver(entries => {
+/* ── ACTIVE NAV ───────────────────────────── */
+const nlinks = document.querySelectorAll('.nav-link');
+const secs   = document.querySelectorAll('section[id]');
+const navo = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
-      navLinks.forEach(l => l.classList.remove('active'));
-      const link = document.querySelector(`.nav-link[href="#${e.target.id}"]`);
-      if (link) link.classList.add('active');
+      nlinks.forEach(l => l.classList.remove('active'));
+      const t = document.querySelector(`.nav-link[href="#${e.target.id}"]`);
+      if (t) t.classList.add('active');
     }
   });
-}, { threshold: 0.35 });
+}, { threshold: 0.4 });
+secs.forEach(s => navo.observe(s));
 
-sections.forEach(s => navObserver.observe(s));
-
-/* ── DISCORD COPY ────────────────────────────── */
+/* ── DISCORD COPY ─────────────────────────── */
 function copyDiscord() {
   navigator.clipboard.writeText('lunavia.gd').catch(() => {});
-  const el = document.getElementById('disc-text');
-  el.textContent = '✓ COPIED!';
-  el.style.color = 'var(--neon)';
-  setTimeout(() => {
-    el.textContent = 'lunavia.gd · click to copy';
-    el.style.color = '';
-  }, 2000);
+  const el = document.getElementById('disc-txt');
+  el.textContent = 'Copied!';
+  el.style.color = 'var(--accent)';
+  setTimeout(() => { el.textContent = 'Click to copy'; el.style.color = ''; }, 2000);
 }
 </script>
 </body>
