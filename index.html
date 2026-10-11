@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lunavia · Game Developer</title>
-<meta name="description" content="Josie.B (Lunavia) · indie game developer, founder of Team INNERMINDS, and solo developer of BCKSPCE and One Final Winter.">
+<meta name="description" content="Josie.B (Lunavia) · indie game developer, Founder of Team INNERMINDS, solo developer of BCKSPCE and One Final Winter, and multiplayer networking developer.">
 <meta property="og:title" content="Lunavia · Game Developer">
 <meta property="og:description" content="Indie game developer, founder of Team INNERMINDS. Currently shipping Within Time on Steam.">
 <meta property="og:image" content="timeforanewera.png">
@@ -18,48 +18,37 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
 
-/* ── TOKENS ──────────────────────────────── */
+/* TOKENS */
 :root {
   --bg:      #eef5f9;
   --surface: rgba(255,255,255,0.72);
   --border:  rgba(255,255,255,0.9);
   --border2: rgba(0,0,0,0.06);
   --shadow:  0 1px 3px rgba(15,40,65,0.05), 0 8px 32px rgba(15,40,65,0.06);
-
   --ink:     #0f1f2d;
   --mid:     #4a6a82;
   --light:   #90afc4;
   --xlight:  #b8cfd9;
-
   --accent:  #1a7aa0;
-  --accent2: #5b9e78;
-
-  --ff:  'Inter', system-ui, sans-serif;
-  --fd:  'Cormorant Garamond', Georgia, serif;
+  --ff: 'Inter', system-ui, sans-serif;
+  --fd: 'Cormorant Garamond', Georgia, serif;
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-
 body {
-  font-family: var(--ff);
-  font-size: 15px;
-  line-height: 1.65;
-  color: var(--ink);
-  background: var(--bg);
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
+  font-family: var(--ff); font-size: 15px; line-height: 1.65;
+  color: var(--ink); background: var(--bg);
+  overflow-x: hidden; -webkit-font-smoothing: antialiased;
 }
-
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-thumb { background: rgba(26,122,160,0.2); }
 a { color: inherit; text-decoration: none; }
 
-/* ── BACKGROUND ──────────────────────────── */
+/* BACKGROUND */
 body::before {
-  content: '';
-  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
   background:
     radial-gradient(ellipse 900px 700px at 15% 10%,  rgba(140,210,240,0.28) 0%, transparent 70%),
     radial-gradient(ellipse 700px 600px at 85% 80%,  rgba(120,195,170,0.22) 0%, transparent 70%),
@@ -67,33 +56,26 @@ body::before {
     var(--bg);
 }
 
-/* ── NAV ─────────────────────────────────── */
+/* NAV */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  height: 56px;
-  display: flex; align-items: center; justify-content: space-between;
+  height: 56px; display: flex; align-items: center; justify-content: space-between;
   padding: 0 40px;
   background: rgba(238,245,249,0.82);
   backdrop-filter: blur(18px) saturate(1.4);
   border-bottom: 1px solid rgba(255,255,255,0.7);
 }
-.nav-logo {
-  font-family: var(--fd);
-  font-size: 1.1rem; font-weight: 300; letter-spacing: 1px;
-  color: var(--ink);
-}
+.nav-logo { font-family: var(--fd); font-size: 1.1rem; font-weight: 300; letter-spacing: 1px; color: var(--ink); }
 .nav-links { display: flex; gap: 32px; }
 .nav-link {
   font-size: 0.72rem; font-weight: 500; letter-spacing: 1.5px;
-  text-transform: uppercase; color: var(--light);
-  transition: color 0.2s;
+  text-transform: uppercase; color: var(--light); transition: color 0.2s;
 }
 .nav-link:hover, .nav-link.active { color: var(--ink); }
 
-/* ── LAYOUT ──────────────────────────────── */
+/* LAYOUT */
 .wrap { max-width: 1040px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 1; }
-section { padding: 96px 0; position: relative; z-index: 1; }
-
+section { padding: 88px 0; position: relative; z-index: 1; }
 .label {
   font-size: 0.65rem; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase;
   color: var(--accent); display: block; margin-bottom: 10px;
@@ -102,21 +84,15 @@ section { padding: 96px 0; position: relative; z-index: 1; }
   font-family: var(--fd); font-size: clamp(1.8rem, 3.5vw, 2.6rem);
   font-weight: 300; color: var(--ink); line-height: 1.15;
 }
-
 .reveal {
   opacity: 0; transform: translateY(18px);
   transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
 }
 .reveal.in { opacity: 1; transform: none; }
 
-/* ── HERO ────────────────────────────────── */
-#hero {
-  min-height: 100vh; padding-top: 56px;
-  display: flex; align-items: center;
-  position: relative; z-index: 1;
-}
+/* HERO */
+#hero { min-height: 100vh; padding-top: 56px; display: flex; align-items: center; }
 .hero-inner { padding: 0 40px; max-width: 1040px; margin: 0 auto; width: 100%; }
-
 .hero-over {
   font-size: 0.7rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
   color: var(--accent); margin-bottom: 20px; display: block;
@@ -129,106 +105,138 @@ section { padding: 96px 0; position: relative; z-index: 1; }
 }
 .hero-name em { font-style: italic; color: var(--ink); display: block; }
 .hero-realname {
-  display: block;
-  font-family: var(--ff);
+  display: block; font-family: var(--ff);
   font-size: clamp(0.85rem, 2vw, 1.1rem);
   font-weight: 400; letter-spacing: 4px; text-transform: uppercase;
   color: var(--light); margin-top: 18px; font-style: normal;
 }
 .hero-sub {
-  font-size: clamp(1rem, 2vw, 1.25rem); font-weight: 300;
-  color: var(--mid); max-width: 520px; margin-bottom: 48px; line-height: 1.7;
+  font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 300;
+  color: var(--mid); max-width: 520px; margin-bottom: 40px; line-height: 1.7;
 }
 .hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .btn-primary {
   font-size: 0.72rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
-  padding: 13px 28px;
-  background: var(--ink); color: #fff;
-  border: 1px solid var(--ink);
-  transition: background 0.2s, color 0.2s;
-  display: inline-block;
+  padding: 13px 28px; background: var(--ink); color: #fff;
+  border: 1px solid var(--ink); transition: background 0.2s, color 0.2s; display: inline-block;
 }
 .btn-primary:hover { background: var(--accent); border-color: var(--accent); }
 .btn-ghost {
   font-size: 0.72rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
-  padding: 13px 28px;
-  background: transparent; color: var(--mid);
-  border: 1px solid var(--border2);
-  transition: border-color 0.2s, color 0.2s;
-  display: inline-block;
+  padding: 13px 28px; background: transparent; color: var(--mid);
+  border: 1px solid var(--border2); transition: border-color 0.2s, color 0.2s; display: inline-block;
 }
 .btn-ghost:hover { border-color: var(--ink); color: var(--ink); }
 .hero-scroll-hint {
-  margin-top: 80px; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase;
+  margin-top: 60px; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase;
   color: var(--xlight); display: flex; align-items: center; gap: 12px;
 }
 .hero-scroll-hint::before { content: ''; width: 24px; height: 1px; background: var(--xlight); }
 
-/* ── PROJECTS CAROUSEL ───────────────────── */
-#projects { padding: 72px 0 0; }
+/* WITHIN TIME FEATURED */
+#featured { padding: 0; }
+.wt-scene {
+  min-height: 580px; background-size: cover; background-position: center 25%;
+  position: relative; display: flex; align-items: center;
+}
+.wt-fog {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    100deg,
+    rgba(6,13,22,0.93) 0%,
+    rgba(6,13,22,0.76) 38%,
+    rgba(6,13,22,0.22) 68%,
+    transparent 100%
+  );
+}
+.wt-content-zone {
+  position: relative; z-index: 1; width: 100%;
+  max-width: 1040px; margin: 0 auto; padding: 72px 40px;
+}
+.wt-inner { max-width: 480px; }
+.wt-eyebrow { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; }
+.wt-pill {
+  font-size: 0.58rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  padding: 3px 10px;
+  background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.85);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.wt-pill-dev {
+  background: rgba(192,139,42,0.18); color: #dfaa58;
+  border-color: rgba(192,139,42,0.3);
+}
+.wt-title {
+  font-family: var(--fd); font-size: clamp(3.5rem, 7vw, 5.5rem);
+  font-weight: 300; color: #fff; line-height: 0.9;
+  letter-spacing: -0.5px; margin-bottom: 8px;
+}
+.wt-studio {
+  font-size: 0.68rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,0.38); margin-bottom: 24px; display: block;
+}
+.wt-desc {
+  font-size: 0.88rem; color: rgba(255,255,255,0.7); line-height: 1.82; margin-bottom: 32px;
+}
+.wt-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+.wt-btn {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 12px 24px; display: inline-block; transition: all 0.2s;
+}
+.wt-btn-primary {
+  background: rgba(255,255,255,0.95); color: #060d16; border: 1px solid transparent;
+}
+.wt-btn-primary:hover { background: #fff; }
+.wt-btn-ghost {
+  background: transparent; color: rgba(255,255,255,0.82);
+  border: 1px solid rgba(255,255,255,0.3);
+}
+.wt-btn-ghost:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.55); color: #fff; }
+.wt-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.stag-dim {
+  font-size: 0.62rem; font-weight: 500; letter-spacing: 0.5px; padding: 3px 10px;
+  background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.42);
+  border: 1px solid rgba(255,255,255,0.12);
+}
 
+/* CAROUSEL */
+#projects { padding: 72px 0 0; }
 .section-head {
   margin-bottom: 48px; padding: 0 40px;
   max-width: 1040px; margin-left: auto; margin-right: auto;
 }
-
 .carousel-outer { position: relative; z-index: 1; }
-
-.carousel-viewport {
-  overflow: hidden;
-  width: 100%;
-}
-
+.carousel-viewport { overflow: hidden; width: 100%; }
 .carousel-track {
-  display: flex;
-  width: 300%; /* 3 slides — update if count changes */
-  transition: transform 0.62s var(--ease);
-  will-change: transform;
+  display: flex; width: 300%;
+  transition: transform 0.62s var(--ease); will-change: transform;
 }
-
-/* Each slide = 1/3 of track = 100% of viewport */
-.slide {
-  width: calc(100% / 3);
-  flex-shrink: 0;
-}
-
-/* Inner grid: image | text, max-width centered */
+.slide { width: calc(100% / 3); flex-shrink: 0; }
 .slide-inner {
-  max-width: 1040px;
-  margin: 0 auto;
-  padding: 0 40px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 480px;
+  max-width: 1040px; margin: 0 auto; padding: 0 40px;
+  display: grid; grid-template-columns: 1fr 1fr; min-height: 480px;
 }
-
-.slide-media {
-  overflow: hidden; position: relative;
-  background: #d4e8f0;
-}
+.slide-media { overflow: hidden; position: relative; background: #d4e8f0; }
 .slide-media img {
   width: 100%; height: 100%; object-fit: cover;
-  transition: transform 0.6s var(--ease);
-  display: block;
+  transition: transform 0.6s var(--ease); display: block;
 }
 .slide:hover .slide-media img { transform: scale(1.04); }
-
-/* Colour-fill panels for projects without images */
 .fill-bckspce {
   background: linear-gradient(145deg, #140d1e 0%, #2d1440 50%, #120c1a 100%);
+  display: flex; align-items: center; justify-content: center;
+}
+.fill-ovrload {
+  background: linear-gradient(145deg, #07080d 0%, #0d1018 45%, #050608 100%);
   display: flex; align-items: center; justify-content: center;
 }
 .fill-ofw {
   background: linear-gradient(145deg, #0a1420 0%, #162840 50%, #080e18 100%);
   display: flex; align-items: center; justify-content: center;
 }
-
 .slide-content {
-  background: var(--surface);
-  backdrop-filter: blur(20px) saturate(1.3);
-  border: 1px solid var(--border);
-  border-left: none;
-  padding: 52px 44px;
+  background: var(--surface); backdrop-filter: blur(20px) saturate(1.3);
+  border: 1px solid var(--border); border-left: none;
+  padding: 48px 44px;
   display: flex; flex-direction: column; justify-content: center;
   box-shadow: var(--shadow);
 }
@@ -239,7 +247,7 @@ section { padding: 96px 0; position: relative; z-index: 1; }
 .slide-status {
   display: inline-flex; align-items: center; gap: 6px;
   font-size: 0.62rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
-  margin-bottom: 18px; color: var(--mid);
+  margin-bottom: 16px; color: var(--mid);
 }
 .slide-status::before {
   content: ''; width: 6px; height: 6px; border-radius: 50%;
@@ -247,82 +255,72 @@ section { padding: 96px 0; position: relative; z-index: 1; }
 }
 .status-dev  { color: #c08b2a; }
 .status-done { color: var(--accent); }
-
-.slide-badge {
-  display: inline-block;
-  font-size: 0.58rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
-  padding: 3px 10px; margin-bottom: 10px;
-  background: var(--accent); color: #fff;
-}
-
+.status-unrel { color: #8872b0; }
 .slide-title {
   font-family: var(--fd); font-size: clamp(2.2rem, 4vw, 3.4rem);
-  font-weight: 300; line-height: 1; color: var(--ink); margin-bottom: 8px;
-  letter-spacing: -0.5px;
+  font-weight: 300; line-height: 1; color: var(--ink); margin-bottom: 8px; letter-spacing: -0.5px;
 }
-.slide-role {
-  font-size: 0.75rem; color: var(--light); margin-bottom: 20px; font-weight: 400;
-}
-.slide-desc {
-  font-size: 0.88rem; color: var(--mid); line-height: 1.8; margin-bottom: 28px;
-}
-.slide-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 28px; }
+.slide-role { font-size: 0.75rem; color: var(--light); margin-bottom: 18px; font-weight: 400; }
+.slide-desc { font-size: 0.88rem; color: var(--mid); line-height: 1.8; margin-bottom: 22px; }
+.slide-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
 .stag {
-  font-size: 0.62rem; font-weight: 500; letter-spacing: 0.5px;
-  padding: 3px 10px;
+  font-size: 0.62rem; font-weight: 500; letter-spacing: 0.5px; padding: 3px 10px;
   background: rgba(26,122,160,0.07); color: var(--accent);
   border: 1px solid rgba(26,122,160,0.15);
 }
-.slide-link {
-  font-size: 0.7rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
-  color: var(--ink); display: inline-flex; align-items: center; gap: 8px;
-  transition: color 0.2s; align-self: flex-start;
-}
-.slide-link:hover { color: var(--accent); }
-.slide-link-off { color: var(--xlight); pointer-events: none; }
 
-/* Carousel controls */
+/* EXPANDED CAROUSEL BUTTONS */
+.slide-link {
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--ink); display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 22px; border: 1px solid var(--ink);
+  transition: all 0.22s; align-self: flex-start; background: transparent;
+}
+.slide-link svg { width: 12px; height: 12px; transition: transform 0.2s; }
+.slide-link:hover { background: var(--ink); color: #fff; }
+.slide-link:hover svg { transform: translateX(3px); }
+.slide-link-off { color: var(--xlight); pointer-events: none; border-color: var(--xlight); }
+
+/* CAROUSEL CONTROLS */
 .car-controls {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 28px 40px 0; max-width: 1040px; margin: 0 auto 96px;
+  padding: 28px 40px 0; max-width: 1040px; margin: 0 auto 88px;
   position: relative; z-index: 1;
 }
 .car-btn {
-  width: 42px; height: 42px;
-  background: var(--surface); border: 1px solid var(--border2);
-  backdrop-filter: blur(12px);
-  display: flex; align-items: center; justify-content: center;
+  width: 42px; height: 42px; background: var(--surface); border: 1px solid var(--border2);
+  backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: center;
   cursor: pointer; transition: all 0.2s; color: var(--mid);
 }
 .car-btn:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
 .car-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .car-dots { display: flex; gap: 10px; }
-.cdot {
-  width: 5px; height: 5px; border-radius: 50%;
-  background: var(--xlight); cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
-}
+.cdot { width: 5px; height: 5px; border-radius: 50%; background: var(--xlight); cursor: pointer; transition: background 0.2s, transform 0.2s; }
 .cdot.on { background: var(--ink); transform: scale(1.4); }
 
-/* ── JAM WORK ───────────────────────────── */
+/* JAM GRID */
 .jam-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border2); }
-.jam-card {
-  background: var(--bg); padding: 36px 40px;
-  transition: background 0.2s;
-}
+.jam-card { background: var(--bg); padding: 36px 40px; transition: background 0.2s; }
 .jam-card:hover { background: rgba(255,255,255,0.6); }
-.jam-thumb {
-  width: 100%; aspect-ratio: 16/7; overflow: hidden; margin-bottom: 22px;
-}
+.jam-thumb { width: 100%; aspect-ratio: 16/7; overflow: hidden; margin-bottom: 22px; position: relative; }
 .jam-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s var(--ease); }
 .jam-card:hover .jam-thumb img { transform: scale(1.04); }
+.jam-thumb::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to bottom, transparent 45%, rgba(238,245,249,0.55) 100%);
+}
 .jam-sub  { font-size: 0.65rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; display: block; }
 .jam-name { font-family: var(--fd); font-size: 1.5rem; font-weight: 400; color: var(--ink); margin-bottom: 8px; }
 .jam-desc { font-size: 0.83rem; color: var(--mid); margin-bottom: 18px; line-height: 1.7; }
-.jam-link { font-size: 0.68rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mid); transition: color 0.2s; }
-.jam-card:hover .jam-link { color: var(--accent); }
+.jam-link {
+  font-size: 0.66rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--mid); display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 18px; border: 1px solid var(--border2);
+  transition: all 0.2s; margin-top: 4px; background: transparent;
+}
+.jam-card:hover .jam-link { color: var(--ink); border-color: var(--ink); }
 
-/* ── QUALIFICATIONS ─────────────────────── */
+/* QUALIFICATIONS */
 .quals-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--border2); }
 .q-panel { background: var(--bg); padding: 36px 38px; }
 .q-top { font-size: 0.65rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; display: block; }
@@ -337,48 +335,52 @@ section { padding: 96px 0; position: relative; z-index: 1; }
 .bio-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 4px; }
 .bio-cols p { font-size: 0.88rem; color: var(--mid); line-height: 1.85; }
 .bio-cols strong { color: var(--ink); font-weight: 600; }
-@media (max-width: 800px) { .bio-cols { grid-template-columns: 1fr; gap: 16px; } }
-.sk-list { display: flex; flex-wrap: wrap; gap: 8px; }
-.sk {
-  font-size: 0.7rem; font-weight: 500; letter-spacing: 0.3px;
-  padding: 6px 14px;
-  background: rgba(255,255,255,0.7); color: var(--mid);
-  border: 1px solid var(--border2);
+
+/* SKILLS REDESIGN */
+.skills-sub-label {
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--light); display: block; margin-bottom: 14px;
+}
+
+/* Hard skills: logo cards */
+.hard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 10px; margin-bottom: 32px;
+}
+.hsk {
+  background: rgba(255,255,255,0.65); border: 1px solid rgba(0,0,0,0.05);
+  padding: 18px 10px 14px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  transition: transform 0.18s, box-shadow 0.18s; cursor: default;
+}
+.hsk:hover { transform: translateY(-2px); box-shadow: 0 4px 18px rgba(15,40,65,0.1); }
+.hsk img { width: 34px; height: 34px; object-fit: contain; display: block; }
+.hsk-name {
+  font-size: 0.55rem; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase;
+  color: var(--mid); text-align: center; line-height: 1.3;
+}
+
+/* Soft skills: pill tags */
+.soft-grid { display: flex; flex-wrap: wrap; gap: 7px; }
+.ssk {
+  font-size: 0.68rem; font-weight: 500; letter-spacing: 0.3px; padding: 5px 13px;
+  background: rgba(255,255,255,0.6); color: var(--mid); border: 1px solid var(--border2);
   cursor: default; transition: all 0.15s;
 }
-.sk:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+.ssk:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
 
-/* ── LINKS ───────────────────────────────── */
+/* LINKS */
 .links-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1px; background: var(--border2); }
-.lc {
-  background: var(--bg); padding: 30px 32px;
-  display: block; transition: background 0.2s;
-}
+.lc { background: var(--bg); padding: 30px 32px; display: block; transition: background 0.2s; }
 .lc:hover { background: rgba(255,255,255,0.6); }
 .lc-platform { font-size: 0.62rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 8px; }
 .lc-name { font-family: var(--fd); font-size: 1.15rem; font-weight: 400; color: var(--ink); display: block; margin-bottom: 4px; }
 .lc-handle { font-size: 0.75rem; color: var(--light); transition: color 0.2s; display: block; }
 .lc:hover .lc-handle { color: var(--accent); }
 
-/* ── ABOUT ───────────────────────────────── */
-.about-layout { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; }
-.about-text p { font-size: 0.92rem; color: var(--mid); line-height: 1.9; margin-bottom: 18px; }
-.about-text p:last-child { margin-bottom: 0; }
-.about-text strong { color: var(--ink); font-weight: 600; }
-.about-meta { display: flex; flex-direction: column; gap: 28px; }
-.am-label { font-size: 0.62rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 10px; }
-.am-items { display: flex; flex-wrap: wrap; gap: 6px; }
-.am-item {
-  font-size: 0.72rem; font-weight: 500; color: var(--mid); padding: 4px 12px;
-  background: rgba(255,255,255,0.65); border: 1px solid var(--border2);
-  cursor: default; transition: color 0.15s;
-}
-.am-item:hover { color: var(--ink); }
-
-/* ── DIVIDER ─────────────────────────────── */
+/* DIVIDER / FOOTER */
 .rule { height: 1px; background: var(--border2); position: relative; z-index: 1; }
-
-/* ── FOOTER ──────────────────────────────── */
 footer {
   padding: 40px; position: relative; z-index: 1;
   display: flex; align-items: center; justify-content: space-between;
@@ -386,17 +388,27 @@ footer {
 .foot-name { font-family: var(--fd); font-size: 1rem; font-weight: 300; color: var(--mid); }
 .foot-copy { font-size: 0.65rem; letter-spacing: 1px; color: var(--xlight); }
 
-/* ── RESPONSIVE ──────────────────────────── */
+/* RESPONSIVE */
 @media (max-width: 800px) {
   .nav-links { display: none; }
+  .hero-name { font-size: 4.5rem; }
+  .wrap, .hero-inner, .section-head, .car-controls { padding-left: 24px; padding-right: 24px; }
+  .wt-content-zone { padding: 48px 24px; }
+  .wt-inner { max-width: 100%; }
+  .wt-title { font-size: 3rem; }
+  .wt-fog {
+    background: linear-gradient(180deg,
+      rgba(6,13,22,0.88) 0%,
+      rgba(6,13,22,0.70) 100%
+    );
+  }
   .slide-inner { grid-template-columns: 1fr; grid-template-rows: 240px 1fr; padding: 0; }
   .slide-content { border-left: 1px solid var(--border); border-top: none; padding: 36px 28px; }
   .quals-grid { grid-template-columns: 1fr; }
-  .quals-grid .skills-wrap { grid-column: 1; }
-  .about-layout { grid-template-columns: 1fr; gap: 36px; }
-  .hero-name { font-size: 4.5rem; }
+  .quals-grid .skills-wrap, .quals-grid .bio-wrap { grid-column: 1; }
+  .bio-cols { grid-template-columns: 1fr; gap: 16px; }
   .jam-grid, .links-list { grid-template-columns: 1fr; }
-  .wrap, .hero-inner, .section-head, .car-controls { padding-left: 24px; padding-right: 24px; }
+  .hard-grid { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); }
   footer { padding: 32px 24px; }
 }
 
@@ -404,34 +416,64 @@ footer {
 </head>
 <body>
 
-<!-- ── NAV ──────────────────────────────── -->
+<!-- NAV -->
 <nav class="nav">
   <div class="nav-logo">Lunavia</div>
   <div class="nav-links">
+    <a class="nav-link" href="#featured">Featured</a>
     <a class="nav-link" href="#projects">Work</a>
     <a class="nav-link" href="#qualifications">Experience</a>
     <a class="nav-link" href="#links">Contact</a>
-    <a class="nav-link" href="#about">About</a>
   </div>
 </nav>
 
-<!-- ── HERO ─────────────────────────────── -->
+<!-- HERO -->
 <section id="hero">
   <div class="hero-inner">
     <span class="hero-over reveal">Game Developer · Director · Artist</span>
-    <h1 class="hero-name reveal"><em>Lunavia</em><span class="hero-realname">Josie.B</span></h1>
+    <h1 class="hero-name reveal"><em>Josephine .B</em><span class="hero-realname">Lunavia</span></h1>
     <p class="hero-sub reveal">
-      I make games. Founder and Lead Developer of Team INNERMINDS, solo developer, and final-year Games Development student in the UK. Currently shipping <strong>Within Time</strong> on Steam.
+      I make games. Founder and Lead Developer of Team INNERMINDS, solo developer, and final-year Games Development student in the UK. From turn-based RPGs to multiplayer networking, building across genres and platforms.
     </p>
     <div class="hero-actions reveal">
-      <a href="#projects" class="btn-primary">View My Work</a>
+      <a href="#featured" class="btn-primary">View My Work</a>
       <a href="https://store.steampowered.com/publisher/lunavia" target="_blank" class="btn-ghost">Steam Studio</a>
     </div>
     <div class="hero-scroll-hint reveal">Scroll to explore</div>
   </div>
 </section>
 
-<!-- ── PROJECTS CAROUSEL ──────────────────── -->
+<!-- WITHIN TIME FEATURED -->
+<section id="featured">
+  <div class="wt-scene" style="background-image: url('timeforanewera.png')">
+    <div class="wt-fog"></div>
+    <div class="wt-content-zone">
+      <div class="wt-inner reveal">
+        <div class="wt-eyebrow">
+          <span class="wt-pill">Flagship Project</span>
+          <span class="wt-pill wt-pill-dev">In Development</span>
+        </div>
+        <h2 class="wt-title">Within<br>Time</h2>
+        <span class="wt-studio">Team INNERMINDS</span>
+        <p class="wt-desc">A massive turn-based RPG with 13 playable characters, built in Godot. As Founder and Lead Developer, directing all aspects of the proprietary STANCE combat system, narrative, art direction, and music across a sprawling, character-driven world.</p>
+        <div class="wt-ctas">
+          <a href="https://withintime.co.uk" target="_blank" class="wt-btn wt-btn-primary">Visit Website</a>
+          <a href="https://store.steampowered.com/app/2302230/Within_Time" target="_blank" class="wt-btn wt-btn-ghost">Wishlist on Steam</a>
+        </div>
+        <div class="wt-tags">
+          <span class="stag-dim">TBRPG</span>
+          <span class="stag-dim">Godot Engine</span>
+          <span class="stag-dim">STANCE System</span>
+          <span class="stag-dim">13 Characters</span>
+          <span class="stag-dim">Team Lead</span>
+          <span class="stag-dim">Art Director</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS CAROUSEL -->
 <section id="projects" style="padding-bottom:0;">
   <div class="section-head reveal">
     <span class="label">Selected Work</span>
@@ -442,39 +484,15 @@ footer {
     <div class="carousel-viewport">
       <div class="carousel-track" id="car-track">
 
-        <!-- 01 Within Time (featured) -->
+        <!-- 01 BCKSPCE -->
         <div class="slide">
           <div class="slide-inner">
             <div class="slide-media">
-              <img src="timeforanewera.png" alt="Within Time key art">
+              <img src="bckspce-cover.png" alt="BCKSPCE" loading="lazy"
+                onerror="this.parentElement.className+=' fill-bckspce';this.style.display='none'">
             </div>
             <div class="slide-content">
               <span class="slide-n">01 / 03</span>
-              <span class="slide-badge">Featured Title</span>
-              <span class="slide-status status-dev">In Development</span>
-              <h3 class="slide-title">Within<br>Time</h3>
-              <div class="slide-role">Founder and Lead Developer, Team INNERMINDS</div>
-              <p class="slide-desc">My flagship TBRPG built in Godot. As founder of Team INNERMINDS I direct everything across 13 playable characters: systems architecture, narrative, art direction, and the proprietary STANCE combat system.</p>
-              <div class="slide-tags">
-                <span class="stag">TBRPG</span>
-                <span class="stag">Godot</span>
-                <span class="stag">STANCE System</span>
-                <span class="stag">Team Lead</span>
-                <span class="stag">Steam</span>
-              </div>
-              <a href="https://store.steampowered.com/app/2302230/Within_Time" target="_blank" class="slide-link">Wishlist on Steam</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- 02 BCKSPCE -->
-        <div class="slide">
-          <div class="slide-inner">
-            <div class="slide-media">
-              <img src="bckspce-cover.png" alt="BCKSPCE" loading="lazy" onerror="this.parentElement.className+=' fill-bckspce';this.style.display='none'">
-            </div>
-            <div class="slide-content">
-              <span class="slide-n">02 / 03</span>
               <span class="slide-status status-done">Completed and Released</span>
               <h3 class="slide-title">BCKSPCE</h3>
               <div class="slide-role">Solo Developer, Psychological Thriller Visual Novel</div>
@@ -484,9 +502,40 @@ footer {
                 <span class="stag">Thriller</span>
                 <span class="stag">LGBTQ+</span>
                 <span class="stag">Solo Dev</span>
-                <span class="stag">Steam</span>
+                <span class="stag">Godot</span>
               </div>
-              <a href="https://store.steampowered.com/app/4650350/BCKSPCE/" target="_blank" class="slide-link">View on Steam</a>
+              <a href="https://store.steampowered.com/app/4650350/BCKSPCE/" target="_blank" class="slide-link">
+                View on Steam
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 02 OVRLOAD -->
+        <div class="slide">
+          <div class="slide-inner">
+            <div class="slide-media">
+              <img src="ovrload-cover.webp" alt="OVRLOAD" loading="lazy"
+                onerror="this.parentElement.className+=' fill-ovrload';this.style.display='none'">
+            </div>
+            <div class="slide-content">
+              <span class="slide-n">02 / 03</span>
+              <span class="slide-status status-unrel">Unreleased</span>
+              <h3 class="slide-title">OVRLOAD</h3>
+              <div class="slide-role">Developer, Multiplayer Arena Shooter</div>
+              <p class="slide-desc">A competitive wave-survival arena shooter built with Steamworks P2P multiplayer networking. Features co-op play for up to 4 players, global leaderboards, and daily and weekly challenges.</p>
+              <div class="slide-tags">
+                <span class="stag">Arena Shooter</span>
+                <span class="stag">Multiplayer</span>
+                <span class="stag">Steamworks</span>
+                <span class="stag">Wave Survival</span>
+                <span class="stag">Co-op</span>
+              </div>
+              <a href="https://lunavia.itch.io/ovrload" target="_blank" class="slide-link">
+                Play on itch.io
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
             </div>
           </div>
         </div>
@@ -495,7 +544,8 @@ footer {
         <div class="slide">
           <div class="slide-inner">
             <div class="slide-media">
-              <img src="COMINGSOON.png" alt="One Final Winter" loading="lazy" onerror="this.parentElement.className+=' fill-ofw';this.style.display='none'">
+              <img src="COMINGSOON.png" alt="One Final Winter" loading="lazy"
+                onerror="this.parentElement.className+=' fill-ofw';this.style.display='none'">
             </div>
             <div class="slide-content">
               <span class="slide-n">03 / 03</span>
@@ -508,6 +558,7 @@ footer {
                 <span class="stag">Thriller</span>
                 <span class="stag">Sequel</span>
                 <span class="stag">Solo Dev</span>
+                <span class="stag">Godot</span>
               </div>
               <span class="slide-link slide-link-off">Announcement TBA</span>
             </div>
@@ -533,7 +584,7 @@ footer {
   </div>
 </section>
 
-<!-- ── JAM WORK ───────────────────────────── -->
+<!-- JAM WORK -->
 <div id="jams" style="position:relative;z-index:1;">
   <div style="max-width:1040px;margin:0 auto;padding:0 40px 18px;position:relative;z-index:1;">
     <span class="label reveal">Game Jams</span>
@@ -544,21 +595,21 @@ footer {
       <span class="jam-sub">Brackey's Game Jam 2024</span>
       <div class="jam-name">Protocol: Shutdown</div>
       <p class="jam-desc">Cyberpunk twin-stick shooter built in Unity over 7 days. Co-developed from concept to published release.</p>
-      <a href="https://bradleycurtis.itch.io/protocolshutdown" target="_blank" class="jam-link">Play on itch.io</a>
+      <a href="https://bradleycurtis.itch.io/protocolshutdown" target="_blank" class="jam-link">Play on itch.io <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
     </div>
     <div class="jam-card">
       <div class="jam-thumb"><img src="cwimg.png" alt="Colourways" loading="lazy"></div>
       <span class="jam-sub">UCA Technical Art Jam 2024</span>
       <div class="jam-name">Colourways</div>
       <p class="jam-desc">3D puzzle platformer exhibited at Guildford Games Festival 2026. Co-developed submission showcasing technical art direction.</p>
-      <a href="https://harry-dillamore.itch.io/colorways" target="_blank" class="jam-link">Play on itch.io</a>
+      <a href="https://harry-dillamore.itch.io/colorways" target="_blank" class="jam-link">Play on itch.io <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
     </div>
   </div>
 </div>
 
 <div class="rule" style="margin:72px 0 0;"></div>
 
-<!-- ── QUALIFICATIONS ────────────────────── -->
+<!-- QUALIFICATIONS -->
 <section id="qualifications">
   <div class="wrap">
     <div class="reveal" style="margin-bottom:44px;">
@@ -566,12 +617,14 @@ footer {
       <h2 class="heading">Education and Experience</h2>
     </div>
     <div class="quals-grid">
+
       <div class="q-panel reveal">
         <span class="q-top">Education</span>
         <div class="q-hed">BSc Games Development</div>
         <div class="q-meta">Final Year, Graduating 2027</div>
         <p class="q-body">Specialising in game engineering, narrative systems, and production leadership. Standout project exhibited at Guildford Games Festival 2026.</p>
       </div>
+
       <div class="q-panel reveal">
         <span class="q-top">Studio Roles</span>
         <div class="role-list">
@@ -589,10 +642,11 @@ footer {
           </div>
           <div>
             <div class="role-name">Developer</div>
-            <div class="role-ctx">Unreleased multiplayer title</div>
+            <div class="role-ctx">OVRLOAD, multiplayer arena shooter, Steamworks networking</div>
           </div>
         </div>
       </div>
+
       <div class="q-panel reveal">
         <span class="q-top">Game Jams</span>
         <div class="role-list">
@@ -606,18 +660,68 @@ footer {
           </div>
         </div>
       </div>
+
+      <!-- SKILLS -->
       <div class="q-panel skills-wrap reveal">
         <span class="q-top">Skills</span>
-        <div class="sk-list">
-          <span class="sk">Godot Engine</span><span class="sk">Unity</span><span class="sk">Unreal Engine</span><span class="sk">GDScript</span><span class="sk">C#</span><span class="sk">GML</span>
-          <span class="sk">Game Design</span><span class="sk">Narrative Design</span><span class="sk">Systems Design</span>
-          <span class="sk">Art Direction</span><span class="sk">Pixel Art</span><span class="sk">Digital Painting</span>
-          <span class="sk">Music Composition</span><span class="sk">FL Studio</span>
-          <span class="sk">Team Leadership</span><span class="sk">Project Management</span>
-          <span class="sk">UI / UX Design</span><span class="sk">Git</span>
+
+        <div class="hard-grid">
+          <div class="hsk">
+            <img src="https://cdn.simpleicons.org/godotengine/478CBF" alt="Godot" onerror="this.style.display='none'">
+            <span class="hsk-name">Godot Engine</span>
+          </div>
+          <div class="hsk">
+            <img src="https://cdn.simpleicons.org/unity/1F2D3D" alt="Unity" onerror="this.style.display='none'">
+            <span class="hsk-name">Unity</span>
+          </div>
+          <div class="hsk">
+            <img src="https://cdn.simpleicons.org/unrealengine/1F2D3D" alt="Unreal" onerror="this.style.display='none'">
+            <span class="hsk-name">Unreal Engine</span>
+          </div>
+          <div class="hsk">
+            <img src="https://cdn.simpleicons.org/aseprite/7D929E" alt="Aseprite" onerror="this.style.display='none'">
+            <span class="hsk-name">Aseprite</span>
+          </div>
+          <div class="hsk">
+            <img src="https://cdn.simpleicons.org/flstudio/FF6400" alt="FL Studio"
+              onerror="this.src='https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@latest/icons/flstudio.svg';this.onerror=null">
+            <span class="hsk-name">FL Studio</span>
+          </div>
+          <div class="hsk">
+            <img src="https://cdn.simpleicons.org/steam/4a6a82" alt="Steamworks" onerror="this.style.display='none'">
+            <span class="hsk-name">Steamworks</span>
+          </div>
+          <div class="hsk">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/csharp/csharp-original.svg" alt="C#" onerror="this.style.display='none'">
+            <span class="hsk-name">C#</span>
+          </div>
+          <div class="hsk">
+            <img src="https://cdn.simpleicons.org/git/F05032" alt="Git" onerror="this.style.display='none'">
+            <span class="hsk-name">Git</span>
+          </div>
+          <div class="hsk">
+            <img src="https://cdn.simpleicons.org/html5/E34F26" alt="HTML5" onerror="this.style.display='none'">
+            <span class="hsk-name">HTML5</span>
+          </div>
+        </div>
+
+        <div class="soft-grid">
+          <span class="ssk">Project Management</span>
+          <span class="ssk">Team Leadership</span>
+          <span class="ssk">Systems Design</span>
+          <span class="ssk">Multiplayer Networking</span>
+          <span class="ssk">Art Direction</span>
+          <span class="ssk">Narrative Design</span>
+          <span class="ssk">UI / UX Design</span>
+          <span class="ssk">Pixel Art</span>
+          <span class="ssk">Music Composition</span>
+          <span class="ssk">Digital Painting</span>
+          <span class="ssk">Game Design</span>
+          <span class="ssk">Agile Production</span>
         </div>
       </div>
 
+      <!-- BACKGROUND -->
       <div class="q-panel bio-wrap reveal">
         <span class="q-top">Background</span>
         <div class="bio-cols">
@@ -625,17 +729,18 @@ footer {
             Self-taught since the age of 14, when early experimentation with <strong>RPG Maker</strong> and <strong>JavaScript</strong> laid the groundwork for a serious interest in game development. What followed was years of self-directed learning across engines and languages, developing fluency in <strong>C#</strong> through Unity and <strong>GameMaker Language</strong> through Game Maker Studio, building that knowledge through shipped projects rather than formal instruction.
           </p>
           <p>
-            <strong>Unreal Engine</strong> has been part of the toolkit for three years, most notably as the foundation for Colourways. In 2024, <strong>Godot</strong> became the engine of choice for all primary development. Within Time, BCKSPCE, and One Final Winter are each built on its architecture, a deliberate consolidation around a platform that rewards disciplined systems thinking. That same self-directed sensibility extends to visual work: <strong>eight years as a pixel artist</strong>, serving as lead artist on Within Time, have made art direction and asset production as native to the process as writing code.
+            <strong>Unreal Engine</strong> has been part of the toolkit for three years, most notably as the foundation for Colourways. In 2024, <strong>Godot</strong> became the engine of choice for all primary development. More recently, the skillset has expanded into <strong>Steamworks P2P multiplayer networking</strong> through OVRLOAD. That same self-directed sensibility extends to visual work: <strong>eight years as a pixel artist</strong>, serving as lead artist on Within Time, have made art direction and asset production as native to the process as writing code.
           </p>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
 <div class="rule"></div>
 
-<!-- ── LINKS ─────────────────────────────── -->
+<!-- LINKS -->
 <section id="links">
   <div class="wrap">
     <div class="reveal" style="margin-bottom:36px;">
@@ -673,74 +778,17 @@ footer {
 </section>
 
 <div class="rule"></div>
-
-<!-- ── ABOUT ─────────────────────────────── -->
-<section id="about">
-  <div class="wrap">
-    <div class="reveal" style="margin-bottom:44px;">
-      <span class="label">About</span>
-      <h2 class="heading">A bit about me</h2>
-    </div>
-    <div class="about-layout">
-      <div class="about-text reveal">
-        <p>
-          I'm <strong>Josie</strong>, a trans game developer from the UK in my final year of a BSc in Games Development, graduating 2027.
-        </p>
-        <p>
-          As <strong>Founder and Lead Developer of Team INNERMINDS</strong>, I oversee all areas of <strong>Within Time</strong>, my flagship TBRPG currently in development on Steam. I'm also the solo developer of both <strong>BCKSPCE</strong> (live on Steam) and its sequel <strong>One Final Winter</strong>, as well as having worked on an unreleased multiplayer title.
-        </p>
-        <p>
-          Outside of game dev I make music, draw pixel art and digital paintings, and spend too much time in FFXIV. Big fan of early-2000s internet energy and all things webcore.
-        </p>
-      </div>
-      <div class="about-meta reveal">
-        <div>
-          <span class="am-label">Currently</span>
-          <div class="am-items">
-            <span class="am-item">Within Time (dev)</span>
-            <span class="am-item">One Final Winter (dev)</span>
-            <span class="am-item">Final year student</span>
-          </div>
-        </div>
-        <div>
-          <span class="am-label">Interests</span>
-          <div class="am-items">
-            <span class="am-item">Webcore / Y2K</span>
-            <span class="am-item">Frutiger Aero</span>
-            <span class="am-item">Pixel Art</span>
-            <span class="am-item">Music</span>
-            <span class="am-item">Persona / SMT</span>
-            <span class="am-item">Binding of Isaac</span>
-            <span class="am-item">FFXIV</span>
-            <span class="am-item">Space</span>
-          </div>
-        </div>
-        <div>
-          <span class="am-label">Identity</span>
-          <div class="am-items">
-            <span class="am-item">She / Her</span>
-            <span class="am-item">Trans</span>
-            <span class="am-item">UK</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── FOOTER ─────────────────────────────── -->
-<div class="rule"></div>
 <footer>
   <span class="foot-name">Josie Lunavia</span>
   <span class="foot-copy">Game Developer · lunaviadev@gmail.com</span>
 </footer>
 
 <script>
-/* ── CAROUSEL ─────────────────────────────── */
+/* CAROUSEL */
 const track  = document.getElementById('car-track');
 const slides = track.querySelectorAll('.slide');
 const dots   = document.querySelectorAll('#dots .cdot');
-const vp = document.querySelector('.carousel-viewport');
+const vp     = document.querySelector('.carousel-viewport');
 let cur = 0, timer;
 
 function goTo(n) {
@@ -752,7 +800,6 @@ function goTo(n) {
 document.getElementById('prev').addEventListener('click', () => { reset(); goTo(cur - 1); });
 document.getElementById('next').addEventListener('click', () => { reset(); goTo(cur + 1); });
 dots.forEach(d => d.addEventListener('click', () => { reset(); goTo(+d.dataset.i); }));
-
 vp.addEventListener('mouseenter', () => clearInterval(timer));
 vp.addEventListener('mouseleave', () => start());
 
@@ -765,7 +812,7 @@ function start() { timer = setInterval(() => goTo(cur + 1), 6500); }
 function reset() { clearInterval(timer); start(); }
 start();
 
-/* ── SCROLL REVEAL ────────────────────────── */
+/* SCROLL REVEAL */
 const ro = new IntersectionObserver(entries => {
   entries.forEach((e, i) => {
     if (e.isIntersecting) {
@@ -777,7 +824,7 @@ const ro = new IntersectionObserver(entries => {
 }, { threshold: 0.1, rootMargin: '0px 0px -24px 0px' });
 document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
-/* ── ACTIVE NAV ───────────────────────────── */
+/* ACTIVE NAV */
 const nlinks = document.querySelectorAll('.nav-link');
 const secs   = document.querySelectorAll('section[id]');
 const navo = new IntersectionObserver(entries => {
@@ -791,7 +838,7 @@ const navo = new IntersectionObserver(entries => {
 }, { threshold: 0.4 });
 secs.forEach(s => navo.observe(s));
 
-/* ── DISCORD COPY ─────────────────────────── */
+/* DISCORD COPY */
 function copyDiscord() {
   navigator.clipboard.writeText('lunavia.gd').catch(() => {});
   const el = document.getElementById('disc-txt');
